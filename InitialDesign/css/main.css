@@ -104,6 +104,16 @@
 	margin: 0 auto;
 }
 
+.search-form-container .search-form {
+    position: initial;
+}
+
+.chosen-dates {
+    border: 1px solid #aaa;
+    padding: 0.3rem 0.7rem;
+    font-size: smaller;
+}
+
 .search-form-input {
 	background: none;
 	border: 1px solid rgba(0,0,0,0.3);
@@ -278,6 +288,73 @@
 	min-height: 34px;
 }
 
+#car-details {
+    background: #fff;
+    padding: 2rem;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    margin-bottom: 3rem;
+    width: 90%;
+    margin: 0 auto 3rem;
+}
+
+#car-details .car-image img {
+    display: block;
+    margin: 0 auto;
+}
+
+#car-details .car-model {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #777;
+}
+
+#car-details .car-capacity {
+    font-size: 1.6rem;
+    font-weight: 700;
+    padding-top: 1rem;
+}
+
+#car-details .car-bags {
+    border: solid #888;
+    border-width: 0 1px;
+    padding: 0 1rem;
+    margin: 0 1rem;
+}
+
+#car-details ul.car-features {
+    font-family: FontAwesome;
+    list-style-type: none;
+    padding: 3rem 1.5rem;
+}
+
+#car-details ul.car-features li::before {
+    content: "\f00c";
+    margin-right: 0.7rem;
+    color: #60b37a;
+}
+
+#car-details .car-class {
+    display: inline-block;
+    background: antiquewhite;
+    padding: 0.3rem 1rem;
+    margin-top: 0.5rem;
+}
+
+#car-details .book-now {    
+	background: #ff852e;
+	border: none;
+	border-radius: 2px;
+	color: #fff;
+    display: block;
+    min-height: 34px;
+    margin: 0 auto;
+    padding: 0.5rem 4rem;
+}
+
+.border-right-1px {
+    border-right: 1px solid #cacaca;
+}
+
 #customer-reviews {
 	margin: 4rem 0;
 }
@@ -304,18 +381,21 @@
 }
 
 #car-rentals h2,
-#car-rentals-deals h2 {
+#car-rentals-deals h2,
+#main h2 {
 	font-size: 2rem;
 	padding-bottom: 2rem;
 }
 
+
+
 #comments {
-    background-color: #b7b7b7;
-    color: #fff;
+    background-color: #ffffff;
+    color: #333;
     padding: 2rem;
-    max-width: 60%;
-    margin: 0 auto 2rem;
-    box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+    max-width: 90%;
+    margin: 0 auto 15rem;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
 }
 
 .comment-text {
@@ -327,11 +407,11 @@
 }
 
 .single-comment:nth-child(even) {
-    background-color: #8f8b92;
+    background-color: #f5f5f5;
 }
 
 .single-comment:nth-child(odd) {
-    background-color: #6d6d6d;
+    background-color: #dedede;
 }
 
 #add-new-comment {
@@ -340,17 +420,17 @@
 }
 
 #add-new-comment-btn {
-    background-color: #f8f8ff;
-    color: #000;
-    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+    background-color: #ff852e;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 2px;
 }
 
 #comments-title {
     font-size: 2rem;
-    font-weight: 700;
     margin: 0 0 1.3rem;
     text-align: center;
-    text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
 }
 
 #submit-comment {
@@ -416,6 +496,7 @@ select#select-ad-type {
 #main-title {
     text-align: center;
     text-transform: capitalize;
+    font-size: 3rem;
     margin: 2rem 0 3rem;
 }
 
@@ -447,9 +528,8 @@ select#select-ad-type {
     width: 100%;
 }
 
-#back-btn {
-    display: block;
-    text-align: right;
+#login-register-page {
+    margin-bottom: 15rem;
 }
 
 footer {
@@ -469,10 +549,17 @@ footer a {
 
 .btn-primary {
     color: #fcfbf7;
-    background-color: #d26c07;
+    background-color: #ff852e;
     background-image: none;
-    border-color: #b95f06;
-    border-bottom: 3px solid #bb5f01;
+    border: none;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus,
+.btn-primary:active:focus,
+.btn-primary:active:hover {
+    background-color: #eca246;
 }
 
 .btn {
@@ -529,6 +616,18 @@ footer a {
     }
     .eq-height {
         display: block;
+    }
+    .car-single-search .price-container {
+        margin-left: 0;
+    }
+    #car-rentals, #car-rentals-deals {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-device-width: 120px) and (max-device-width: 640px) {
+    .car-single-search .car-image {
+        display: none;
     }
 }
 
