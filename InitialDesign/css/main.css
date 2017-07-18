@@ -120,12 +120,35 @@
 	min-height: 36px;
 }
 
-.car-single-compact a {
-	text-decoration: none;
+#car-rentals,
+#car-rentals-deals {
+	width: 90%;
+    margin: 0 auto;
+}
+
+.cars-title {
+	font-size: 2rem;
+    padding: 1rem 0;
+    float: left;
+}
+
+.sort-cars-by select {
+	margin-left: 2rem;
+	width: 110px;
+}
+
+.sort-cars-by .sort-by-text {
+    padding-right: 2rem;
+}
+
+.car-single-compact a,
+.car-single-search a {
 	color: #000;
+	text-decoration: none;
 }
 
 .car-single-compact,
+.car-single-search,
 .review-compact {
 	display: block;
 	background-color: #fff;
@@ -137,17 +160,39 @@
 	border-bottom: 1px solid rgba(0,0,0,0.2);
 }
 
+.car-single-search {
+	min-height: 200px;
+}
+
 .car-single-compact .car-image {
 	position: absolute;
 	right: 30px;
 	top: 35px;
 }
 
+.car-single-search .car-image {
+	float: right;
+}
+
 .car-single-compact .car-class,
 .car-single-compact .passengers-bags,
 .car-single-compact .price,
-.car-single-compact .car-select-button  {
+.car-single-compact .car-select-button,
+.car-single-search .original-price,
+.car-single-search .total,
+.car-single-search .total-price {
 	display: block;
+}
+
+.car-single-search .price-container {
+	float: right;
+    width: 150px;
+    height: 160px;
+    padding: 0 1rem;
+    margin-left: 3rem;
+    border-left: 1px solid rgba(0,0,0,0.1);
+    text-align: center;
+    font-size: 2rem;
 }
 
 .car-single-compact .car-class {
@@ -161,8 +206,67 @@
 	padding-bottom: 0.5rem;
 }
 
-.car-single-compact .price {
-	
+.car-single-search img {
+	height: 150px;
+}
+
+.car-single-search .save-percent {
+    font-size: 1.5rem;
+	font-weight: 700;
+    color: #4db74d;
+}
+
+.price-container .total {
+	font-size: 1.4rem;
+    color: #1b2727;
+}
+
+.price-container .original-price {
+	font-size: 1.6rem;
+    text-decoration: line-through;
+    color: #b4b4b4;
+}
+
+.price-container .total-price {
+	color: #8fbc8f;
+}
+
+.sort-cars-by {
+	float: right;
+    padding: 1rem 0;
+}
+
+.view-deal-button {
+	padding: 0.5rem 2rem;
+    background: #ff852e;
+    color: #fff;
+    border: none;
+    border-radius: 2px;
+    min-height: 34px;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+
+.car-single-search .car-class {
+	font-size: 2rem;
+}
+
+.car-single-search .car-model {
+	color: #bbbaba;
+	margin-bottom: 1rem;
+}
+
+.car-single-search .car-capacity span {
+	margin-right: 1rem;
+}
+
+.car-single-search .car-info {
+	float: left;
+}
+
+.car-single-search .offer-details {
+    color: #d2681c;
+    margin: 0.5rem 0;
 }
 
 .car-single-compact .car-select-button {
@@ -199,7 +303,8 @@
 	color: #adadad;
 }
 
-#price-by-category {
+#car-rentals h2,
+#car-rentals-deals h2 {
 	font-size: 2rem;
 	padding-bottom: 2rem;
 }
