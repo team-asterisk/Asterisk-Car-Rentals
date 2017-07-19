@@ -380,6 +380,19 @@
 	color: #adadad;
 }
 
+#review-form {
+    margin-bottom: 10rem;
+}
+
+#leave-review {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.select-rating {
+    margin-bottom: 1.3rem;
+}
+
 #car-rentals h2,
 #car-rentals-deals h2,
 #main h2 {
@@ -387,7 +400,35 @@
 	padding-bottom: 2rem;
 }
 
+#bookings-history {
+    margin-bottom: 10rem;
+}
 
+.booking {
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid #dedede;
+    padding: 1rem;
+}
+
+.booking.header {
+    font-weight: 700;
+}
+
+.booking-car-model,
+.booking-pickup,
+.booking-dropoff,
+.booking-total-price {
+    width: 24%;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-width: 0 0 0 1px;
+}
+
+.booking-car-model {
+    border: none;
+}
 
 #comments {
     background-color: #ffffff;
@@ -625,9 +666,25 @@ footer a {
     }
 }
 
-@media only screen and (min-device-width: 120px) and (max-device-width: 640px) {
+@media only screen and (min-device-width: 120px) and (max-device-width: 639px) {
     .car-single-search .car-image {
         display: none;
+    }
+    #leave-review {
+        width: 90%;
+    }
+    .booking {
+        width: 100%;
+    }
+}
+
+@media only screen and (min-device-width: 640px) and (max-device-width: 1200px) {
+
+    #leave-review {
+        width: 80%;
+    }
+    .booking {
+        width: 100%;
     }
 }
 
