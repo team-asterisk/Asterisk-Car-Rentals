@@ -48,8 +48,7 @@
     font-weight: 700;
 }
 
-#login-register,
-#post-free-ad {
+#login-register {
     display: inline-block;
     vertical-align: middle;
 }
@@ -430,6 +429,63 @@
     border: none;
 }
 
+#booking {
+    background: #fff;
+    padding: 2rem 2rem 5rem 2rem;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    margin-bottom: 3rem;
+    width: 90%;
+    margin: 0 auto 10rem;
+}
+
+.booking-included > ul,
+.booking-extras > ul {
+    font-family: FontAwesome;
+    list-style-type: none;
+}
+
+.booking-included > ul > li::before {
+    content: "\f00c";
+    margin-right: 0.7rem;
+    color: #60b37a;
+}
+
+.booking-extras-row {
+    margin: 0 2rem 1rem 0;
+    padding: 0.5rem;
+    border-bottom: 1px solid #dedede;
+}
+
+.booking-included h2,
+.booking-extras h2 {
+    padding: 3rem 0 2rem 2rem;
+}
+
+#price-wrapper {
+    padding: 1rem;
+}
+
+#price-wrapper .total-text {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+#price-wrapper .total-price {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+#price-wrapper .rental-period {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+#button-wrapper button {
+    margin-top: 2rem;
+    padding: 1rem;
+    width: 100%;
+}
+
 #comments {
     background-color: #ffffff;
     color: #333;
@@ -524,8 +580,7 @@ select {
 	padding-left: 0.5rem;
 }
 
-select#user-type,
-select#select-ad-type {
+select#user-type {
     background: url("../images/select-arrow.png") no-repeat center right !important;
 }
 
@@ -550,7 +605,7 @@ select#select-ad-type {
 
 #login-form,
 #register-form,
-#post-ad-form {
+#profile-form {
     width: 50%;
     margin: 0 auto 3rem;
     padding: 2rem;
@@ -559,8 +614,7 @@ select#select-ad-type {
 }
 
 #login-form label,
-#register-form label,
-#post-ad-form label {
+#register-form label {
     margin-bottom: 0.7rem;
 }
 
@@ -569,7 +623,8 @@ select#select-ad-type {
     width: 100%;
 }
 
-#login-register-page {
+#login-register-page,
+#user-profile-page {
     margin-bottom: 15rem;
 }
 
@@ -624,11 +679,6 @@ footer a {
     display: -ms-flexbox;
     display: flex;
     flex-wrap: wrap;
-}
-
-.ad-single-compact {
-    padding-top: 15px;
-    padding-bottom: 15px;
 }
 
 /*
