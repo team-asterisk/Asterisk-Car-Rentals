@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rentals</title>
+    <link rel="icon" href="./images/favicon.ico">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+<header id="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-2 pull-left top-height">
+                <div id="logo">
+                    <a href="/home"><img src="./images/logo.png" alt="Car Rentals logo"></a>
+                </div>
+            </div>
+            <div class="col-xs-5 col-md-4 pull-left top-height">
+                <div id="nav">
+                    <div><a href="#">Cars</a></div>
+                    <div><a href="#">Deals</a></div>
+                </div>
+            </div>
+            <div class="col-xs-7 col-md-6 pull-right">
+                <div id="top-right-panel">
+                    <div id="login-register">
+                        <a href="/sign-in-up">
+                            <div id="my-account-logo">
+                                <img src="./images/my-account.png" alt="my-account">
+                            </div>
+                            <div id="my-account-link">My Account</div>
+                        </a>
+                        <a id="logout-link" class="hidden" href="#/logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div id="main">
+    
+    <div class="container">
+        <div id="car-details">
+            <div class="row">
+                <div class="col-xs-12 col-md-4 border-right-1px">
+                    <div class="car-model">Toyota Corolla</div>
+                    <div class="car-price">From $15 per Day</div>
+                    <span class="car-image"><img src="./images/4door-sedan.png" alt="Economy car"></span>
+                </div>
+                <div class="col-xs-12 col-md-8">
+                    <div class="car-info">
+                        <div class="car-capacity">
+                            <span class="car-passengers">5 Adults</span>
+                            <span class="car-bags">2 Bags</span>
+                            <span class="car-doors">2-4 Doors</span>
+                        </div>
+                        <div class="car-class">Economy</div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-5">
+                                <ul class="car-features">
+                                    <li>Fuel type: Petrol</li>
+                                    <li>Mileage: 36 Mpg</li>
+                                    <li>Transmission: Manual</li>
+                                </ul>
+                            </div>
+                            <div class="col-xs-12 col-md-5">
+                                <ul class="car-features">
+                                    <li>Air Conditioning</li>
+                                    <li>Model 2015</li>
+                                    <li>* Unlimited mileage included</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="booking">
+            <div class="row">
+                <div class="col-md-8 border-right-1px">
+                    <h3>Booking Options</h3>
+                    <div class="booking-included">
+                        <h2>What's included</h2>
+                        <ul>
+                            <li>Free cancellation at any time</li>
+                            <li>Unlimited Free Mileage</li>
+                            <li>Third party insurance</li>
+                            <li>Collision damage waiver (Excess: € 600; approx. US$ 690)</li>
+                            <li>Registration fee / Road tax</li>
+                        </ul>
+                    </div>
+                    <div class="booking-extras">
+                        <h2>Booking Extras</h2>
+                        <ul>
+                            <li class="row booking-extras-row">
+                                <input type="checkbox" name="add_navigation" value="1" class="col-xs-2">
+                                <span class="booikng-extra-type col-xs-6">Navigation System</span>
+                                <span class="booking-extra-price col-xs-3">$10 / Day</span>
+                            </li>
+                            <li class="row booking-extras-row">
+                                <input type="checkbox" name="add_navigation" value="1" class="col-xs-2">
+                                <span class="booikng-extra-type col-xs-6">Additional Driver</span>
+                                <span class="booking-extra-price col-xs-3">$20 / Day</span>
+                            </li>
+                            <li class="row booking-extras-row">
+                                <input type="checkbox" name="add_navigation" value="1" class="col-xs-2">
+                                <span class="booikng-extra-type col-xs-6">Underage fee 24</span>
+                                <span class="booking-extra-price col-xs-3">$40</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h3>Price</h3>
+                    <div class="current-total-price">
+                        <div id="price-wrapper" class="row">
+                            <div class="total-text col-xs-7">Your total price:
+                                <div class="rental-period">Rental Period: 3 days</div>
+                            </div>
+                            <div class="total-price col-xs-5" id="">US$ 150.30</div>
+                        </div>
+                        <div id="button-wrapper">
+                            <button type="submit" class="btn btn-primary">
+                                <strong>Finish Booking</strong>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+</div>
+
+<footer class="text-center footer">
+    <div class="row">
+        <div>
+            <small><strong>Author:</strong> <a href="https://github.com/team-asterisk/CarRentals" target="_blank">Team Asterisk</a></small>
+            <br>
+            <small><strong>&copy; 2017</strong></small>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
