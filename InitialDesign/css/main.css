@@ -486,6 +486,14 @@
     width: 100%;
 }
 
+#booking .search-form {
+    position: initial;
+    background: none;
+    padding: 2rem;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
 #comments {
     background-color: #ffffff;
     color: #333;
