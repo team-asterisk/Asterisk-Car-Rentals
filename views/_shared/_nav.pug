@@ -1,0 +1,28 @@
+mixin nav()
+    // script(src="/static/js/nav.js")
+    nav.nav
+        ul.list.list-horizontal
+            li.list-item
+                a.nav-btn(href="/")
+                    | Home
+
+            if user
+                li.list-item.dropdown
+                    a.nav-btn.dropdown-toggle#nav-btn-toggle-items(href="#")
+                        =user.username
+                    ul.dropdown-list.list
+                        li.list-item
+                            form(action="/auth/logout" method="post")
+                                button.nav-btn
+                                    | Logout
+            else
+                li.list-item.dropdown
+                    a.nav-btn.dropdown-toggle#nav-btn-toggle-items(href="#")
+                        | User
+                    ul.dropdown-list.list
+                        li.list-item
+                            a.nav-btn#nav-btn-item-all(href="/auth/register")
+                                | Register
+                        li.list-item
+                            a.nav-btn#nav-btn-item-add(href="/auth/login")
+                                | Login
