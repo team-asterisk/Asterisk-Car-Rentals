@@ -399,19 +399,19 @@
 	padding-bottom: 2rem;
 }
 
-#bookings-history {
+#bookings-history,
+#view-bookings,
+#view-cars,
+#view-deals {
     margin-bottom: 10rem;
 }
 
-.booking {
+.booking,
+.cars {
     width: 80%;
     margin: 0 auto;
     border: 1px solid #dedede;
     padding: 1rem;
-}
-
-.booking.header {
-    font-weight: 700;
 }
 
 .booking-car-model,
@@ -425,8 +425,100 @@
     border-width: 0 0 0 1px;
 }
 
-.booking-car-model {
+#view-bookings .booking-car-model,
+#view-bookings .booking-pickup,
+#view-bookings .booking-dropoff,
+#view-bookings .booking-total-price,
+#view-bookings .booking-user,
+#view-bookings .booking-status {
+    width: 16%;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-width: 0 0 0 1px;
+}
+
+#view-cars .car-model,
+#view-cars .car-category,
+#view-cars .car-fuel-type,
+#view-cars .car-price,
+#view-cars .car-edit,
+#view-deals .car-model,
+#view-deals .car-category,
+#view-deals .car-fuel-type,
+#view-deals .car-price,
+#view-deals .car-special-price {
+    width: 19%;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-width: 0 0 0 1px;
+}
+
+#view-deals .car-price {
+    color: #9c9c9c;
+    text-decoration: line-through;
+}
+
+#view-deals .car-special-price {
+    color: #f00;
+    font-weight: 700;
+}
+
+.booking-car-model,
+#view-bookings .booking-user,
+#view-cars .car-model,
+#view-deals .car-model {
     border: none;
+}
+
+.booking.header,
+.cars.header {
+    font-weight: 700;
+}
+
+#view-deals .header .car-price,
+#view-deals .header .car-special-price {
+    color: #333;
+    text-decoration: none;
+}
+
+.sort-by-wrapper {
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+}
+
+.page-nav {
+    text-align: center;
+    margin-top: 5rem;
+    font-size: 2rem;
+}
+
+.page-nav span {
+    padding-right: 0.5rem;
+}
+
+#view-bookings #main-title,
+#view-cars #main-title,
+#view-deals #main-title {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+#dashboard {
+    background: #f3f3f3;
+    padding: 1rem;
+    margin: 0 3rem 5rem 3rem;
+    border-bottom: 1px solid #bbbbbb;
+}
+
+#dashboard span {
+    font-size: 1.6rem;
+}
+
+#dashboard .dashboard-pages span {
+    padding-right: 2rem;
 }
 
 #booking {
