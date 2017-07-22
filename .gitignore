@@ -162,6 +162,9 @@ ClientBin/
 *.publishsettings
 node_modules/
 bower_components/
+typings/
+typings.json
+package-lock.json
 
 # RIA/Silverlight projects
 Generated_Code/
