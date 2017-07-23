@@ -1,0 +1,69 @@
+extends ../_shared/_master
+
+block main
+    #main
+        .container
+            #car-rentals
+                .cars-title Choose a car from our large collection
+                .sort-cars-by
+                    span.sort-by-text Sort by:
+                    span Price
+                    select#sort_by_category(name='sort_by_category')
+                        option(value='', disabled='', selected='') Category
+                        option(value='small_to_large', title='small to large') small to large
+                        option(value='large_to_small', title='large to small') large to small
+                .row
+                    .col-xs-12
+                        article.car-single-search
+                            a(href='#')
+                                .car-category
+                                    .price-container
+                                        span.total-price $50 / day
+                                        span.total Total
+                                        button.view-deal-button View Deal
+                                    .car-info
+                                        .car-class Economy
+                                        .car-model Toyota Corolla or similar
+                                        .car-capacity
+                                            span.car-passengers 5 Adults
+                                            span.car-bags 2 Bags
+                                            span.car-doors 2-4 Doors
+                                        .offer-details * Unlimited mileage included
+                                    span.car-image
+                                        img(src='./images/4door-sedan.png', alt='Economy car')
+                    .col-xs-12
+                        article.car-single-search
+                            a(href='#')
+                                .car-category
+                                    .price-container
+                                        span.total-price $50 / day
+                                        span.total Total
+                                        button.view-deal-button View Deal
+                                    .car-info
+                                        .car-class Economy
+                                        .car-model Toyota Corolla or similar
+                                        .car-capacity
+                                            span.car-passengers 5 Adults
+                                            span.car-bags 2 Bags
+                                            span.car-doors 2-4 Doors
+                                        .offer-details * Unlimited mileage included
+                                    span.car-image
+                                        img(src='./images/4door-sedan.png', alt='Economy car')
+                    .col-xs-12
+                        article.car-single-search
+                            a(href='#')
+                                .car-category
+                                    .price-container
+                                        span.total-price $50 / day
+                                        span.total Total
+                                        button.view-deal-button View Deal
+                                    .car-info
+                                        .car-class Economy
+                                        .car-model Toyota Corolla or similar
+                                        .car-capacity
+                                            span.car-passengers 5 Adults
+                                            span.car-bags 2 Bags
+                                            span.car-doors 2-4 Doors
+                                        .offer-details * Unlimited mileage included
+                                    span.car-image
+                                        img(src='./images/4door-sedan.png', alt='Economy car')
