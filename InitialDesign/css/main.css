@@ -402,12 +402,16 @@
 #bookings-history,
 #view-bookings,
 #view-cars,
-#view-deals {
+#view-deals,
+#view-users,
+#add-new-car,
+#edit-car {
     margin-bottom: 10rem;
 }
 
 .booking,
-.cars {
+.cars,
+.users {
     width: 80%;
     margin: 0 auto;
     border: 1px solid #dedede;
@@ -447,7 +451,12 @@
 #view-deals .car-category,
 #view-deals .car-fuel-type,
 #view-deals .car-price,
-#view-deals .car-special-price {
+#view-deals .car-special-price,
+#view-users .user-username,
+#view-users .user-name,
+#view-users .user-phone,
+#view-users .user-email,
+#view-users .user-edit {
     width: 19%;
     display: inline-block;
     text-align: center;
@@ -468,12 +477,14 @@
 .booking-car-model,
 #view-bookings .booking-user,
 #view-cars .car-model,
-#view-deals .car-model {
+#view-deals .car-model,
+#view-users .user-username {
     border: none;
 }
 
 .booking.header,
-.cars.header {
+.cars.header
+.users.header {
     font-weight: 700;
 }
 
@@ -501,9 +512,19 @@
 
 #view-bookings #main-title,
 #view-cars #main-title,
-#view-deals #main-title {
+#view-deals #main-title,
+#view-users #main-title,
+#add-new-car #main-title,
+#edit-car #main-title {
     font-size: 2.2rem;
     margin-bottom: 0.5rem;
+}
+
+#add-new-car label.section,
+#edit-car label.section {
+    border-bottom: 1px solid #cecece;
+    display: block;
+    margin: 1.5rem 0 1.3rem;
 }
 
 #dashboard {
@@ -669,7 +690,9 @@
 * ------------------------------
 */
 
-select {
+select,
+#add-car-form select,
+#edit-car-form select {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	background: url(../images/select-arrow.png) no-repeat center right;
@@ -705,7 +728,9 @@ select#user-type {
 
 #login-form,
 #register-form,
-#profile-form {
+#profile-form,
+#add-car-form,
+#edit-car-form {
     width: 50%;
     margin: 0 auto 3rem;
     padding: 2rem;
