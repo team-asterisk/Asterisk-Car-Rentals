@@ -162,6 +162,7 @@ ClientBin/
 *.pfx
 *.publishsettings
 node_modules/
+config/config.js
 bower_components/
 typings/
 typings.json
