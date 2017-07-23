@@ -4,14 +4,97 @@
 
 ### 01. Models
 
+#### Data provided
+
+1. user (user role: regular)
+2. admin (user role: admin)
+3. support user (user role: support)
+4. car - single 
+5. car category (list of cars based on category)
+6. car deals (list of cars based on deal property)
+7. car query (list of cars based on search properties)
+8. booking (user, car, period)
+9. bookings (list of not expired bookings)
+10. booking history (list of expired bookings)
+9. review (autor - registered, rating, text - limited)
+10. comment (author, text - larger limit)
+
+#### Data Manipulation
+
+##### Not registered
+1. add
+	- comment
+2. view
+	- home / reviews
+	- cars
+	- single car / comments
+	- deals
+
+##### Regular user
+1. add
+	- user
+	- booking
+	- review 
+	- comment
+2. edit
+	- user (self)
+3. view
+	- home / reviews
+	- cars
+	- deals
+	- single car / comments
+	- bookings (self)
+
+##### Administrator - all for user +
+1. add
+	- new car
+2. edit
+	- car (activate deal)
+	- user (make admin)
+3. view
+	- users
+	- bookings
+	- booking history
+
+#### Models Structure
+
 1. user
-2. admin - inherit user
-3. support user
-4. car category - collection of many cars
-5. deals - collection of many cars
-6. car
-7. review
-8. comment
+	- firstName
+	- lastName
+	- passHash (from password)
+	- phone
+	- email
+	- role (regular / admin / support)
+2. car
+	- make
+	- model
+	- category
+	- photo (link, uploaded)
+	- capacity
+		- adults
+		- bags
+		- doors
+	- details
+		- fuel
+		- transmission
+		- year
+		- airConditioner
+	- price
+		- base
+		- special
+	- deal (yes / no)
+3. booking (price calculated from total days * car.price)
+	- user (user _id)
+	- car (car _id)
+	- pickup (date)
+	- dropoff (date)
+4. review
+	- author (user _id)
+	- rating
+	- text
+5. comment
+	- author (any)
+	- text
 
 ### 02. Pages
 
