@@ -1,6 +1,14 @@
+const validator = require('../utils').validator;
+const size = require('../utils').constants.size;
+
 class User {
     static isValid(model) {
-        return true;
+        return typeof model !== 'undefined' &&
+            validator.validateString(model.name, size.MIN_NAME, size.MAX_NAME) &&
+            validator.validateString(model.username, size.MIN_NAME, size.MAX_NAME) &&
+            validator.validateString(model.password, size.MIN_PASS, size.MAX_PASS) &&
+            validator.validateEmail(model.email) &&
+            validator.validatePhone(model.phone);
     }
 
     get id() {

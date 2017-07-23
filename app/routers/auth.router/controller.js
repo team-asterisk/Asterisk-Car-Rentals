@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const convert = require('../../../utils/inputConverter').convert;
 
 class AuthController {
     constructor(data) {
@@ -18,12 +19,13 @@ class AuthController {
 
     register(req, res, next) {
         const bodyUser = req.body;
-        this.data.users.findByUsername(bodyUser.username)
+        const convertedUser = this._convertStrings(bodyUser);
+        this.data.users.findByUsername(convertedUser.username)
             .then((dbUser) => {
                 if (dbUser) {
                     throw new Error('User already exists');
                 }
-                return this._generateHash(bodyUser);
+                return this._generateHash(convertedUser);
             })
             .then((newUser) => {
                 return this.data.users.create(newUser);
@@ -34,6 +36,16 @@ class AuthController {
             .catch((err) => {
                 req.flash('error', err);
             });
+    }
+
+    _convertStrings(bodyUser) {
+        const converted = {};
+        Object.keys(bodyUser)
+            .forEach((prop) => {
+                converted[prop] = convert(bodyUser[prop]);
+            });
+
+        return converted;
     }
 
     _generateHash(bodyUser) {
