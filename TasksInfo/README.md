@@ -22,13 +22,13 @@
 #### Data Manipulation
 
 ##### Not registered
-1. add
-	- comment
-2. view
+1. view
 	- home / reviews
 	- cars
 	- single car / comments
 	- deals
+	- login
+	- register
 
 ##### Regular user
 1. add
@@ -52,22 +52,22 @@
 	- car (activate deal)
 	- user (make admin)
 3. view
+	- cars
+	- deals
 	- users
 	- bookings
-	- booking history
 
 #### Models Structure
 
 1. user
-	- firstName
-	- lastName
-	- passHash (from password)
+	- Name
+	- username
+	- password (it is validated and then stored as hash in db)
 	- phone
 	- email
 	- role (regular / admin / support)
 2. car
-	- make
-	- model
+	- make + model (one input field)
 	- category
 	- photo (link, uploaded)
 	- capacity
@@ -83,18 +83,38 @@
 		- base
 		- special
 	- deal (yes / no)
-3. booking (price calculated from total days * car.price)
-	- user (user _id)
-	- car (car _id)
+3. booking
+	- user (username)
+	- car (Make Model)
 	- pickup (date)
 	- dropoff (date)
+	- total price (calculated from total days * car.price)
+	- extrax (array with all extras as gps etc.)
 4. review
-	- author (user _id)
+	- author (Name)
 	- rating
 	- text
 5. comment
-	- author (any)
+	- author (Name)
 	- text
+6. car categories
+	- name (Economy, Compact etc.)
+	- cars (array with all cars with same category). To include this info for every car:
+	{
+		"model": "Toyota Corolla",
+		"category": "Compact",
+		"fueltype": "Petrol",
+		"baseprice": 20
+	}
+7. deals
+	- array with all cars that have active special price with this info for every car:
+	{
+		"model": "Toyota Corolla",
+		"category": "Compact",
+		"fueltype": "Petrol",
+		"baseprice": 20,
+		"specialprice": 14.99
+	}
 
 ### 02. Pages
 
