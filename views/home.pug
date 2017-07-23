@@ -5,7 +5,7 @@ block topContainer
         .search-form
             form(action='/searchcars', method='GET')
                 input.search-form-input(name='from_where' type='text', placeholder='From Where', maxlength='90')
-                input.search-form-input(name='pickup_date' type='text', placeholder='Pickup Date')
+                input.search-form-input(name='pickup_date' type='text', placeholder='Pickup Date', id='datepicker')
                 select#pickup_hour(name='pickup_hour', title='Noon')
                     option(value='8', title='8:00 am') 8:00 am
                     option(value='9', title='9:00 am') 9:00 am
@@ -18,7 +18,7 @@ block topContainer
                     option(value='16', title='4:00 pm') 4:00 pm
                     option(value='17', title='5:00 pm') 5:00 pm
                     option(value='18', title='6:00 pm') 6:00 pm
-                input.search-form-input(name='dropoff_date' type='text', placeholder='Dropoff Date')
+                input.search-form-input(name='dropoff_date' type='text', placeholder='Dropoff Date', id='datepicker')
                 select#dropoff_hour(name='dropoff_hour', title='Noon')
                     option(value='8', title='8:00 am') 8:00 am
                     option(value='9', title='9:00 am') 9:00 am

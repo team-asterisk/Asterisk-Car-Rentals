@@ -7,16 +7,16 @@ const attachTo = (app, data) => {
 
     router
         .get('/register', (req, res) => {
-            return controller.getSignUpForm(req, res);
+            return controller.getRegisterForm(req, res);
         })
         .get('/login', (req, res) => {
-            return controller.getSignInForm(req, res);
+            return controller.getLogInForm(req, res);
         })
         .post('/logout', (req, res) => {
-            return controller.signOut(req, res);
+            return controller.logOut(req, res);
         })
         .post('/register', (req, res) => {
-            return controller.signUp(req, res);
+            return controller.register(req, res);
         })
         .post('/login', passport.authenticate('local', {
             successRedirect: '/',
