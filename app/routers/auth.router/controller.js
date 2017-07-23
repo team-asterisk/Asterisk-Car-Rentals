@@ -3,18 +3,18 @@ class CarRentalsController {
         this.data = data;
     }
 
-    getSignUpForm(req, res) {
+    getRegisterForm(req, res) {
         return res.render('auth/register');
     }
-    getSignInForm(req, res) {
+    getLogInForm(req, res) {
         return res.render('auth/login');
     }
-    signOut(req, res) {
+    logOut(req, res) {
         req.logout();
         return res.redirect('/');
     }
 
-    signUp(req, res) {
+    register(req, res) {
         const bodyUser = req.body;
 
         this.data.users.findByUsername(bodyUser.username)
