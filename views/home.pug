@@ -1,6 +1,149 @@
 extends _shared/_master
-block body
-    h1
-        | Welcome to Asterisk - Car Rentals
-    h2
-        | Come back later after we finish it...
+
+block topContainer
+    #top-container
+        .search-form
+            form(action='/searchcars', method='GET')
+                input.search-form-input(name='from_where' type='text', placeholder='From Where', maxlength='90')
+                input.search-form-input(name='pickup_date' type='text', placeholder='Pickup Date')
+                select#pickup_hour(name='pickup_hour', title='Noon')
+                    option(value='8', title='8:00 am') 8:00 am
+                    option(value='9', title='9:00 am') 9:00 am
+                    option(value='10', title='10:00 am') 10:00 am
+                    option(value='11', title='11:00 am') 11:00 am
+                    option(value='12', title='12:00 am', selected='selected') 12:00 am
+                    option(value='13', title='1:00 pm') 1:00 pm
+                    option(value='14', title='2:00 pm') 2:00 pm
+                    option(value='15', title='3:00 pm') 3:00 pm
+                    option(value='16', title='4:00 pm') 4:00 pm
+                    option(value='17', title='5:00 pm') 5:00 pm
+                    option(value='18', title='6:00 pm') 6:00 pm
+                input.search-form-input(name='dropoff_date' type='text', placeholder='Dropoff Date')
+                select#dropoff_hour(name='dropoff_hour', title='Noon')
+                    option(value='8', title='8:00 am') 8:00 am
+                    option(value='9', title='9:00 am') 9:00 am
+                    option(value='10', title='10:00 am') 10:00 am
+                    option(value='11', title='11:00 am') 11:00 am
+                    option(value='12', title='12:00 am', selected='selected') 12:00 am
+                    option(value='13', title='1:00 pm') 1:00 pm
+                    option(value='14', title='2:00 pm') 2:00 pm
+                    option(value='15', title='3:00 pm') 3:00 pm
+                    option(value='16', title='4:00 pm') 4:00 pm
+                    option(value='17', title='5:00 pm') 5:00 pm
+                    option(value='18', title='6:00 pm') 6:00 pm
+                button.search-form-btn(type='submit')
+                    span Search
+
+
+block main
+    #main
+        .container
+            #car-categories-home-page
+                h2#price-by-category Car Rental Prices by Category
+                .row.eq-height
+                    .col-xs-12.col-sm-6.col-md-4.eq-height
+                        article.car-single-compact
+                            a(href='/cardetails')
+                                .car-category
+                                    span.price From $ 10/day
+                                    span.car-class Economy
+                                    span.passengers-bags 2 Adults, 2 Bags 
+                                    span.car-image
+                                        img(src='./images/car-economy.png', alt='Economy car')
+                                    button.car-select-button Select
+                    .col-xs-12.col-sm-6.col-md-4.eq-height
+                        article.car-single-compact
+                            a(href='#')
+                                .car-category
+                                    span.price From $ 11/day
+                                    span.car-class Compact
+                                    span.passengers-bags 4 Adults, 2 Bags 
+                                    span.car-image
+                                        img(src='./images/car-compact.png', alt='Compact car')
+                                    button.car-select-button Select
+                    .col-xs-12.col-sm-6.col-md-4.eq-height
+                        article.car-single-compact
+                            a(href='#')
+                                .car-category
+                                    span.price From $ 12/day
+                                    span.car-class Full-Size
+                                    span.passengers-bags 5 Adults, 2 Bags 
+                                    span.car-image
+                                        img(src='./images/car-full-size.png', alt='Full-Size car')
+                                    button.car-select-button Select
+                .row.eq-height
+                    .col-xs-12.col-sm-6.col-md-4.eq-height
+                        article.car-single-compact
+                            a(href='#')
+                                .car-category
+                                    span.price From $ 15/day
+                                    span.car-class Premium
+                                    span.passengers-bags 5 Adults, 5 Bags 
+                                    span.car-image
+                                        img(src='./images/car-premium.png', alt='Premium car')
+                                    button.car-select-button Select
+                    .col-xs-12.col-sm-6.col-md-4.eq-height
+                        article.car-single-compact
+                            a(href='#')
+                                .car-category
+                                    span.price From $ 14/day
+                                    span.car-class SUV
+                                    span.passengers-bags 5 Adults, 5 Bags 
+                                    span.car-image
+                                        img(src='./images/car-suv.png', alt='SUV')
+                                    button.car-select-button Select
+                    .col-xs-12.col-sm-6.col-md-4.eq-height
+                        article.car-single-compact
+                            a(href='#')
+                                .car-category
+                                    span.price From $ 16/day
+                                    span.car-class Van
+                                    span.passengers-bags 5 Adults, 7 Bags 
+                                    span.car-image
+                                        img(src='./images/car-van.png', alt='Van')
+                                    button.car-select-button Select
+            #customer-reviews
+                .row.eq-height
+                    .col-xs-12.col-sm-6.col-md-4.eq-height
+                        article.review-compact
+                            .review-content
+                                .review-rating ★★★★★
+                                p.review-text
+                                | Lorem ipsum dolor sit amet, quo at decore dolorum. His in idque atomorum, mel ut epicurei evertitur. Qui viris ocurreret at. Mel falli causae numquam ut, nam novum aeterno te. Quo ex velit rationibus cotidieque, his senserit mediocrem definitionem at.
+                                .review-author Pesho
+                    .col-xs-12.col-sm-6.col-md-4.eq-height
+                        article.review-compact
+                            .review-content
+                                .review-rating ★★★★★
+                                p.review-text
+                                | Lorem ipsum dolor sit amet, quo at decore dolorum. His in idque atomorum, mel ut epicurei evertitur. Qui viris ocurreret at. Mel falli causae numquam ut, nam novum aeterno te. Quo ex velit rationibus cotidieque, his senserit mediocrem definitionem at.
+                                .review-author Pesho
+                    .col-xs-12.col-sm-6.col-md-4.eq-height
+                        article.review-compact
+                            .review-content
+                                .review-rating ★★★
+                                p.review-text
+                                | Lorem ipsum dolor sit amet, quo at decore dolorum. His in idque atomorum, mel ut epicurei evertitur. Qui viris ocurreret at. Mel falli causae numquam ut, nam novum aeterno te. Quo ex velit rationibus cotidieque, his senserit mediocrem definitionem at.
+                                .review-author Pesho
+                .row.eq-height
+                    .col-xs-12.col-sm-6.col-md-4.eq-height
+                        article.review-compact
+                            .review-content
+                                .review-rating ★★★★★
+                                p.review-text
+                                | Lorem ipsum dolor sit amet, quo at decore dolorum. His in idque atomorum, mel ut epicurei evertitur. Qui viris ocurreret at. Mel falli causae numquam ut, nam novum aeterno te. Quo ex velit rationibus cotidieque, his senserit mediocrem definitionem at.
+                                .review-author Pesho
+                    .col-xs-12.col-sm-6.col-md-4.eq-height
+                        article.review-compact
+                            .review-content
+                                .review-rating ★★★★
+                                p.review-text
+                                | Lorem ipsum dolor sit amet, quo at decore dolorum. His in idque atomorum, mel ut epicurei evertitur. Qui viris ocurreret at. Mel falli causae numquam ut, nam novum aeterno te. Quo ex velit rationibus cotidieque, his senserit mediocrem definitionem at.
+                                .review-author Pesho
+                    .col-xs-12.col-sm-6.col-md-4.eq-height
+                        article.review-compact
+                            .review-content
+                                .review-rating ★★★★★
+                                p.review-text
+                                | Lorem ipsum dolor sit amet, quo at decore dolorum. His in idque atomorum, mel ut epicurei evertitur. Qui viris ocurreret at. Mel falli causae numquam ut, nam novum aeterno te. Quo ex velit rationibus cotidieque, his senserit mediocrem definitionem at.
+                                .review-author Pesho
