@@ -2,14 +2,20 @@ const session = require('express-session');
 const passport = require('passport');
 const { Strategy } = require('passport-local');
 const MongoStore = require('connect-mongo')(session);
+const bcrypt = require('bcrypt');
 
 const config = require('../../config');
 
 const applyTo = (app, data) => {
-    passport.use(new Strategy((username, password, done) => {
-        data.users.checkPassword(username, password)
-            .then(() => {
-                return data.users.findByUsername(username);
+    passport.use(new Strategy((username, passHash, done) => {
+        data.users.findByUsername(username)
+            .then((user) => {
+                bcrypt.compare(passHash, user.passHash, (err, res) => {
+                    if (res) {
+                        return user;
+                    }
+                    return Promise.reject(err);
+                });
             })
             .then((user) => {
                 done(null, user);
