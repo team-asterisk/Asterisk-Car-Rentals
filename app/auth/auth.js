@@ -7,14 +7,16 @@ const bcrypt = require('bcrypt');
 const config = require('../../config');
 
 const applyTo = (app, data) => {
-    passport.use(new Strategy((username, passHash, done) => {
+    passport.use(new Strategy((username, password, done) => {
         data.users.findByUsername(username)
             .then((user) => {
-                bcrypt.compare(passHash, user.passHash, (err, res) => {
-                    if (res) {
-                        return user;
-                    }
-                    return Promise.reject(err);
+                return new Promise((res, rej) => {
+                    bcrypt.compare(password, user.passHash, (err, ready) => {
+                        if (ready) {
+                            res(user);
+                        }
+                        rej(err);
+                    });
                 });
             })
             .then((user) => {
