@@ -8,6 +8,22 @@ const attachTo = (app, data) => {
         return res.render('home');
     });
 
+    app.get('/cardetails', (req, res) => {
+        return res.render('./public/car-details');
+    });
+
+    app.get('/cars', (req, res) => {
+        return res.render('./public/cars');
+    });
+
+    app.get('/searchcars', (req, res) => {
+        return res.render('./public/search-cars');
+    });
+
+    app.get('/deals', (req, res) => {
+        return res.render('./public/deals');
+    });
+
     fs.readdirSync(__dirname)
         .filter((file) => file.includes('.router'))
         .forEach((file) => {
