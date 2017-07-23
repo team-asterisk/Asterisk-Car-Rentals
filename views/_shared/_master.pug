@@ -1,16 +1,62 @@
-include _nav
-
 <!DOCTYPE html>
-html(lang="en")
+html(lang='en')
 head
-    meta(charset="UTF-8")
-    title Document
-    link(rel="stylesheet", href="/libs/bootstrap/dist/css/bootstrap.min.css")
-    script(src='/libs/jquery/dist/jquery.js')
-    link(rel="stylesheet", href="/static/css/main.css")
-    block head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Car Rentals
+    link(rel='icon', href='/images/favicon.ico')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/css/main.css')
 body
-    +nav()
-    .container
-        block body
+    nav.navbar.navbar-default.navbar-static-top
+        .container-fluid
+            .navbar-header
+                a.navbar-brand(href='/')
+                    img(src='/images/logo.png', width='166', height='50', alt='Car Rentals logo')
+            ul.nav.navbar-nav
+                li
+                    a(href='/cars') Cars
+                li
+                    a(href='/deals') Deals
+            ul.nav.navbar-nav.navbar-right
+                li.register
+                    a(href='/auth/register') Regiser
+                li.login
+                    a(href='/auth/login') Login
+                li.my-account.dropdown
+                    a.dropdown-toggle(data-toggle='dropdown', href='#')
+                        #my-account-logo
+                            img(src='/images/my-account.png', alt='my-account')
+                        #my-account-link My Account
+                        span.caret
+                    ul.dropdown-menu
+                        li
+                            a(href='/auth/dashboard') Dashboard
+                        li
+                            a(href='/auth/profile') Profile
+                        li
+                            a(href='/auth/bookings') Bookings
+                        li
+                            a(href='/auth/review') Leave Review
+                        li
+                            a(href='/auth/logout') Logout
+
+    block topContainer
+    
+    block main
         
+    footer.text-center.footer
+        .row
+        div
+            small
+                strong 
+                    | Author:
+                a(href='https://github.com/team-asterisk/CarRentals', target='_blank') 
+                    | Team Asterisk
+                br
+            small
+                strong 
+                    | © 2017
+    script(src='/js/jquery.min.js')
+    script(src='/js/bootstrap.min.js')
