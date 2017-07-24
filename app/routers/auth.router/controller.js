@@ -29,7 +29,7 @@ class AuthController {
         this.data.users.findByUsername(convertedUser.username)
             .then((dbUser) => {
                 if (dbUser) {
-                    return Promise.reject('User already exists');
+                    throw new Error('User already exists');
                 }
                 return this._generateHash(convertedUser);
             })
@@ -40,7 +40,7 @@ class AuthController {
                 return res.redirect('/auth/login');
             })
             .catch((err) => {
-                req.flash('error', err);
+                req.flash('error', err.message);
                 return res.redirect('/auth/register');
             });
     }
