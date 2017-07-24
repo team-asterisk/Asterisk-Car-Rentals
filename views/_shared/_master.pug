@@ -22,27 +22,31 @@ body
                 li
                     a(href='/deals') Deals
             ul.nav.navbar-nav.navbar-right
-                li.register
-                    a(href='/auth/register') Regiser
-                li.login
-                    a(href='/auth/login') Login
-                li.my-account.dropdown
-                    a.dropdown-toggle(data-toggle='dropdown', href='#')
-                        #my-account-logo
-                            img(src='/images/my-account.png', alt='my-account')
-                        #my-account-link My Account
-                        span.caret
-                    ul.dropdown-menu
-                        li
-                            a(href='/auth/dashboard') Dashboard
-                        li
-                            a(href='/auth/profile') Profile
-                        li
-                            a(href='/auth/bookings') Bookings
-                        li
-                            a(href='/auth/review') Leave Review
-                        li
-                            a(href='/auth/logout') Logout
+                if user
+                    li.my-account.dropdown
+                        a.dropdown-toggle(data-toggle='dropdown', href='#')
+                            #my-account-logo
+                                img(src='/images/my-account.png', alt='my-account')
+                            #my-account-link 
+                                =user.username
+                            span.caret
+                        ul.dropdown-menu
+                            li
+                                a(href='/auth/dashboard') Dashboard
+                            li
+                                a(href='/auth/profile') Profile
+                            li
+                                a(href='/auth/bookings') Bookings
+                            li
+                                a(href='/auth/review') Leave Review
+                            li
+                                a(href='/auth/logout') Logout
+                else
+                    li.register
+                        a(href='/auth/register') Regiser
+                    li.login
+                        a(href='/auth/login') Login
+
 
     block topContainer
     
