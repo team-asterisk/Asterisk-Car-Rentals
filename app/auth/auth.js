@@ -10,14 +10,28 @@ const applyTo = (app, data) => {
     passport.use(new Strategy((username, password, done) => {
         data.users.findByUsername(username)
             .then((user) => {
-                return new Promise((res, rej) => {
-                    bcrypt.compare(password, user.passHash, (err, ready) => {
-                        if (ready) {
-                            res(user);
-                        }
-                        rej(err);
-                    });
-                });
+                if (!user) {
+                    throw new Error(`No user ${username} found!`);
+                } else {
+                    return user;
+                }
+            })
+            .then((user) => {
+                // async hash compare not working well here
+                // return new Promise((res, rej) => {
+                //     bcrypt.compare(password, user.passHash, (err, ready) => {
+                //         if (ready) {
+                //             res(user);
+                //         } else {
+                //             throw new Error('Password is wrong!');
+                //         }
+                //     });
+                // });
+
+                if (bcrypt.compareSync(password, user.passHash)) {
+                    return user;
+                }
+                throw new Error('Password is wrong!');
             })
             .then((user) => {
                 done(null, user);
@@ -45,7 +59,8 @@ const applyTo = (app, data) => {
         data.users.findById(id)
             .then((user) => {
                 done(null, user);
-            }).catch(done);
+            })
+            .catch(done);
     });
 
     app.use((req, res, next) => {

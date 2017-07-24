@@ -9,9 +9,11 @@ class AuthController {
     getRegisterForm(req, res) {
         return res.render('auth/register');
     }
+
     getLogInForm(req, res) {
         return res.render('auth/login');
     }
+
     logOut(req, res) {
         req.logout();
         return res.redirect('/');

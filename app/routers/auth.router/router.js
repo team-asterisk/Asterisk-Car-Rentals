@@ -12,7 +12,7 @@ const attachTo = (app, data) => {
         .get('/login', (req, res) => {
             return controller.getLogInForm(req, res);
         })
-        .post('/logout', (req, res) => {
+        .get('/logout', (req, res) => {
             return controller.logOut(req, res);
         })
         .post('/register', (req, res) => {
