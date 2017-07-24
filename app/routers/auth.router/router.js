@@ -15,6 +15,24 @@ const attachTo = (app, data) => {
         .get('/profile', (req, res) => {
             return controller.getProfileForm(req, res);
         })
+        .get('/addcar', (req, res) => {
+            return controller.getAddCarForm(req, res);
+        })
+        .get('/editcar', (req, res) => {
+            return controller.getEditCarForm(req, res);
+        })
+        .get('/viewbookings', (req, res) => {
+            return controller.getViewBookings(req, res);
+        })
+        .get('/viewcars', (req, res) => {
+            return controller.getViewCars(req, res);
+        })
+        .get('/viewusers', (req, res) => {
+            return controller.getViewUsers(req, res);
+        })
+        .get('/viewdeals', (req, res) => {
+            return controller.getViewDeals(req, res);
+        })
         .get('/logout', (req, res) => {
             return controller.logOut(req, res);
         })
