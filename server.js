@@ -1,12 +1,9 @@
 /* eslint-disable no-console */
 
-const async = () => {
-    return Promise.resolve();
-};
-
 const config = require('./config');
 
 (async () => {
+
     try {
         const db = await require('./db').init(config.connectionString);
         const data = await require('./data').init(db);
@@ -16,7 +13,7 @@ const config = require('./config');
             console.log(`Car Rentals is now live at http://localhost:${config.port}`));
     }
     catch (err) {
-        console.log(err);
+        console.log(err.message);
     }
 })();
 
