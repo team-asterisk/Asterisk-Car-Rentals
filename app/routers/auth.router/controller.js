@@ -55,7 +55,7 @@ class AuthController {
         return res.redirect('/');
     }
 
-    updateProfile(req, res, next) {
+    updateProfile(req, res) {
         const bodyUser = req.body;
         const convertedUser = this._convertStrings(bodyUser);
         this.data.users.findByUsername(convertedUser.username)
@@ -91,7 +91,7 @@ class AuthController {
             });
     }
 
-    register(req, res, next) {
+    register(req, res) {
         const bodyUser = req.body;
         const convertedUser = this._convertStrings(bodyUser);
         this.data.users.findByUsername(convertedUser.username)
