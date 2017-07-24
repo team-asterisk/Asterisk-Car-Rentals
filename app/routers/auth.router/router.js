@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const passport = require('passport');
+const multer = require('../utils/fileupload');
 
 const attachTo = (app, data) => {
     const router = new Router();
@@ -41,6 +42,9 @@ const attachTo = (app, data) => {
         })
         .post('/profile', (req, res) => {
             return controller.updateProfile(req, res);
+        })
+        .post('/addcar', multer.uploadSingle, (req, res) => {
+            return controller.addCar(req, res);
         })
         .get('/logout', (req, res) => {
             return controller.logOut(req, res);
