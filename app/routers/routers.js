@@ -7,11 +7,7 @@ const attachTo = (app, data) => {
     app.get('/', (req, res) => {
         return res.render('home');
     });
-
-    app.get('/cardetails', (req, res) => {
-        return res.render('./public/car-details');
-    });
-
+    
     app.get('/cars', (req, res) => {
         return res.render('./public/cars');
     });
