@@ -12,6 +12,9 @@ const attachTo = (app, data) => {
         .get('/login', (req, res) => {
             return controller.getLogInForm(req, res);
         })
+        .get('/profile', (req, res) => {
+            return controller.getProfileForm(req, res);
+        })
         .get('/logout', (req, res) => {
             return controller.logOut(req, res);
         })

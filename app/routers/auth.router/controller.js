@@ -14,6 +14,10 @@ class AuthController {
         return res.render('auth/login');
     }
 
+    getProfileForm(req, res) {
+        return res.render('auth/profile');
+    }
+
     logOut(req, res) {
         req.logout();
         return res.redirect('/');
