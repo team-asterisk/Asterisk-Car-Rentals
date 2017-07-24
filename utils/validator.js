@@ -1,6 +1,6 @@
 function validateString(str, min, max, chars) {
     if (typeof str !== 'string' || str.length < min || str.length > max) {
-        throw new Error(`Invalid username: Length must be between ${min} and ${max}`);
+        throw new Error(`Invalid text: Length must be between ${min} and ${max}`);
     }
 
     // can add chars as parameter optionally

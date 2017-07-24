@@ -3,7 +3,6 @@
 const config = require('./config');
 
 (async () => {
-
     try {
         const db = await (require('./db').init(config.connectionString));
         const data = await require('./data').init(db);
