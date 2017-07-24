@@ -55,6 +55,18 @@ class AuthController {
         return res.redirect('/');
     }
 
+    addCar(req, res) {
+        const bodyCar = req.body;
+        if (!req.file) {
+            return res.status(400).send('No files were uploaded.');
+        }
+
+        const carPhotoFileName = req.file.originalname;
+
+        return res.status(200)
+            .redirect('/auth/addcar');
+}
+
     updateProfile(req, res) {
         const bodyUser = req.body;
         const convertedUser = this._convertStrings(bodyUser);
