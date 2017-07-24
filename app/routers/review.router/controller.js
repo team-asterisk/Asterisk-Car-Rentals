@@ -12,7 +12,7 @@ class ReviewController {
     addReview(req, res) {
         const review = req.body;
         const user = req.user;
-        this.data.reviews.create(new Review(review, user))
+        this.data.reviews.create(review, user)
             .then(() => {
                 return res.redirect('/');
             })
