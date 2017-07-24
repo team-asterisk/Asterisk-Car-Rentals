@@ -1,0 +1,39 @@
+extends ../_shared/_master
+
+block main
+    #main
+        .container
+            #user-profile-page
+                h1#main-title Welcome, 
+                    =user.username
+                h2()
+                    center
+                        | Use this form to change your profile.
+                #user-profile
+                  form#profile-form
+                    label(for='username') Username
+                    br
+                    input#username.form-control(type='text', name='username', value=user.username, disabled='')
+                    br
+                    label(for='password') New Password
+                    br
+                    input#password.form-control(type='password', name='password')
+                    br
+                    label(for='repeat-password') Repeat Password
+                    br
+                    input#repeat-password.form-control(type='password', name='repeat-password')
+                    br
+                    label(for='name') Name
+                    br
+                    input#name.form-control(type='text', name='name', value=user.name)
+                    br
+                    label(for='user-phone') Phone number
+                    br
+                    input#user-phone.form-control(type='text', name='phone', value=user.phone)
+                    br
+                    label(for='user-email') Email
+                    br
+                    input#user-email.form-control(type='email', name='email', value=user.email)
+                    br
+                    button.btn.btn-primary(type='submit') Save changes
+
