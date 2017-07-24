@@ -11,6 +11,17 @@ class UsersData extends BaseData {
             .filterBy({ username: new RegExp(username, 'i') })
             .then(([user]) => user);
     }
+
+    create(model) {
+        if (!this._isModelValid(model)) {
+            return Promise.reject('Validation failed!');
+        }
+        delete model.password;
+        return this.collection.insert(model)
+            .then(() => {
+                return model;
+            });
+    }
 }
 
 module.exports = UsersData;
