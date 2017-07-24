@@ -72,11 +72,10 @@ class AuthController {
                         return Promise.resolve(convertedUser);
                     }
                     if (convertedUser.password !== convertedUser['repeat-password']) {
-                        throw new Error(`Passwords do not!`);
+                        throw new Error(`Passwords do not match!`);
                     }
 
                     return this._generateHash(convertedUser);
-
                 }
                 throw new Error(`User ${bodyUser.username} not found!`);
             })
