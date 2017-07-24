@@ -11,10 +11,11 @@ const applyTo = (app, data) => {
         data.users.findByUsername(username)
             .then((user) => {
                 if (!user) {
-                    throw new Error(`No user ${username} found!`);
-                } else {
-                    return user;
+                    return Promise.reject(`No user ${username} found!`);
                 }
+
+                return user;
+
             })
             .then((user) => {
                 // async hash compare not working well here
@@ -31,13 +32,13 @@ const applyTo = (app, data) => {
                 if (bcrypt.compareSync(password, user.passHash)) {
                     return user;
                 }
-                throw new Error('Password is wrong!');
+                return Promise.reject('Password is wrong!');
             })
             .then((user) => {
                 done(null, user);
             })
             .catch((err) => {
-                done(err);
+                done(null, false, { message: err });
             });
     }));
 
