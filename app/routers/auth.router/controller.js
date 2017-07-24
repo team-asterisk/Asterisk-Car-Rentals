@@ -18,6 +18,14 @@ class AuthController {
         return res.render('auth/profile');
     }
 
+    getMyBookings(req, res) {
+        return res.render('auth/bookings');
+    }
+
+    getReviewForm(req, res) {
+        return res.render('auth/review');
+    }
+
     getAddCarForm(req, res) {
         return res.render('auth/admin/addcar');
     }
