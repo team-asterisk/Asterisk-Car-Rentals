@@ -16,16 +16,7 @@ class BaseMongoDbData {
 
     getAll() {
         return this.collection.find()
-            .toArray()
-            .then((models) => {
-                if (this.ModelClass.toViewModel) {
-                    return models.map(
-                        (model) => this.ModelClass.toViewModel(model)
-                    );
-                }
-
-                return models;
-            });
+            .toArray();
     }
 
     create(model) {
