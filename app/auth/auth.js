@@ -16,17 +16,6 @@ const applyTo = (app, data) => {
                 return user;
             })
             .then((user) => {
-                // async hash compare not working well here
-                // return new Promise((res, rej) => {
-                //     bcrypt.compare(password, user.passHash, (err, ready) => {
-                //         if (ready) {
-                //             res(user);
-                //         } else {
-                //             throw new Error('Password is wrong!');
-                //         }
-                //     });
-                // });
-
                 if (bcrypt.compareSync(password, user.passHash)) {
                     return user;
                 }
