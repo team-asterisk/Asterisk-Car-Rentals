@@ -1,0 +1,102 @@
+extends _shared/_master
+
+block adminpage
+    #view-cars
+        h2#main-title View Cars
+        .sort-by-wrapper
+            .sort-cars-by
+                span.sort-by-text Sort by:
+                span
+                    a(href='#') Price
+                select#sort_by_category(name='sort_by_category')
+                    option(value='', disabled='', selected='') Category
+                    option(value='small_to_large', title='small to large') small to large
+                    option(value='large_to_small', title='large to small') large to small
+        .row
+            .col-xs-12
+                article.cars.header
+                    .car-model Model
+                    .car-category Category
+                    .car-fuel-type Fuel Type
+                    .car-price Price per Day
+                    .car-edit Operation
+            .col-xs-12
+                article.cars
+                    .car-model Toyota Corolla
+                    .car-category Economy
+                    .car-fuel-type Petrol
+                    .car-price $19
+                    .car-edit
+                        a(href='/auth/editcar') Edit
+            .col-xs-12
+                article.cars
+                    .car-model Toyota Corolla
+                    .car-category Economy
+                    .car-fuel-type Petrol
+                    .car-price $19
+                    .car-edit
+                        a(href='/auth/editcar') Edit
+            .col-xs-12
+                article.cars
+                    .car-model Toyota Corolla
+                    .car-category Economy
+                    .car-fuel-type Petrol
+                    .car-price $19
+                    .car-edit
+                        a(href='/auth/editcar') Edit
+            .col-xs-12
+                article.cars
+                    .car-model Toyota Corolla
+                    .car-category Economy
+                    .car-fuel-type Petrol
+                    .car-price $19
+                    .car-edit
+                        a(href='/auth/editcar') Edit
+            .col-xs-12
+                article.cars
+                    .car-model Toyota Corolla
+                    .car-category Economy
+                    .car-fuel-type Petrol
+                    .car-price $19
+                    .car-edit
+                        a(href='/auth/editcar') Edit
+            .col-xs-12
+                article.cars
+                    .car-model Toyota Corolla
+                    .car-category Economy
+                    .car-fuel-type Petrol
+                    .car-price $19
+                    .car-edit
+                        a(href='/auth/editcar') Edit
+            .col-xs-12
+                article.cars
+                    .car-model Toyota Corolla
+                    .car-category Economy
+                    .car-fuel-type Petrol
+                    .car-price $19
+                    .car-edit
+                        a(href='/auth/editcar') Edit
+            .col-xs-12
+                article.cars
+                    .car-model Toyota Corolla
+                    .car-category Economy
+                    .car-fuel-type Petrol
+                    .car-price $19
+                    .car-edit
+                        a(href='/auth/editcar') Edit
+            .col-xs-12
+                article.cars
+                    .car-model Mercedes E Class
+                    .car-category Premium
+                    .car-fuel-type Petrol
+                    .car-price $49
+                    .car-edit
+                        a(href='/auth/editcar') Edit
+            .col-xs-12
+                article.cars
+                    .car-model Toyota Corolla
+                    .car-category Economy
+                    .car-fuel-type Petrol
+                    .car-price $19
+                    .car-edit
+                        a(href='/auth/editcar') Edit
