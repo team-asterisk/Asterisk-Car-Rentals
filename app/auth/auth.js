@@ -13,9 +13,7 @@ const applyTo = (app, data) => {
                 if (!user) {
                     return Promise.reject(`No user ${username} found!`);
                 }
-
                 return user;
-
             })
             .then((user) => {
                 // async hash compare not working well here
