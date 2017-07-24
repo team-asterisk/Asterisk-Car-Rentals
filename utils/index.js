@@ -1,3 +1,4 @@
 const constants = require('./constants');
 const validator = require('./validator');
-module.exports = { constants, validator };
+const to = require('./toAwait');
+module.exports = { constants, validator, to };
