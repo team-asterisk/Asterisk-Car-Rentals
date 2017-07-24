@@ -6,6 +6,7 @@ block main
             #login-register-page
                 h1#main-title Register
                 #register
+                    != messages()
                     form#register-form(action='/auth/register', method='POST')
                         label(for='name') Name
                         br
