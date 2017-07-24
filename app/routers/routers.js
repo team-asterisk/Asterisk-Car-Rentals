@@ -7,6 +7,8 @@ const attachTo = (app, data) => {
     app.get('/', (req, res) => {
         return res.render('home');
     });
+
+    //cardetails moved to its own folder
     
     app.get('/cars', (req, res) => {
         return res.render('./public/cars');
