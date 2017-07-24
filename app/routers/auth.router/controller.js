@@ -18,6 +18,38 @@ class AuthController {
         return res.render('auth/profile');
     }
 
+    getMyBookings(req, res) {
+        return res.render('auth/bookings');
+    }
+
+    getReviewForm(req, res) {
+        return res.render('auth/review');
+    }
+
+    getAddCarForm(req, res) {
+        return res.render('auth/admin/addcar');
+    }
+
+    getEditCarForm(req, res) {
+        return res.render('auth/admin/editcar');
+    }
+
+    getViewBookings(req, res) {
+        return res.render('auth/admin/viewbookings');
+    }
+
+    getViewCars(req, res) {
+        return res.render('auth/admin/viewcars');
+    }
+
+    getViewUsers(req, res) {
+        return res.render('auth/admin/viewusers');
+    }
+
+    getViewDeals(req, res) {
+        return res.render('auth/admin/viewdeals');
+    }
+
     logOut(req, res) {
         req.logout();
         return res.redirect('/');

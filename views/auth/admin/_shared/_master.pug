@@ -1,0 +1,22 @@
+extends ../../../_shared/_master
+
+block main
+    #main
+        .container
+            #dashboard
+                .row
+                    .col-xs-12.col-md-2
+                        span.pull-right
+                            strong Dashboard:
+                    .col-xs-12.col-md-10.dashboard-pages
+                        span
+                            a(href='/auth/addcar') Add New Car
+                        span
+                            a(href='/auth/viewusers') View Users
+                        span
+                            a(href='/auth/viewcars') View Cars
+                        span
+                            a(href='/auth/viewbookings') View Bookings
+                        span
+                            a(href='/auth/viewdeals') View Deals
+            block adminpage

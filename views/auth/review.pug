@@ -1,0 +1,24 @@
+extends ../_shared/_master
+
+block main
+    #main
+        .container
+            #leave-review-page
+                h1#main-title Leave Us Review
+                #leave-review
+                    form#review-form
+                        label(for='review-form') Give us your rating
+                        br
+                        select.select-rating(name='rating')
+                            option(value='5', title='5 stars') 5 Stars
+                            option(value='4', title='4 stars') 4 Stars
+                            option(value='3', title='3 stars') 3 Stars
+                            option(value='2', title='2 stars') 2 Stars
+                            option(value='1', title='1 star') 1 Star
+                        br
+                        label(for='review-form') Type here your review
+                        br
+                        textarea#review-text.form-control(rows='8', cols='30', name='review')
+                        br
+                        button.btn.btn-primary(type='submit') Send
+

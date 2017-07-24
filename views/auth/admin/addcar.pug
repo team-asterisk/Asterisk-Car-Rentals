@@ -1,0 +1,76 @@
+extends _shared/_master
+
+block adminpage
+    #add-new-car
+        h2#main-title Add New Car
+        .row
+            .col-xs-12
+                != messages()
+                form#add-car-form(action='/auth/addcar', method='POST')
+                    label(for='name') Car Make and Model
+                    br
+                    input#name.form-control(type='text', name='name', placeholder='E.g. Toyota Corolla')
+                    br
+                    label(for='category') Category
+                    br
+                    input#category.form-control(type='text', name='category', placeholder='E.g. Economy, Compact, Full-size, SUV, Premium or Van')
+                    br
+                    label(for='picture') Picture
+                    br
+                    input(type='file', name='picture')
+                    br
+                    label.section Capacity
+                    label(for='number_of_adults') Number of Adults
+                    br
+                    input#adults.form-control(type='text', name='number_of_adults', placeholder='E.g. 2, 4, 5, 7 etc.')
+                    br
+                    label(for='number_of_bags') Number of Bags
+                    br
+                    input#bags.form-control(type='text', name='number_of_bags', placeholder='E.g. 2, 4, 5 etc.')
+                    br
+                    label(for='number_of_doors') Number of Doors
+                    br
+                    input#doors.form-control(type='text', name='number_of_doors', placeholder='E.g. 2, 4, 5 etc.')
+                    br
+                    label.section Car Details
+                    label(for='fuel_type') Fuel Type
+                    select.form-control(name='fuel_type', title='FuelType')
+                        option(value='1', title='Petrol') Petrol
+                        option(value='2', title='Diesel') Diesel
+                        option(value='3', title='Hybrid') Hybrid
+                        option(value='4', title='Electric') Electric
+                    br
+                    label(for='transmission') Transmission
+                    select.form-control(name='transmission', title='Transmission')
+                        option(value='1', title='Manual') Manual
+                        option(value='2', title='Automatic') Automatic
+                    br
+                    label(for='mileage') Mileage
+                    input#mileage.form-control(type='text', name='mileage', placeholder='E.g. 34Mpg')
+                    br
+                    label(for='year_of_manufacture') Year of Manufacture
+                    select.form-control(name='year_of_manufacture', title='YearofManufacture')
+                        option(value='2010', title='2010') 2010
+                        option(value='2011', title='2011') 2011
+                        option(value='2012', title='2012') 2012
+                        option(value='2013', title='2013') 2013
+                        option(value='2014', title='2014') 2014
+                        option(value='2015', title='2015') 2015
+                        option(value='2016', title='2016') 2016
+                        option(value='2017', title='2017') 2017
+                    br
+                    label(for='air_conditioner') Air Conditioner
+                    input#air_conditioner.fom-control(type='checkbox', name='air_conditioner')
+                    br
+                    label.section Price
+                    label(for='base_price') Base price per Day
+                    input#base_price.form-control(type='text', name='base_price', placeholder='Price in $ - e.g. 20')
+                    br
+                    label(for='special_price') Special price per Day
+                    input#special_price.form-control(type='text', name='special_price', placeholder='Price in $ - e.g. 14.99')
+                    br
+                    label(for='activate_special_price') Activate Special Price
+                    input#activate_special_price.fom-control(type='checkbox', name='activate_special_price')
+                    br
+                    br
+                    button.btn.btn-primary(type='submit') Add Car
