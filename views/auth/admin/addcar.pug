@@ -6,7 +6,7 @@ block adminpage
         .row
             .col-xs-12
                 != messages()
-                form#add-car-form(action='/auth/addcar', method='POST')
+                form#add-car-form(action='/auth/addcar', method='POST', encType='multipart/form-data')
                     label(for='name') Car Make and Model
                     br
                     input#name.form-control(type='text', name='name', placeholder='E.g. Toyota Corolla')
@@ -17,7 +17,7 @@ block adminpage
                     br
                     label(for='picture') Picture
                     br
-                    input(type='file', name='picture')
+                    input(type='file', name='carphoto')
                     br
                     label.section Capacity
                     label(for='number_of_adults') Number of Adults
