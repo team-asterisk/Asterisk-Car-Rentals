@@ -23,6 +23,43 @@ class AuthController {
         return res.redirect('/');
     }
 
+    updateProfile(req, res, next) {
+        const bodyUser = req.body;
+        const convertedUser = this._convertStrings(bodyUser);
+        this.data.users.findByUsername(convertedUser.username)
+            .then((dbUser) => {
+                if (dbUser) {
+                    convertedUser._id = dbUser._id;
+                    convertedUser.username = dbUser.username;
+
+                    if (convertedUser.password === '' ||
+                        typeof convertedUser.password === 'undefined') {
+                        delete convertedUser.password;
+                        delete convertedUser['repeat-password'];
+                        convertedUser.passHash = dbUser.passHash;
+                        Promise.resolve(convertedUser);
+                    } else {
+                        if (convertedUser.password !== convertedUser['repeat-password']) {
+                            throw new Error(`Passwords do not!`);
+                        }
+
+                        return this._generateHash(convertedUser);
+                    }
+                }
+                throw new Error(`User ${bodyUser.username} not found!`);
+            })
+            .then((updatedUser) => {
+                return this.data.users.updateById(updatedUser);
+            })
+            .then((dbUser) => {
+                return res.redirect('/');
+            })
+            .catch((err) => {
+                req.flash('error', err.message);
+                return res.redirect('/auth/profile');
+            });
+    }
+
     register(req, res, next) {
         const bodyUser = req.body;
         const convertedUser = this._convertStrings(bodyUser);
@@ -67,6 +104,10 @@ class AuthController {
                     }
 
                     bodyUser.passHash = hash;
+                    delete bodyUser.password;
+                    if (bodyUser['repeat-password']) {
+                        delete bodyUser['repeat-password'];
+                    }
                     return res(bodyUser);
                 });
             });

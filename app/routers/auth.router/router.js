@@ -15,6 +15,9 @@ const attachTo = (app, data) => {
         .get('/profile', (req, res) => {
             return controller.getProfileForm(req, res);
         })
+        .post('/profile', (req, res) => {
+            return controller.updateProfile(req, res);
+        })
         .get('/logout', (req, res) => {
             return controller.logOut(req, res);
         })

@@ -10,7 +10,7 @@ block main
                     center
                         | Use this form to change your profile.
                 #user-profile
-                  form#profile-form
+                  form#profile-form(action='/auth/profile', method="POST")
                     label(for='username') Username
                     br
                     input#username.form-control(type='text', name='username', value=user.username, disabled='')
