@@ -69,14 +69,14 @@ class AuthController {
                         delete convertedUser.password;
                         delete convertedUser['repeat-password'];
                         convertedUser.passHash = dbUser.passHash;
-                        Promise.resolve(convertedUser);
-                    } else {
-                        if (convertedUser.password !== convertedUser['repeat-password']) {
-                            throw new Error(`Passwords do not!`);
-                        }
-
-                        return this._generateHash(convertedUser);
+                        return Promise.resolve(convertedUser);
                     }
+                    if (convertedUser.password !== convertedUser['repeat-password']) {
+                        throw new Error(`Passwords do not!`);
+                    }
+
+                    return this._generateHash(convertedUser);
+
                 }
                 throw new Error(`User ${bodyUser.username} not found!`);
             })
