@@ -26,14 +26,6 @@ class AuthController {
         return res.render('auth/review');
     }
 
-    getAddCarForm(req, res) {
-        return res.render('auth/admin/addcar');
-    }
-
-    getEditCarForm(req, res) {
-        return res.render('auth/admin/editcar');
-    }
-
     getViewBookings(req, res) {
         return res.render('auth/admin/viewbookings');
     }
@@ -54,18 +46,6 @@ class AuthController {
         req.logout();
         return res.redirect('/');
     }
-
-    addCar(req, res) {
-        const bodyCar = req.body;
-        if (!req.file) {
-            return res.status(400).send('No files were uploaded.');
-        }
-
-        const carPhotoFileName = req.file.originalname;
-
-        return res.status(200)
-            .redirect('/auth/addcar');
-}
 
     updateProfile(req, res) {
         const bodyUser = req.body;
