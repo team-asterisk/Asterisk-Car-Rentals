@@ -13,21 +13,19 @@ class CarController {
 
     addCar(req, res) {
         const bodyCar = req.body;
-        // if (!req.file) {
-        //     return res.status(400).send('No files were uploaded.');
-        // }
+        if (!req.file) {
+            return res.status(400).send('No files were uploaded.');
+        }
 
         const carPhotoFileName = req.file.originalname;
         const newCar = bodyCar;
         newCar.carphotolink = req.file.destination + carPhotoFileName;
 
-        this.data.cars.create(newCar)
+        return this.data.cars.create(newCar)
             .then(() => {
-                console.log('stana');
                 return res.redirect('/auth/addcar');
             })
             .catch((err) => {
-                console.log('ne stana');
                 req.flash('error', err.message);
                 return res.status(400)
                     .redirect('/auth/addcar');
