@@ -111,6 +111,7 @@ class AuthController {
                 if (dbUser) {
                     user._id = dbUser._id;
                     user._username = dbUser._username;
+        converted.bookings = [];
 
                     if (user._password === '' ||
                         typeof user._password === 'undefined') {
