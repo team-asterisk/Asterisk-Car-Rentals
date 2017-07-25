@@ -2,8 +2,8 @@ class CommentController {
     constructor(data) {
         this.data = data;
     }
+
     addComment(req, res) {
-        console.log(req);
         const comment = req.body;
         const user = req.user;
         this.data.comments.create(comment, user)
@@ -12,7 +12,6 @@ class CommentController {
             })
             .catch((err) => {
                 req.flash('error', err.message);
-                return res.redirect('/cardetails');
             });
     }
 }

@@ -5,11 +5,14 @@ const attachTo = (app, data) => {
     const controller = require('./controller').init(data);
 
     router
-        .post('cardetails/comment', (req, res) => {
+        .get('/comment', (req, res) => {
+            return res.redirect('/cardetails');
+        })
+        .post('/comment', (req, res) => {
             return controller.addComment(req, res);
         });
 
-    app.use('/', router);
+    app.use('/cardetails', router);
 };
 
 module.exports = { attachTo };

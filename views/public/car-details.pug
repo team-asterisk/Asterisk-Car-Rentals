@@ -32,8 +32,8 @@ block main
                             button.book-now Book Now
             #comments
                 h2#comments-title Comments
-                if context.length   
-                    each comment in comments
+                if context.comments.length   
+                    each comment in context.comments
                         .single-comment
                             .comment-author
                                 strong Author:

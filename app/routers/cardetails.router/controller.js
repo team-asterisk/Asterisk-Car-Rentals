@@ -17,21 +17,21 @@ const init = (data) => {
     return controller;
 };
 
-//TO BE MOVED TO modelview.js
+// TO BE MOVED TO modelview.js
 async function generateViewModel(data) {
-
-    //EXAMPLE
+    // EXAMPLE
     const currentUser = { id: 3 };
 
-    //concurrently retrieving items
+    // concurrently retrieving items
     const [cars, comments, user] = await Promise.all([data.cars.getAll(),
-    data.comments.getAll(), data.users.findById(currentUser.id)]);
+        data.comments.getAll(), data.users.findById(currentUser.id),
+    ]);
 
-    //generating a specfic viewModel for our needs
+    // generating a specfic viewModel for our needs
     const viewModel = {
         cars,
         comments,
-        user
+        user,
     };
 
     return viewModel;
