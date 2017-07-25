@@ -820,6 +820,11 @@ footer a {
 	width: 84%;
 }
 
+input[type=checkbox] {
+    margin-left: 0.5rem;
+    vertical-align: top;
+}
+
 /* 
 * END Overriding Bootstrap styles 
 * ----------------------------
