@@ -31,8 +31,9 @@ body
                                 =user.username
                             span.caret
                         ul.dropdown-menu
-                            li
-                                a(href='/auth/viewusers') Dashboard
+                            if user.role == "admin"
+                                li
+                                    a(href='/auth/viewusers') Dashboard
                             li
                                 a(href='/auth/profile') Profile
                             li
