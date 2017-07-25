@@ -10,6 +10,7 @@ class User {
         this.phone = model.phone;
         this.email = model.email;
         this.role = model.role || 'user';
+        this.bookings = model.bookings || [];
     }
 
     get id() {
