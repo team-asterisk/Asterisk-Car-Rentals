@@ -12,6 +12,8 @@ class CommentController {
             })
             .catch((err) => {
                 req.flash('error', err.message);
+                return res.status(400)
+                    .send(err.message);
             });
     }
 }
