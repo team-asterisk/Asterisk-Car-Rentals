@@ -44,21 +44,6 @@ class AuthController {
         return res.redirect('/');
     }
 
-<<<<<<< HEAD
-=======
-    addCar(req, res) {
-        const bodyCar = req.body;
-        if (!req.file) {
-            return res.status(400).send('No files were uploaded.');
-        }
-
-        const carPhotoFileName = req.file.originalname;
-
-        return res.status(200)
-            .redirect('/auth/addcar');
-    }
-
->>>>>>> master
     updateProfile(req, res) {
         const bodyUser = req.body;
         return this._updateUserProperties(bodyUser)
@@ -106,7 +91,6 @@ class AuthController {
                 if (dbUser) {
                     user._id = dbUser._id;
                     user._username = dbUser._username;
-        converted.bookings = [];
 
                     if (user._password === '' ||
                         typeof user._password === 'undefined') {
