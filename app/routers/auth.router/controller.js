@@ -132,6 +132,8 @@ class AuthController {
                 converted[prop] = convert(bodyUser[prop]);
             });
 
+        converted.role = 'user';
+
         return converted;
     }
 
