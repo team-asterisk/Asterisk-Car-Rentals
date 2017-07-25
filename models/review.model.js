@@ -4,51 +4,51 @@ const convert = require('../utils/inputConverter').convert;
 
 class Review {
     constructor(model, user) {
-        this.author = user.username;
-        this.content = model.review;
-        this.rating = model.rating;
+        this._author = user.username;
+        this._content = model.review;
+        this._rating = model.rating;
     }
 
     get id() {
         return this._id;
     }
 
-    get author() {
-        return this._author;
+    get _author() {
+        return this.author;
     }
 
-    set author(value) {
+    set _author(value) {
         const name = convert(value);
         if (validator.validateString(name, size.MIN_NAME, size.MAX_NAME)) {
-            this._author = name;
+            this.author = name;
         } else {
             throw new Error('Invalid author');
         }
     }
 
-    get content() {
-        return this._content;
+    get _content() {
+        return this.content;
     }
 
-    set content(value) {
+    set _content(value) {
         const text = convert(value);
         if (validator.validateString(text, size.MIN_TEXT, size.MAX_TEXT)) {
-            this._content = text;
+            this.content = text;
         } else {
             throw new Error('Invalid content');
         }
     }
 
-    get rating() {
-        return this._rating;
+    get _rating() {
+        return this.rating;
     }
 
-    set rating(value) {
+    set _rating(value) {
         const rating = parseInt(value, 10);
         if (typeof rating !== 'number' || (rating < 0 && rating > 5)) {
             throw new Error('Invalid rating');
         }
-        this._rating = rating;
+        this.rating = rating;
     }
 }
 

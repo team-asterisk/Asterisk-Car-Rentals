@@ -110,11 +110,11 @@ block main
                                 article.review-compact
                                     .review-content
                                         .review-rating
-                                            = '★★★★★'.substr(0, review._rating)
+                                            = '★★★★★'.substr(0, review.rating)
                                         p.review-text
-                                            =review._content
+                                            =review.content
                                         .review-author
-                                            =review._author
+                                            =review.author
                     if i%3
                         .row.eq-height
                 else 
