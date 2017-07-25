@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const passport = require('passport');
-const multer = require('../utils/fileupload');
 
 const attachTo = (app, data) => {
     const router = new Router();
@@ -19,12 +18,6 @@ const attachTo = (app, data) => {
         .get('/bookings', (req, res) => {
             return controller.getMyBookings(req, res);
         })
-        .get('/addcar', (req, res) => {
-            return controller.getAddCarForm(req, res);
-        })
-        .get('/editcar', (req, res) => {
-            return controller.getEditCarForm(req, res);
-        })
         .get('/viewbookings', (req, res) => {
             return controller.getViewBookings(req, res);
         })
@@ -39,9 +32,6 @@ const attachTo = (app, data) => {
         })
         .post('/profile', (req, res) => {
             return controller.updateProfile(req, res);
-        })
-        .post('/addcar', multer.uploadSingle, (req, res) => {
-            return controller.addCar(req, res);
         })
         .get('/logout', (req, res) => {
             return controller.logOut(req, res);
