@@ -1,4 +1,5 @@
 extends ../_shared/_master
+include ../auth/modals/comment.pug
 
 block main
     #main
@@ -31,15 +32,16 @@ block main
                             button.book-now Book Now
             #comments
                 h2#comments-title Comments
-                .single-comment
-                    .comment-author
-                        strong Author:
-                        |  Pesho
-                    .comment-text Comment text
-                .single-comment
-                    .comment-author
-                        strong Author:
-                        |  Pesho
-                    .comment-text Comment text 2
+                if context.length   
+                    each comment in comments
+                        .single-comment
+                            .comment-author
+                                strong Author:
+                                    =comment._author
+                            .comment-text 
+                                =comment._content
+                else
+                    | No comments added, be the first to comment this car!
                 #add-new-comment
-                    button#add-new-comment-btn(type='submit') Add new comment
+                    button#add-new-comment-btn(type='button', data-toggle='modal', data-target='#myModal') Add new comment
+                +comment

@@ -1,5 +1,3 @@
-const Review = require('../../../models/review.model');
-
 class ReviewController {
     constructor(data) {
         this.data = data;

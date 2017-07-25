@@ -3,12 +3,23 @@ const Comment = require('../../models/comment.model');
 
 class CommentsData extends BaseData {
     constructor(db) {
-        super(db, Comment, Comment);
+        super(db, Comment);
     }
 
-    _isModelValid(model) {
-        // custom validation here
-        return super._isModelValid(model);
+    create(comment, user) {
+        // Property validation instead of method validation
+        let newInstance;
+
+        try {
+            newInstance = new Comment(comment, user);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+
+        return this.collection.insert(newInstance)
+            .then(() => {
+                return newInstance;
+            });
     }
 }
 

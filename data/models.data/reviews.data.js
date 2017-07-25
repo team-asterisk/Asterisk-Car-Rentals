@@ -7,8 +7,7 @@ class ReviewsData extends BaseData {
     }
 
     create(review, user) {
-
-        //Property validation instead of method validation
+        // Property validation instead of method validation
         let newInstance;
 
         try {
@@ -22,7 +21,6 @@ class ReviewsData extends BaseData {
                 return newInstance;
             });
     }
-
 }
 
 module.exports = ReviewsData;
