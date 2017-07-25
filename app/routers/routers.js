@@ -5,9 +5,15 @@ const path = require('path');
 
 const attachTo = (app, data) => {
     app.get('/', (req, res) => {
-        return res.render('home');
+        Promise.resolve(data.reviews.getAll())
+            .then((items) => {
+                return res.render('home', {
+                    context: items,
+                });
+            });
     });
 
+    console.log(data.reviews);
     // cardetails moved to its own folder
 
     // todo: move to cars.router

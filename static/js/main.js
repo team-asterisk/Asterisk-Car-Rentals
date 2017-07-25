@@ -49,4 +49,8 @@ $(() => {
             }
             endDate = ev.date;
         });
+
+    const ratingStarrs = (num) => {
+        this.html('★★★★★'.slice(0, num));
+    };
 });
