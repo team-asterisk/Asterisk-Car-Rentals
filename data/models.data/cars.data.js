@@ -3,12 +3,22 @@ const Car = require('../../models/car.model');
 
 class CarsData extends BaseData {
     constructor(db) {
-        super(db, Car, Car);
+        super(db, Car);
     }
 
-    _isModelValid(model) {
-        // custom validation here
-        return super._isModelValid(model);
+    create(car) {
+        let newInstance;
+
+        try {
+            newInstance = new Car(car);
+        } catch (error) {
+            return Promise.reject(error);
+        }
+
+        return this.collection.insert(newInstance)
+            .then(() => {
+                return newInstance;
+            });
     }
 }
 
