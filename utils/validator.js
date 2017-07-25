@@ -31,6 +31,20 @@ function validateEmail(email) {
     return true;
 }
 
+function validateImageExtension(image) {
+    if (!image || image.length === 0) {
+        throw new Error('Invalid image: Only JPG and PNG is allowed');
+    }
+
+    const pattern = /\.(jpe?g|png|gif|bmp)$/;
+
+    if (!pattern.test(image)) {
+        throw new Error('Invalid image: Please upload image with correct extension');
+    }
+
+    return true;
+}
+
 function validateUrl(url) {
     if (!url || url.length === 0) {
         throw new Error('Invalid url');
@@ -74,4 +88,5 @@ module.exports = {
     validateUrl,
     validatePhone,
     validatePassword,
+    validateImageExtension,
 };
