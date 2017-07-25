@@ -103,47 +103,19 @@ block main
                                         img(src='./images/car-van.png', alt='Van')
                                     button.car-select-button Select
             #customer-reviews
-                .row.eq-height
-                    .col-xs-12.col-sm-6.col-md-4.eq-height
-                        article.review-compact
-                            .review-content
-                                .review-rating ★★★★★
-                                p.review-text
-                                | Lorem ipsum dolor sit amet, quo at decore dolorum. His in idque atomorum, mel ut epicurei evertitur. Qui viris ocurreret at. Mel falli causae numquam ut, nam novum aeterno te. Quo ex velit rationibus cotidieque, his senserit mediocrem definitionem at.
-                                .review-author Pesho
-                    .col-xs-12.col-sm-6.col-md-4.eq-height
-                        article.review-compact
-                            .review-content
-                                .review-rating ★★★★★
-                                p.review-text
-                                | Lorem ipsum dolor sit amet, quo at decore dolorum. His in idque atomorum, mel ut epicurei evertitur. Qui viris ocurreret at. Mel falli causae numquam ut, nam novum aeterno te. Quo ex velit rationibus cotidieque, his senserit mediocrem definitionem at.
-                                .review-author Pesho
-                    .col-xs-12.col-sm-6.col-md-4.eq-height
-                        article.review-compact
-                            .review-content
-                                .review-rating ★★★
-                                p.review-text
-                                | Lorem ipsum dolor sit amet, quo at decore dolorum. His in idque atomorum, mel ut epicurei evertitur. Qui viris ocurreret at. Mel falli causae numquam ut, nam novum aeterno te. Quo ex velit rationibus cotidieque, his senserit mediocrem definitionem at.
-                                .review-author Pesho
-                .row.eq-height
-                    .col-xs-12.col-sm-6.col-md-4.eq-height
-                        article.review-compact
-                            .review-content
-                                .review-rating ★★★★★
-                                p.review-text
-                                | Lorem ipsum dolor sit amet, quo at decore dolorum. His in idque atomorum, mel ut epicurei evertitur. Qui viris ocurreret at. Mel falli causae numquam ut, nam novum aeterno te. Quo ex velit rationibus cotidieque, his senserit mediocrem definitionem at.
-                                .review-author Pesho
-                    .col-xs-12.col-sm-6.col-md-4.eq-height
-                        article.review-compact
-                            .review-content
-                                .review-rating ★★★★
-                                p.review-text
-                                | Lorem ipsum dolor sit amet, quo at decore dolorum. His in idque atomorum, mel ut epicurei evertitur. Qui viris ocurreret at. Mel falli causae numquam ut, nam novum aeterno te. Quo ex velit rationibus cotidieque, his senserit mediocrem definitionem at.
-                                .review-author Pesho
-                    .col-xs-12.col-sm-6.col-md-4.eq-height
-                        article.review-compact
-                            .review-content
-                                .review-rating ★★★★★
-                                p.review-text
-                                | Lorem ipsum dolor sit amet, quo at decore dolorum. His in idque atomorum, mel ut epicurei evertitur. Qui viris ocurreret at. Mel falli causae numquam ut, nam novum aeterno te. Quo ex velit rationibus cotidieque, his senserit mediocrem definitionem at.
-                                .review-author Pesho
+                if context.length   
+                    .row.eq-height
+                        each review, i in context
+                            .col-xs-12.col-sm-6.col-md-4.eq-height
+                                article.review-compact
+                                    .review-content
+                                        .review-rating
+                                            = '★★★★★'.substr(0, review._rating)
+                                        p.review-text
+                                            =review._content
+                                        .review-author
+                                            =review._author
+                    if i%3
+                        .row.eq-height
+                else 
+                    | No reviews provided
