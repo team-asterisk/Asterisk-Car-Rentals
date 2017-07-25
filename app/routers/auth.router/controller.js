@@ -1,6 +1,3 @@
-const bcrypt = require('bcrypt');
-const convert = require('../../../utils/inputConverter').convert;
-
 class AuthController {
     constructor(data) {
         this.data = data;
@@ -65,34 +62,13 @@ class AuthController {
 
         return res.status(200)
             .redirect('/auth/addcar');
-}
+    }
 
     updateProfile(req, res) {
         const bodyUser = req.body;
-        const convertedUser = this._convertStrings(bodyUser);
-        this.data.users.findByUsername(convertedUser.username)
-            .then((dbUser) => {
-                if (dbUser) {
-                    convertedUser._id = dbUser._id;
-                    convertedUser.username = dbUser.username;
-
-                    if (convertedUser.password === '' ||
-                        typeof convertedUser.password === 'undefined') {
-                        delete convertedUser.password;
-                        delete convertedUser['repeat-password'];
-                        convertedUser.passHash = dbUser.passHash;
-                        return Promise.resolve(convertedUser);
-                    }
-                    if (convertedUser.password !== convertedUser['repeat-password']) {
-                        throw new Error(`Passwords do not match!`);
-                    }
-
-                    return this._generateHash(convertedUser);
-                }
-                throw new Error(`User ${bodyUser.username} not found!`);
-            })
-            .then((updatedUser) => {
-                return this.data.users.updateById(updatedUser);
+        return this._updateUserProperties(bodyUser)
+            .then((user) => {
+                return this.data.users.updateById(user);
             })
             .then((dbUser) => {
                 return res.redirect('/');
@@ -105,16 +81,9 @@ class AuthController {
 
     register(req, res) {
         const bodyUser = req.body;
-        const convertedUser = this._convertStrings(bodyUser);
-        this.data.users.findByUsername(convertedUser.username)
-            .then((dbUser) => {
-                if (dbUser) {
-                    throw new Error('User already exists');
-                }
-                return this._generateHash(convertedUser);
-            })
-            .then((newUser) => {
-                return this.data.users.create(newUser);
+        return this._checkIfUserExists(bodyUser)
+            .then(() => {
+                return this.data.users.create(bodyUser);
             })
             .then((dbUser) => {
                 return res.redirect('/auth/login');
@@ -125,39 +94,44 @@ class AuthController {
             });
     }
 
-    _convertStrings(bodyUser) {
-        const converted = {};
-        Object.keys(bodyUser)
-            .forEach((prop) => {
-                converted[prop] = convert(bodyUser[prop]);
+    _checkIfUserExists(user) {
+        return this.data.users.findByUsername(user._username)
+            .then((dbUser) => {
+                if (dbUser) {
+                    throw new Error('User already exists');
+                }
+
+                return Promise.resolve(true);
             });
-
-        converted.role = 'user';
-
-        return converted;
     }
 
-    _generateHash(bodyUser) {
-        const promise = new Promise((res, rej) => {
-            bcrypt.genSalt(10, (err, salt) => {
-                if (err) {
-                    return rej(err);
-                }
-                return bcrypt.hash(bodyUser.password, salt, (error, hash) => {
-                    if (err) {
-                        return rej(error);
+    _updateUserProperties(user) {
+        return this.data.users.findByUsername(user._username)
+            .then((dbUser) => {
+                if (dbUser) {
+                    user._id = dbUser._id;
+                    user._username = dbUser._username;
+
+                    if (user._password === '' ||
+                        typeof user._password === 'undefined') {
+                        delete user._password;
+                        delete user['repeat-password'];
+                        user.passHash = dbUser.passHash;
+                        return Promise.resolve(user);
                     }
 
-                    bodyUser.passHash = hash;
-                    delete bodyUser.password;
-                    if (bodyUser['repeat-password']) {
-                        delete bodyUser['repeat-password'];
+                    if (user._password !== user['repeat-password']) {
+                        throw new Error(`Passwords do not match!`);
                     }
-                    return res(bodyUser);
-                });
+                    return Promise.resolve(user);
+                }
+
+                if (user._username) {
+                    throw new Error(`User ${user._username} not found!`);
+                } else {
+                    throw new Error(`No username provided!`);
+                }
             });
-        });
-        return promise;
     }
 }
 

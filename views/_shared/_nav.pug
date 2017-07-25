@@ -9,7 +9,7 @@ mixin nav()
         if user
             li.list-item.dropdown
                 a.nav-btn.dropdown-toggle#nav-btn-toggle-items(href="#")
-                    =user.username
+                    =user._username
                 ul.dropdown-list.list
                     li.list-item
                         form(action="/auth/logout" method="get")
