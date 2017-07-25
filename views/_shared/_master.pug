@@ -28,10 +28,10 @@ body
                             #my-account-logo
                                 img(src='/images/my-account.png', alt='my-account')
                             #my-account-link 
-                                =user._username
+                                =user.username
                             span.caret
                         ul.dropdown-menu
-                            if user._role == "admin"
+                            if user.role == "admin"
                                 li
                                     a(href='/auth/viewusers') Dashboard
                             li

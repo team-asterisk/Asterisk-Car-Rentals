@@ -4,35 +4,35 @@ const convert = require('../utils/inputConverter').convert;
 
 class Comment {
     constructor(model, user) {
-        this.author = user.username;
-        this.content = model.comment;
+        this._author = user.username;
+        this._content = model.comment;
     }
 
     get id() {
         return this._id;
     }
 
-    get author() {
-        return this._author;
+    get _author() {
+        return this.author;
     }
 
-    set author(value) {
+    set _author(value) {
         const name = convert(value);
         if (validator.validateString(name, size.MIN_NAME, size.MAX_NAME)) {
-            this._author = name;
+            this.author = name;
         } else {
             throw new Error('Invalid author');
         }
     }
 
-    get content() {
-        return this._content;
+    get _content() {
+        return this.content;
     }
 
-    set content(value) {
+    set _content(value) {
         const text = convert(value);
         if (validator.validateString(text, size.MIN_TEXT, size.MAX_TEXT)) {
-            this._content = text;
+            this.content = text;
         } else {
             throw new Error('Invalid content');
         }

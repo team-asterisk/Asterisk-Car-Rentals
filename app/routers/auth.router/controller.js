@@ -62,8 +62,8 @@ class AuthController {
     register(req, res) {
         const bodyUser = req.body;
         return this._checkIfUserExists(bodyUser)
-            .then(() => {
-                return this.data.users.create(bodyUser);
+            .then((user) => {
+                return this.data.users.create(user);
             })
             .then((dbUser) => {
                 return res.redirect('/auth/login');
@@ -75,39 +75,52 @@ class AuthController {
     }
 
     _checkIfUserExists(user) {
-        return this.data.users.findByUsername(user._username)
+        const username = user.username;
+        return this.data.users.findByUsername(username)
             .then((dbUser) => {
+                console.log('------- test if exists -------');
+                console.log(dbUser);
+                console.log(user);
+                console.log('------- end test if exists -------');
+
                 if (dbUser) {
                     throw new Error('User already exists');
                 }
 
-                return Promise.resolve(true);
+                return Promise.resolve(user);
             });
     }
 
     _updateUserProperties(user) {
-        return this.data.users.findByUsername(user._username)
+        return this.data.users.findByUsername(user.username)
             .then((dbUser) => {
                 if (dbUser) {
-                    user._id = dbUser._id;
-                    user._username = dbUser._username;
+                    console.log('------- test update -------');
+                    console.log(dbUser);
+                    console.log(user);
+                    console.log('------- end test update -------');
 
-                    if (user._password === '' ||
-                        typeof user._password === 'undefined') {
-                        delete user._password;
+                    user._id = dbUser._id;
+                    user.username = dbUser.username;
+                    user.role = dbUser.role;
+                    user.bookings = dbUser.bookings;
+
+                    if (user.password === '' ||
+                        typeof user.password === 'undefined') {
+                        delete user.password;
                         delete user['repeat-password'];
                         user.passHash = dbUser.passHash;
                         return Promise.resolve(user);
                     }
 
-                    if (user._password !== user['repeat-password']) {
+                    if (user.password !== user['repeat-password']) {
                         throw new Error(`Passwords do not match!`);
                     }
                     return Promise.resolve(user);
                 }
 
-                if (user._username) {
-                    throw new Error(`User ${user._username} not found!`);
+                if (user.username) {
+                    throw new Error(`User ${user.username} not found!`);
                 } else {
                     throw new Error(`No username provided!`);
                 }

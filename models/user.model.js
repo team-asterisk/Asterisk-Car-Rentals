@@ -4,93 +4,93 @@ const convert = require('../utils/inputConverter').convert;
 
 class User {
     constructor(model) {
-        this.name = model.name;
-        this.username = model.username;
-        this.password = model.password;
-        this.phone = model.phone;
-        this.email = model.email;
-        this.role = model.role || 'user';
-        this.bookings = model.bookings || [];
+        this._name = model.name;
+        this._username = model.username;
+        this._password = model.password;
+        this._phone = model.phone;
+        this._email = model.email;
+        this._role = model.role || 'user';
+        this._bookings = model.bookings || [];
     }
 
     get id() {
         return this._id;
     }
 
-    get name() {
-        return this._name;
+    get _name() {
+        return this.name;
     }
 
-    set name(value) {
+    set _name(value) {
         const nameVal = convert(value);
         if (validator.validateString(nameVal, size.MIN_NAME, size.MAX_NAME)) {
-            this._name = nameVal;
+            this.name = nameVal;
         } else {
             throw new Error('Invalid name');
         }
     }
 
-    get username() {
-        return this._username;
+    get _username() {
+        return this.username;
     }
 
-    set username(value) {
+    set _username(value) {
         const usernameVal = convert(value);
         if (validator.validateString(usernameVal, size.MIN_NAME, size.MAX_NAME)) {
-            this._username = usernameVal;
+            this.username = usernameVal;
         } else {
             throw new Error('Invalid username');
         }
     }
 
-    get password() {
-        return this._password;
+    get _password() {
+        return this.password;
     }
 
-    set password(value) {
+    set _password(value) {
         const passwordVal = convert(value);
         if (validator.validatePassword(passwordVal)) {
-            this._password = passwordVal;
+            this.password = passwordVal;
         } else {
             throw new Error('Invalid password');
         }
     }
 
-    get phone() {
-        return this._phone;
+    get _phone() {
+        return this.phone;
     }
 
-    set phone(value) {
+    set _phone(value) {
         const phoneVal = convert(value);
         if (validator.validatePhone(phoneVal)) {
-            this._phone = phoneVal;
+            this.phone = phoneVal;
         } else {
             throw new Error('Invalid phone number');
         }
     }
 
-    get email() {
-        return this._email;
+    get _email() {
+        return this.email;
     }
 
-    set email(value) {
+    set _email(value) {
         const emailVal = convert(value);
         if (validator.validatePhone(emailVal)) {
-            this._email = emailVal;
+            this.email = emailVal;
         } else {
             throw new Error('Invalid email');
         }
     }
 
-    get role() {
-        return this._role;
+    get _role() {
+        return this.role;
     }
 
-    set role(value) {
+    set _role(value) {
         if (typeof value !== 'string' || ['user', 'admin'].indexOf(value) < 0) {
             throw new Error('Invalid role');
         }
-        this._role = value;
+        this.role = value;
     }
 }
 
