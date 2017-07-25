@@ -13,7 +13,7 @@ const attachTo = (app, data) => {
             });
     });
 
-    console.log(data.reviews);
+    // console.log(data.reviews);
     // cardetails moved to its own folder
 
     // todo: move to cars.router
