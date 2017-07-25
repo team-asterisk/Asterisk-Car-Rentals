@@ -133,6 +133,7 @@ class AuthController {
             });
 
         converted.role = 'user';
+        converted.bookings = [];
 
         return converted;
     }
