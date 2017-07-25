@@ -155,7 +155,7 @@ class Car {
         if (typeof ac !== 'number' || (ac < 0 && ac > 1)) {
             throw new Error('Invalid feature air conditioner');
         }
-        this.airconditioner = ac;
+        this._airconditioner = ac;
     }
 
     get baseprice() {
@@ -191,7 +191,7 @@ class Car {
         if (typeof special !== 'number' || (special < 0 && special > 1)) {
             throw new Error('Invalid feature special price activated');
         }
-        this.specialpriceactivated = special;
+        this._specialpriceactivated = special;
     }
 }
 
