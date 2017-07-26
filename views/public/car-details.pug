@@ -7,34 +7,45 @@ block main
             #car-details
                 .row
                     .col-xs-12.col-md-4.border-right-1px
-                        .car-model Toyota Corolla
-                        .car-price From $15 per Day
+                        .car-model
+                            = result.car.makemodel
+                        .car-price 
+                            = 'From $' + result.car.baseprice + 'per Day'
                         span.car-image
-                            img(src='./images/4door-sedan.png', alt='Economy car')
+                            img(src= '../' + result.car.carphotolink)
                     .col-xs-12.col-md-8
                         .car-info
                             .car-capacity
-                                span.car-passengers 5 Adults
-                                span.car-bags 2 Bags
-                                span.car-doors 2-4 Doors
-                            .car-class Economy
+                                span.car-passengers 
+                                    = result.car.adultscount + ' Adults'
+                                span.car-bags 
+                                    = result.car.bagscount + ' Bags'
+                                span.car-doors
+                                    = result.car.doorscount + ' Doors'
+                            .car-class
+                                = result.car.category
                             .row
                                 .col-xs-12.col-md-5
                                     ul.car-features
-                                        li Fuel type: Petrol
-                                        li Mileage: 36 Mpg
-                                        li Transmission: Manual
+                                        li 
+                                            = 'Fuel type: ' + result.car.fueltype
+                                        li
+                                            = 'Mileage: ' + result.car.mileage + ' Mpg'
+                                        li
+                                            = 'Transmission: ' + result.car.transmission
                                 .col-xs-12.col-md-5
                                     ul.car-features
-                                        li Air Conditioning
-                                        li Model 2015
+                                        if result.car.airconditioner
+                                            li Air Conditioning
+                                        li
+                                            = 'Model ' + result.car.yearofmanufacture
                                         li * Unlimited mileage included
                             button.book-now Book Now
-            #{req.toastr.render()}
+            
             #comments
                 h2#comments-title Comments
-                if context.comments.length   
-                    each comment in context.comments
+                if result.car.comments.length   
+                    each comment in result.car.comments
                         .single-comment
                             .comment-author
                                 strong Author:
