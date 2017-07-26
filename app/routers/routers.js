@@ -17,20 +17,6 @@ const attachTo = (app, data) => {
     // console.log(data.reviews);
     // cardetails moved to its own folder
 
-    // todo: move to cars.router
-    app.get('/cars', (req, res) => {
-        return res.render('./public/cars');
-    });
-
-    app.get('/searchcars', (req, res) => {
-        return res.render('./public/search-cars');
-    });
-
-    // todo: move to deals.router
-    app.get('/deals', (req, res) => {
-        return res.render('./public/deals');
-    });
-
     fs.readdirSync(__dirname)
         .filter((file) => file.includes('.router'))
         .forEach((file) => {
