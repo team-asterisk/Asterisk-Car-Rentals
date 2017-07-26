@@ -37,8 +37,8 @@ class CarController {
                 return res.render('./public/car-details', {
                     result: {
                         car,
-                        req: req,
                     },
+                    req: req,
                 });
             });
     }
