@@ -206,7 +206,7 @@ class Car {
         if (typeof value === 'undefined') {
             value = 0;
         }
-        
+
         if (value < 0 || value > 1) {
             throw new Error('Invalid feature air conditioner');
         }
