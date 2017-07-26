@@ -19,9 +19,9 @@ $(() => {
         "hideMethod": "slideUp"
     };
 
-    let startDate;
-    let endDate;
-    let now = new Date();
+    var startDate;
+    var endDate;
+    var now = new Date();
 
     $('.datepicker-from')
         .datepicker()
@@ -48,5 +48,34 @@ $(() => {
                 $(ev.target).val("");
             }
             endDate = ev.date;
+
+            var elem = $('.automatic-price');
+            console.log(elem);
+            var special = +elem.attr('special');
+            var base = +elem.attr('base');
+            var activated = +elem.attr('activated');
+            console.log(special, base, activated);
+            var p = calculatePrice(endDate, startDate, base, special, activated);
+            console.log(p);
+            elem.html(p);
         });
+
+    function calculatePrice(d1, d2, base, special, activated) {
+        var price = base;
+
+        if (activated === 1) {
+            price = special;
+        }
+        console.log(price);
+        console.log(d1.valueOf());
+        console.log(d2.valueOf());
+
+        if (d1.valueOf() < d2.valueOf()) {
+            var totalDays = Math.round((d2.valueOf() - d1.valueOf()) / (1000 * 60 * 60 * 24));
+            console.log(totalDays);
+            return totalDays * price;
+        } else {
+            return 0;
+        }
+    }
 });
