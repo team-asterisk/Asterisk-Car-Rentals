@@ -9,8 +9,11 @@ block main
                     .col-xs-12.col-md-4.border-right-1px
                         .car-model
                             = result.car.makemodel
-                        .car-price 
-                            = 'From $' + result.car.baseprice + 'per Day'
+                        .car-price
+                            if result.car.specialpriceactivated
+                                = 'From $' + result.car.specialprice + 'per Day'
+                            else
+                                = 'From $' + result.car.baseprice + 'per Day'
                         span.car-image
                             img(src= '../' + result.car.carphotolink)
                     .col-xs-12.col-md-8
