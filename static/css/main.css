@@ -348,6 +348,8 @@
     min-height: 34px;
     margin: 0 auto;
     padding: 0.5rem 4rem;
+    max-width: 150px;
+    text-align: center;
 }
 
 .border-right-1px {
