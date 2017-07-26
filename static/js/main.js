@@ -60,7 +60,7 @@ $(() => {
             elem.html(p);
         });
 
-    function calculatePrice(d1, d2, base, special, activated) {
+    function calculatePrice(d2, d1, base, special, activated) {
         var price = base;
 
         if (activated === 1) {
