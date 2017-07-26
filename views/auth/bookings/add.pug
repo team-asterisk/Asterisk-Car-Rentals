@@ -11,7 +11,7 @@ block main
                         | Fill in the form to book this car
                 #{req.toastr.render()}
                 #user-profile
-                    form#profile-form(action='/auth/bookings/add/' +context.id, method="POST")
+                    form#profile-form(action='/auth/bookings/add/' +context.car.id, method="POST")
                         label(for='makemodel') Car Model
                         br
                         input#username.form-control(type='text', name='makemodel', value=context.car.makemodel, disabled='')

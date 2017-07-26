@@ -66,7 +66,7 @@ $(() => {
 
         if (d1.valueOf() < d2.valueOf()) {
             var totalDays = Math.round((d2.valueOf() - d1.valueOf()) / (1000 * 60 * 60 * 24));
-            return totalDays * price;
+            return (totalDays * price).toFixed(2);
         } else {
             return 0;
         }
