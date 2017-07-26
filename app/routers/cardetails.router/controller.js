@@ -1,16 +1,10 @@
 const init = (data) => {
     const controller = {
         async getAll(req, res) {
-            const viewModel = await generateViewModel(data);
+            const user = req.user;
+            const viewModel = await generateViewModel(data, user);
             console.log(viewModel);
             return res.render('./public/car-details', { context: viewModel, req: req });
-            // return data.cars.getAll()
-            //     .then((cars) => {
-            //         console.log(cars);
-            //         // return res.render('./public/car-details', {
-            //         //     context: cars,
-            //         // });
-            //     });
         },
     };
 
@@ -18,13 +12,10 @@ const init = (data) => {
 };
 
 // TO BE MOVED TO modelview.js
-async function generateViewModel(data) {
-    // EXAMPLE
-    const currentUser = { id: 3 };
-
+async function generateViewModel(data, currentUser) {
     // concurrently retrieving items
     const [cars, comments, user] = await Promise.all([data.cars.getAll(),
-        data.comments.getAll(), data.users.findById(currentUser.id),
+        data.comments.getAll(), currentUser,
     ]);
 
     // generating a specfic viewModel for our needs
