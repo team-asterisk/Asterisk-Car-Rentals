@@ -9,4 +9,22 @@ const size = {
     MAX_TEXT: 1000,
 };
 
-module.exports = { size };
+const toastrOptions = {
+    'closeButton': false,
+    'debug': false,
+    'newestOnTop': false,
+    'progressBar': false,
+    'positionClass': 'toast-top-center',
+    'preventDuplicates': true,
+    'onclick': null,
+    'showDuration': '100',
+    'hideDuration': '100',
+    'timeOut': '1200',
+    'extendedTimeOut': '1000',
+    'showEasing': 'swing',
+    'hideEasing': 'linear',
+    'showMethod': 'slideDown',
+    'hideMethod': 'slideUp',
+};
+
+module.exports = { size, toastrOptions };

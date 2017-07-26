@@ -8,11 +8,12 @@ class CommentController {
         const user = req.user;
         this.data.comments.create(comment, user)
             .then(() => {
+                req.toastr.success('Thank you for your comment!', 'Success!');
                 return res.redirect('/cardetails');
             })
             .catch((err) => {
-                req.flash('error', err.message);
-                return res.redirect('#');
+                req.toastr.error(err.message);
+                return res.redirect('/cardetails');
             });
     }
 }

@@ -4,7 +4,7 @@ class ReviewController {
     }
 
     getReviewForm(req, res) {
-        return res.render('auth/review');
+        return res.render('auth/review', { req: req });
     }
 
     addReview(req, res) {
@@ -12,10 +12,11 @@ class ReviewController {
         const user = req.user;
         this.data.reviews.create(review, user)
             .then(() => {
+                req.toastr.success('Thank you for your review!!', 'Success!');
                 return res.redirect('/');
             })
             .catch((err) => {
-                req.flash('error', err.message);
+                req.toastr.error(err.message);
                 return res.redirect('/auth/review');
             });
     }

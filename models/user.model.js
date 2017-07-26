@@ -92,6 +92,15 @@ class User {
         }
         this.role = value;
     }
+
+    get _bookings() {
+        return this.bookings;
+    }
+
+    set _bookings(val) {
+        // validate
+        this.bookings = val;
+    }
 }
 
 module.exports = User;

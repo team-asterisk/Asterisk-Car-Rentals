@@ -10,6 +10,9 @@ head
     link(rel='stylesheet', href='/css/datepicker.css')
     link(rel='stylesheet', href='/css/toastr.min.css')
     link(rel='stylesheet', href='/css/main.css')
+    link(rel='stylesheet', href='../../node_modules/toastr/build/toastr.min.css')
+    script(src='/js/jquery.min.js')
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js')
 body
     nav.navbar.navbar-default.navbar-static-top
         .container-fluid
@@ -48,11 +51,11 @@ body
                     li.login
                         a(href='/auth/login') Login
 
-
+                #{req.toastr.render()}
     block topContainer
     
     block main
-        
+
     footer.text-center.footer
         .row
         div
@@ -65,7 +68,6 @@ body
             small
                 strong 
                     | © 2017
-    script(src='/js/jquery.min.js')
     script(src='/js/bootstrap.min.js')
     script(src='/js/bootstrap-datepicker.js')
     script(src='/js/toastr.min.js')

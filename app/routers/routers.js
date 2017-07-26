@@ -9,6 +9,7 @@ const attachTo = (app, data) => {
             .then((items) => {
                 return res.render('home', {
                     context: items,
+                    req: req,
                 });
             });
     });

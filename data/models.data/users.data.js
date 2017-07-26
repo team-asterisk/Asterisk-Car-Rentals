@@ -55,13 +55,13 @@ class UsersData extends BaseData {
                 if (err) {
                     return rej(err);
                 }
-                return bcrypt.hash(bodyUser._password, salt, (error, hash) => {
+                return bcrypt.hash(bodyUser.password, salt, (error, hash) => {
                     if (err) {
                         return rej(error);
                     }
 
                     bodyUser.passHash = hash;
-                    delete bodyUser._password;
+                    delete bodyUser.password;
 
                     if (bodyUser['repeat-password']) {
                         delete bodyUser['repeat-password'];

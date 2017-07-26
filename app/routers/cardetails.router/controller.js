@@ -3,7 +3,7 @@ const init = (data) => {
         async getAll(req, res) {
             const viewModel = await generateViewModel(data);
             console.log(viewModel);
-            return res.render('./public/car-details', { context: viewModel });
+            return res.render('./public/car-details', { context: viewModel, req: req });
             // return data.cars.getAll()
             //     .then((cars) => {
             //         console.log(cars);

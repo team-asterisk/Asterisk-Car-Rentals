@@ -30,6 +30,7 @@ block main
                                         li Model 2015
                                         li * Unlimited mileage included
                             button.book-now Book Now
+            #{req.toastr.render()}
             #comments
                 h2#comments-title Comments
                 if context.comments.length   

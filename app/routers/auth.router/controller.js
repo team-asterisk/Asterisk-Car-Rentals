@@ -4,15 +4,15 @@ class AuthController {
     }
 
     getRegisterForm(req, res) {
-        return res.render('auth/register');
+        return res.render('auth/register', { req: req });
     }
 
     getLogInForm(req, res) {
-        return res.render('auth/login');
+        return res.render('auth/login', { req: req });
     }
 
     getProfileForm(req, res) {
-        return res.render('auth/profile');
+        return res.render('auth/profile', { req: req });
     }
 
     getMyBookings(req, res) {
@@ -54,7 +54,7 @@ class AuthController {
                 return res.redirect('/');
             })
             .catch((err) => {
-                req.flash('error', err.message);
+                req.toastr.error(err.message);
                 return res.redirect('/auth/profile');
             });
     }
@@ -69,7 +69,7 @@ class AuthController {
                 return res.redirect('/auth/login');
             })
             .catch((err) => {
-                req.flash('error', err.message);
+                req.toastr.error(err.message);
                 return res.redirect('/auth/register');
             });
     }
