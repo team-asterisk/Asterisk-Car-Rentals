@@ -45,6 +45,9 @@ class BookingsController {
         const newBooking = req.body;
         const user = req.user;
 
+        console.log(carId);
+        console.log(newBooking);
+
         this.data.cars.findById(carId)
             .then((car) => {
                 this._addOrReplaceBookingToUser(car, user, newBooking);
@@ -66,6 +69,9 @@ class BookingsController {
         const carId = req.params.id;
         const newBooking = req.body;
         const user = req.user;
+
+        console.log(carId);
+        console.log(newBooking);
 
         this.data.cars.findById(carId)
             .then((car) => {
