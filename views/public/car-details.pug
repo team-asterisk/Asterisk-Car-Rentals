@@ -5,31 +5,36 @@ block main
     #main
         .container
             #car-details
-                .row
-                    .col-xs-12.col-md-4.border-right-1px
-                        .car-model Toyota Corolla
-                        .car-price From $15 per Day
-                        span.car-image
-                            img(src='./images/4door-sedan.png', alt='Economy car')
-                    .col-xs-12.col-md-8
-                        .car-info
-                            .car-capacity
-                                span.car-passengers 5 Adults
-                                span.car-bags 2 Bags
-                                span.car-doors 2-4 Doors
-                            .car-class Economy
-                            .row
-                                .col-xs-12.col-md-5
-                                    ul.car-features
-                                        li Fuel type: Petrol
-                                        li Mileage: 36 Mpg
-                                        li Transmission: Manual
-                                .col-xs-12.col-md-5
-                                    ul.car-features
-                                        li Air Conditioning
-                                        li Model 2015
-                                        li * Unlimited mileage included
-                            button.book-now Book Now
+                if context.car   
+                    - var car = context.car;
+                    .row
+                        .col-xs-12.col-md-4.border-right-1px
+                            .car-model #{car.model}
+                            .car-price From $#{car.baseprice} per Day
+                            span.car-image
+                                img(src=car.carphotolink, width='250', alt='Economy car')
+                        .col-xs-12.col-md-8
+                            .car-info
+                                .car-capacity
+                                    span.car-passengers #{car.adultscount} Adults
+                                    span.car-bags #{car.bagscount} Bags
+                                    span.car-doors #{car.doorscount} Doors
+                                .car-class #{car.category}
+                                .row
+                                    .col-xs-12.col-md-5
+                                        ul.car-features
+                                            li Fuel type: #{car.fueltype}
+                                            li Mileage: #{car.mileage} Mpg
+                                            li Transmission: #{car.transmission}
+                                    .col-xs-12.col-md-5
+                                        ul.car-features
+                                            if car.airconditioner=1
+                                                li Air Conditioning
+                                            li Model #{car.yearofmanifacture}
+                                            li * Unlimited mileage included
+                                a.book-now(href="/auth/bookings/add/" + car._id) Book Now
+                else
+                    | Sorry this car cannot be booked right now, please come back later!
             #{req.toastr.render()}
             #comments
                 h2#comments-title Comments
