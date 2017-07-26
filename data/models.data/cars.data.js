@@ -6,11 +6,11 @@ class CarsData extends BaseData {
         super(db, Car);
     }
 
-    create(car) {
+    create(car, photoLink) {
         let newInstance;
 
         try {
-            newInstance = new Car(car);
+            newInstance = new Car(car, photoLink);
         } catch (error) {
             return Promise.reject(error);
         }

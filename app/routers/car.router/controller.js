@@ -18,10 +18,9 @@ class CarController {
         }
 
         const carPhotoFileName = req.file.originalname;
-        const newCar = bodyCar;
-        newCar.carphotolink = req.file.destination + carPhotoFileName;
+        const carPhotoLink = req.file.destination + carPhotoFileName;
 
-        return this.data.cars.create(newCar)
+        return this.data.cars.create(bodyCar, carPhotoLink)
             .then(() => {
                 return res.redirect('/auth/addcar');
             })
