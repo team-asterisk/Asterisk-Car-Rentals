@@ -2,7 +2,7 @@ const init = (data) => {
     const controller = {
         async getAll(req, res) {
             const user = req.user;
-            const carId = '597845c1d146f53080ad48ab'; // parseInt(req.params.id, 10);
+            const carId = req.params.id; // '597845c1d146f53080ad48ab';
             const viewModel = await generateViewModel(data, user, carId);
             return res.render('./public/car-details', { context: viewModel, req: req });
         },
@@ -25,4 +25,5 @@ async function generateViewModel(data, currentUser, carId) {
 
     return viewModel;
 }
+
 module.exports = { init };
