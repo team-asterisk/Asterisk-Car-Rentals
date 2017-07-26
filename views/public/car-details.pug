@@ -15,7 +15,7 @@ block main
                             else
                                 = 'From $' + result.car.baseprice + 'per Day'
                         span.car-image
-                            img(src= '../' + result.car.carphotolink)
+                            img(width=250, src= '../' + result.car.carphotolink)
                     .col-xs-12.col-md-8
                         .car-info
                             .car-capacity
@@ -43,7 +43,7 @@ block main
                                         li
                                             = 'Model ' + result.car.yearofmanufacture
                                         li * Unlimited mileage included
-                            button.book-now Book Now
+                        a.book-now(href="/auth/bookings/add/" + result.car._id) Book Now
             #comments
                 h2#comments-title Comments
                 if result.car.comments.length   

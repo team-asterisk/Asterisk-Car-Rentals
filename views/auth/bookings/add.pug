@@ -11,20 +11,20 @@ block main
                         | Fill in the form to book this car
                 #{req.toastr.render()}
                 #user-profile
-                    form#profile-form(action='/auth/bookings/' +context.id, method="POST")
-                        label(for='model') Car Model
+                    form#profile-form(action='/auth/bookings/add/' +context.id, method="POST")
+                        label(for='makemodel') Car Model
                         br
-                        input#username.form-control(type='text', name='username', value=context.car.makemodel, disabled='')
+                        input#username.form-control(type='text', name='makemodel', value=context.car.makemodel, disabled='')
                         br
-                        label(for='model') Pickup location
+                        label(for='location') Pickup location
                         br
                         input.search-form-input(name='location' type='text', placeholder='Sofia', maxlength='90', disabled='')
                         br
-                        label(for='model') Pick-up date
+                        label(for='startdate') Pick-up date
                         br
                         input.search-form-input.datepicker-from(name='startdate' type='text', placeholder='Pickup Date')
                         br
-                        label(for='model') Drop-off date
+                        label(for='enddate') Drop-off date
                         br
                         input.search-form-input.datepicker-to(name='enddate' type='text', placeholder='Dropoff Date')
                         br
