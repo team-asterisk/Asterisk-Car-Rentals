@@ -12,58 +12,34 @@ block main
                         option(value='', disabled='', selected='') Category
                         option(value='small_to_large', title='small to large') small to large
                         option(value='large_to_small', title='large to small') large to small
-                .row
-                    .col-xs-12
-                        article.car-single-search
-                            a(href='#')
-                                .car-category
-                                    .price-container
-                                        span.total-price $50 / day
-                                        span.total Total
-                                        button.view-deal-button View Deal
-                                    .car-info
-                                        .car-class Economy
-                                        .car-model Toyota Corolla or similar
-                                        .car-capacity
-                                            span.car-passengers 5 Adults
-                                            span.car-bags 2 Bags
-                                            span.car-doors 2-4 Doors
-                                        .offer-details * Unlimited mileage included
-                                    span.car-image
-                                        img(src='./images/4door-sedan.png', alt='Economy car')
-                    .col-xs-12
-                        article.car-single-search
-                            a(href='#')
-                                .car-category
-                                    .price-container
-                                        span.total-price $50 / day
-                                        span.total Total
-                                        button.view-deal-button View Deal
-                                    .car-info
-                                        .car-class Economy
-                                        .car-model Toyota Corolla or similar
-                                        .car-capacity
-                                            span.car-passengers 5 Adults
-                                            span.car-bags 2 Bags
-                                            span.car-doors 2-4 Doors
-                                        .offer-details * Unlimited mileage included
-                                    span.car-image
-                                        img(src='./images/4door-sedan.png', alt='Economy car')
-                    .col-xs-12
-                        article.car-single-search
-                            a(href='#')
-                                .car-category
-                                    .price-container
-                                        span.total-price $50 / day
-                                        span.total Total
-                                        button.view-deal-button View Deal
-                                    .car-info
-                                        .car-class Economy
-                                        .car-model Toyota Corolla or similar
-                                        .car-capacity
-                                            span.car-passengers 5 Adults
-                                            span.car-bags 2 Bags
-                                            span.car-doors 2-4 Doors
-                                        .offer-details * Unlimited mileage included
-                                    span.car-image
-                                        img(src='./images/4door-sedan.png', alt='Economy car')
+                if context.length
+                    .row
+                        each car, i in context
+                            .col-xs-12
+                                article.car-single-search
+                                    a(href='/car/' + car._id)
+                                        .car-category
+                                            .price-container
+                                                if car.specialpriceactivated
+                                                    span.original-price
+                                                        = '$' + car.baseprice + ' / Day'
+                                                span.total-price
+                                                    = '$' + car.specialprice + ' / Day'
+                                                span.total Total
+                                                button.view-deal-button View Deal
+                                            .car-info
+                                                .car-class
+                                                    = car.category
+                                                .car-model
+                                                    = car. makemodel
+                                                .car-capacity
+                                                    span.car-passengers 
+                                                        = car.adultscount + ' Adults'
+                                                    span.car-bags 
+                                                        = car.bagscount + ' Bags'
+                                                    span.car-doors
+                                                        = car.doorscount + ' Doors'
+                                                .offer-details * Unlimited mileage included
+                                            span.car-image
+                                                img(src=car.carphotolink)
+                            

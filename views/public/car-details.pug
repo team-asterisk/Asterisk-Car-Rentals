@@ -5,41 +5,46 @@ block main
     #main
         .container
             #car-details
-                if context.car   
-                    - var car = context.car;
-                    .row
-                        .col-xs-12.col-md-4.border-right-1px
-                            .car-model #{car.model}
-                            .car-price From $#{car.baseprice} per Day
-                            span.car-image
-                                img(src=car.carphotolink, width='250', alt='Economy car')
-                        .col-xs-12.col-md-8
-                            .car-info
-                                .car-capacity
-                                    span.car-passengers #{car.adultscount} Adults
-                                    span.car-bags #{car.bagscount} Bags
-                                    span.car-doors #{car.doorscount} Doors
-                                .car-class #{car.category}
-                                .row
-                                    .col-xs-12.col-md-5
-                                        ul.car-features
-                                            li Fuel type: #{car.fueltype}
-                                            li Mileage: #{car.mileage} Mpg
-                                            li Transmission: #{car.transmission}
-                                    .col-xs-12.col-md-5
-                                        ul.car-features
-                                            if car.airconditioner=1
-                                                li Air Conditioning
-                                            li Model #{car.yearofmanifacture}
-                                            li * Unlimited mileage included
-                                a.book-now(href="/auth/bookings/add/" + car._id) Book Now
-                else
-                    | Sorry this car cannot be booked right now, please come back later!
-            #{req.toastr.render()}
+                .row
+                    .col-xs-12.col-md-4.border-right-1px
+                        .car-model
+                            = result.car.makemodel
+                        .car-price 
+                            = 'From $' + result.car.baseprice + 'per Day'
+                        span.car-image
+                            img(src= '../' + result.car.carphotolink)
+                    .col-xs-12.col-md-8
+                        .car-info
+                            .car-capacity
+                                span.car-passengers 
+                                    = result.car.adultscount + ' Adults'
+                                span.car-bags 
+                                    = result.car.bagscount + ' Bags'
+                                span.car-doors
+                                    = result.car.doorscount + ' Doors'
+                            .car-class
+                                = result.car.category
+                            .row
+                                .col-xs-12.col-md-5
+                                    ul.car-features
+                                        li 
+                                            = 'Fuel type: ' + result.car.fueltype
+                                        li
+                                            = 'Mileage: ' + result.car.mileage + ' Mpg'
+                                        li
+                                            = 'Transmission: ' + result.car.transmission
+                                .col-xs-12.col-md-5
+                                    ul.car-features
+                                        if result.car.airconditioner
+                                            li Air Conditioning
+                                        li
+                                            = 'Model ' + result.car.yearofmanufacture
+                                        li * Unlimited mileage included
+                            button.book-now Book Now
             #comments
                 h2#comments-title Comments
-                if context.comments.length   
-                    each comment in context.comments
+                if result.car.comments.length   
+                    each comment in result.car.comments
                         .single-comment
                             .comment-author
                                 strong Author:

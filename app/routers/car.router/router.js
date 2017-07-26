@@ -6,17 +6,29 @@ const attachTo = (app, data) => {
     const controller = require('./controller').init(data);
 
     router
-        .get('/addcar', (req, res) => {
+        .get('/auth/addcar', (req, res) => {
             return controller.getAddCarForm(req, res);
         })
-        .get('/editcar', (req, res) => {
+        .get('/auth/editcar', (req, res) => {
             return controller.getEditCarForm(req, res);
         })
-        .post('/addcar', multer.uploadSingle, (req, res) => {
+        .post('/auth/addcar', multer.uploadSingle, (req, res) => {
             return controller.addCar(req, res);
+        })
+        .get('/cars', (req, res) => {
+            return controller.getAllCars(req, res);
+        })
+        .get('/car/:id', (req, res) => {
+            return controller.getSingleCar(req, res);
+        })
+        .get('/searchcars', (req, res) => {
+            return res.render('./public/search-cars');
+        })
+        .get('/deals', (req, res) => {
+            return controller.getAllDeals(req, res);
         });
 
-    app.use('/auth', router);
+    app.use(router);
 };
 
 module.exports = { attachTo };
