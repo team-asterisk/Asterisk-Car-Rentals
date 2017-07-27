@@ -9,9 +9,6 @@ const attachTo = (app, data) => {
         .get('/auth/addcar', (req, res) => {
             return controller.getAddCarForm(req, res);
         })
-        .get('/auth/editcar', (req, res) => {
-            return controller.getEditCarForm(req, res);
-        })
         .get('/auth/editcar/:id', (req, res) => {
             return controller.getEditCarById(req, res);
         })
@@ -19,7 +16,7 @@ const attachTo = (app, data) => {
             return controller.addCar(req, res);
         })
         .post('/auth/editcar/:id', multer.uploadSingle, (req, res) => {
-            return controller.editCar(req, res);
+            return controller.updateCar(req, res);
         })
         .get('/cars', (req, res) => {
             return controller.getAllCars(req, res);

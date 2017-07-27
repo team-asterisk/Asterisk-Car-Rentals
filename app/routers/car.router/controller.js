@@ -7,15 +7,11 @@ class CarController {
         return res.render('auth/admin/addcar', { req: req });
     }
 
-    getEditCarForm(req, res) {
-        return res.render('auth/admin/editcar', { req: req });
-    }
-
     getEditCarById(req, res) {
         Promise.resolve(this.data.cars.findById(req.params.id))
             .then((car) => {
                 return res.render('auth/admin/editcar', {
-                        car,
+                    car,
                     req: req,
                 });
             });
@@ -85,8 +81,41 @@ class CarController {
             });
     }
 
-    editCar(req, res) {
-        return res.send('Needs implementation!');
+    updateCar(req, res) {
+        const bodyCar = req.body;
+        if (req.file) {
+            const carPhotoFileName = req.file.originalname;
+            const carPhotoLink = req.file.destination + carPhotoFileName;
+            bodyCar.carphotolink = carPhotoLink;
+        }
+
+        return this._updateCarProperties(req.params.id, bodyCar)
+            .then((car) => {
+                return this.data.cars.updateById(car);
+            })
+            .then(() => {
+                req.toastr.success('Successfuly updated this car!', 'Success!');
+                return res.redirect('/auth/viewcars');
+            })
+            .catch((err) => {
+                req.toastr.error(err.message);
+                return res.redirect('/auth/viewcars');
+            });
+    }
+
+    _updateCarProperties(carId, car) {
+        return this.data.cars.findById(carId)
+            .then((dbCar) => {
+                if (!car.carphotolink) {
+                    car.carphotolink = dbCar.carphotolink;
+                }
+
+                car._id = dbCar._id;
+                car.comments = dbCar.comments;
+                car.booked = dbCar.booked;
+
+                return Promise.resolve(car);
+            });
     }
 }
 
