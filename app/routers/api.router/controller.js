@@ -6,7 +6,7 @@ class ApiController {
     getCarDetails(req, res) {
         Promise.resolve(this.data.cars.findById(req.params.id))
             .then((car) => {
-                return res.send({
+                return res.status(200).send({
                         car,
                     },
                 );
@@ -20,7 +20,7 @@ class ApiController {
     getDeals(req, res) {
         Promise.resolve(this.data.cars.filterBy({ 'specialpriceactivated': '1' }))
             .then((deals) => {
-                return res.send({
+                return res.status(200).send({
                         deals,
                     },
                 );
@@ -30,7 +30,7 @@ class ApiController {
     getCars(req, res) {
         Promise.resolve(this.data.cars.getAll())
             .then((cars) => {
-                return res.send({
+                return res.status(200).send({
                         cars,
                     },
                 );
@@ -41,7 +41,7 @@ class ApiController {
         const category = req.params.category;
         Promise.resolve(this.data.cars.filterBy({ 'category': category }))
             .then((cars) => {
-                return res.send({
+                return res.status(200).send({
                         cars,
                     },
                 );

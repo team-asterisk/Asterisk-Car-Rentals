@@ -74,13 +74,14 @@
     margin-top: 1rem;
 }
 
-#select-category select {
-    height: 40px;
+select#select-category {
+    height: 36px;
     padding: 0 1.5rem 0 1rem;
     font-size: 1.6rem;
-    background-color: #fff;
     border: 1px solid #ccc;
     box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.07);
+    vertical-align: bottom;
+    padding: 0.7rem;
 }
 
 #top-container {
@@ -855,6 +856,22 @@ footer a {
 input[type=checkbox] {
     margin-left: 0.5rem;
     vertical-align: top;
+}
+
+i.icon-arrow-right,
+i.icon-arrow-left {
+    font-family: FontAwesome;
+    font-style: normal;
+    font-size: 1.5rem;
+    color: #ff7f50;
+}
+
+i.icon-arrow-right::before {
+    content: "\f061";
+}
+
+i.icon-arrow-left::before {
+    content: "\f060";
 }
 
 

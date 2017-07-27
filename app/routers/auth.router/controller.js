@@ -28,7 +28,7 @@ class AuthController {
 
     logOut(req, res) {
         req.logout();
-        return res.redirect('/');
+        return res.status(200).redirect('/');
     }
 
     updateProfile(req, res) {
@@ -38,11 +38,11 @@ class AuthController {
                 return this.data.users.updateById(user);
             })
             .then((dbUser) => {
-                return res.redirect('/');
+                return res.status(200).redirect('/');
             })
             .catch((err) => {
                 req.toastr.error(err.message);
-                return res.redirect('/auth/profile');
+                return res.status(400).redirect('/auth/profile');
             });
     }
 
@@ -53,11 +53,11 @@ class AuthController {
                 return this.data.users.create(user);
             })
             .then((dbUser) => {
-                return res.redirect('/auth/login');
+                return res.status(200).redirect('/auth/login');
             })
             .catch((err) => {
                 req.toastr.error(err.message);
-                return res.redirect('/auth/register');
+                return res.status(400).redirect('/auth/register');
             });
     }
 

@@ -83,12 +83,12 @@ class BookingsController {
             })
             .then(() => {
                 req.toastr.success(message, 'Thank you!');
-                return res.redirect('/auth/bookings');
+                return res.status(200).redirect('/auth/bookings');
             })
             .catch((err) => {
                 req.toastr.error(err.message);
                 setTimeout(() => {
-                    return res.redirect('/auth/bookings/add/' + carId);
+                    return res.status(400).redirect('/auth/bookings/add/' + carId);
                 }, 1000);
             });
     }
@@ -140,12 +140,12 @@ class BookingsController {
             })
             .then(() => {
                 req.toastr.success(message, 'Thank you!');
-                return res.redirect('/auth/bookings');
+                return res.status(200).redirect('/auth/bookings');
             })
             .catch((err) => {
                 req.toastr.error(err.message);
                 setTimeout(() => {
-                    return res.redirect('/auth/bookings/' + bookingId);
+                    return res.status(400).redirect('/auth/bookings/' + bookingId);
                 }, 1000);
             });
     }

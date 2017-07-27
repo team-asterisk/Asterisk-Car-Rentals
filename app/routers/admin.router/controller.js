@@ -61,11 +61,11 @@ class AdminController {
                 return this.data.users.updateById(user);
             })
             .then(() => {
-                return res.redirect('/auth/viewusers');
+                return res.status(200).redirect('/auth/viewusers');
             })
             .catch((err) => {
                 req.toastr.error(err.message);
-                return res.redirect('/auth/viewusers');
+                return res.status(400).redirect('/auth/viewusers');
             });
     }
 

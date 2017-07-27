@@ -70,12 +70,11 @@ class CarController {
         return this.data.cars.create(bodyCar, carPhotoLink)
             .then(() => {
                 req.toastr.success('Successfuly added new car!', 'Success!');
-                return res.redirect('/auth/addcar');
+                return res.status(200).redirect('/auth/addcar');
             })
             .catch((err) => {
                 req.toastr.error(err.message);
-                return res.status(400)
-                    .redirect('/auth/addcar');
+                return res.status(400).redirect('/auth/addcar');
             });
     }
 
@@ -93,11 +92,11 @@ class CarController {
             })
             .then(() => {
                 req.toastr.success('Successfuly updated this car!', 'Success!');
-                return res.redirect('/auth/viewcars');
+                return res.status(200).redirect('/auth/viewcars');
             })
             .catch((err) => {
                 req.toastr.error(err.message);
-                return res.redirect('/auth/viewcars');
+                return res.status(400).redirect('/auth/viewcars');
             });
     }
 
