@@ -24,13 +24,16 @@ $(() => {
     var now = new Date();
 
     $('.datepicker-from, .datepicker-to').datepicker({
+        format: 'yyyy-mm-dd',
         autoclose: true
     });
 
     $('.datepicker-from')
         .datepicker()
         .on('changeDate', (ev) => {
-            if (ev.date.valueOf() < now.valueOf()) {
+            if (ev.date.valueOf() < now.valueOf() + 3600000) {
+                console.log(ev.date.valueOf());
+                conosle.log(now.valueOf())
                 toastr.error('Today or future date is required!', 'Attention!');
                 $(ev.target).val('');
             }
@@ -79,7 +82,7 @@ $(() => {
             price = special;
         }
 
-        if (d1.valueOf() < d2.valueOf()) {
+        if ((d1 && d2) && d1.valueOf() < d2.valueOf()) {
             var totalDays = Math.round((d2.valueOf() - d1.valueOf()) / (1000 * 60 * 60 * 24));
             return (totalDays * price).toFixed(2);
         } else {

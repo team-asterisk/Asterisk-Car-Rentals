@@ -56,10 +56,22 @@ class BookingsController {
 
         this.data.cars.findById(carId)
             .then((car) => {
-                if (this._checkIfCarIsBooked(car, newBooking.startdate, newBooking.enddate)) {
-                    this._addBookedDatesToCar(car, newBooking.startdate, newBooking.enddate, newBooking._id);
-                    this.data.cars.updateById(car);
-                    return car;
+                if (this._checkIfCarIsBooked(
+                        car,
+                        newBooking.startdate,
+                        newBooking.enddate
+                    )) {
+                    this._addBookedDatesToCar(
+                        car,
+                        newBooking.startdate,
+                        newBooking.enddate,
+                        newBooking._id
+                    );
+
+                    return this.data.cars.updateById(car)
+                        .then(() => {
+                            return car;
+                        });
                 }
                 throw new Error('Cannot book the car for these dates!');
             })
@@ -92,21 +104,38 @@ class BookingsController {
 
         this.data.cars.findById(current.car._id)
             .then((car) => {
+                console.log(car);
                 this._removeBookedDatesFromCar(car, bookingId);
-                if (this._checkIfCarIsBooked(car, newBooking.startdate, newBooking.enddate)) {
-                    this._addBookedDatesToCar(car, newBooking.startdate, newBooking.enddate, newBooking._id);
-                    this.data.cars.updateById(car);
-                    return car;
+                if (this._checkOtherDates(
+                        car,
+                        newBooking.startdate,
+                        newBooking.enddate,
+                        current.startdate,
+                        current.enddate
+                    )) {
+                    this._addBookedDatesToCar(
+                        car,
+                        newBooking.startdate,
+                        newBooking.enddate,
+                        newBooking._id
+                    );
+                    console.log(car);
+                    return this.data.cars.updateById(car)
+                        .then(() => {
+                            return car;
+                        });
                 }
                 throw new Error('Cannot book the car for these dates!');
             })
             .then((car) => {
+                console.log(car);
                 return this._addBookingToUser(car, user, newBooking);
             })
             .then((sameUser) => {
                 return this._removeBookingFromUser(sameUser, bookingId);
             })
             .then((updatedUser) => {
+                console.log(updatedUser);
                 return this.data.users.updateById(updatedUser);
             })
             .then(() => {
@@ -136,11 +165,16 @@ class BookingsController {
     }
 
     _removeBookedDatesFromCar(car, bookingId) {
-        const index = car.booked.indexOf(car.booked.find((x) => x._id === bookingId));
-        car.booked.splice(index, 1);
+        const index = car.booked.indexOf(
+            car.booked
+            .find((x) => x._id === bookingId));
+
+        car.booked
+            .splice(index, 1);
         return car;
     }
 
+    // this method checks all saved periods for this car
     _checkIfCarIsBooked(car, start, end) {
         const booked = car.booked;
 
@@ -151,6 +185,36 @@ class BookingsController {
             booked.forEach((dates) => {
                 const startBooking = new Date(dates.startdate);
                 const endBooking = new Date(dates.enddate);
+                if ((startBooking.valueOf() <= startdate.valueOf() &&
+                        endBooking.valueOf() >= startdate.valueOf()) ||
+                    (startBooking.valueOf() >= startdate.valueOf() &&
+                        startBooking.valueOf() <= enddate.valueOf())) {
+                    throw new Error('Cannot book the car for these dates!');
+                }
+            });
+        }
+        return true;
+    }
+
+    // this method excludes current booking period
+    _checkOtherDates(car, start, end, ostart, oend) {
+        const booked = car.booked;
+
+        const startdate = new Date(start);
+        const enddate = new Date(end);
+        const oldstart = new Date(ostart);
+        const oldend = new Date(oend);
+
+        if (booked.length > 0) {
+            booked.forEach((dates) => {
+                const startBooking = new Date(dates.startdate);
+                const endBooking = new Date(dates.enddate);
+
+                if (startBooking.valueOf() === oldstart.valueOf() &&
+                    endBooking.valueOf() === oldend.valueOf()) {
+                    return;
+                }
+
                 if ((startBooking.valueOf() <= startdate.valueOf() &&
                         endBooking.valueOf() >= startdate.valueOf()) ||
                     (startBooking.valueOf() >= startdate.valueOf() &&
@@ -182,8 +246,11 @@ class BookingsController {
         const startdate = new Date(newBooking.startdate);
         const enddate = new Date(newBooking.enddate);
 
-        // https://goo.gl/1L8HUi
-        const totalDays = Math.round((enddate.valueOf() - startdate.valueOf()) / (1000 * 60 * 60 * 24));
+        const totalDays = Math.round((
+                enddate.valueOf() -
+                startdate.valueOf()) /
+            (1000 * 60 * 60 * 24));
+
         let total = totalDays * car.baseprice;
 
         if (+car.specialpriceactivated === 1) {
