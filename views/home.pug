@@ -6,6 +6,7 @@ block topContainer
             form(action='/searchcars', method='GET')
                 select(name='category', id='select-category', title='category')
                     option(value='', disabled='', selected='') Choose category
+                    option(value='All', title='AllCategories') All
                     option(value='Economy', title='Economy') Economy
                     option(value='Compact', title='Compact') Compact
                     option(value='Fullsize', title='Fullsize') Full-size
