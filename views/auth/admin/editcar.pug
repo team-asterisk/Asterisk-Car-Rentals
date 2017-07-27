@@ -5,71 +5,106 @@ block adminpage
         h2#main-title Edit Car
         .row
             .col-xs-12
-                form#edit-car-form
+                form#edit-car-form(action='/auth/editcar/' + car._id, method='POST', encType='multipart/form-data')
                     label(for='name') Car Make and Model
                     br
-                    input#name.form-control(type='text', name='name', value='Toyota Corolla')
+                    input#name.form-control(type='text', name='name', value=car.makemodel)
                     br
                     label(for='category') Category
                     br
-                    input#category.form-control(type='text', name='category', value='Compact')
+                    select.form-control(name='category', title='category')
+                        if (car.category == 'Economy')
+                            option(value='Economy', title='Economy') Economy
+                        if (car.category == 'Compact')
+                            option(value='Compact', title='Compact') Compact
+                        if (car.category == 'Fullsize')
+                            option(value='Fullsize', title='Fullsize') Full-size
+                        if (car.category == 'Premium')
+                            option(value='Premium', title='Premium') Premium
+                        if (car.category == 'SUV')
+                            option(value='SUV', title='SUV') SUV
+                        if (car.category == 'Van')
+                            option(value='Van', title='Van') Van
+                        
                     br
-                    label(for='picture') Picture
+                    label(for='carphoto') Choose another picture
                     br
-                    input(type='file', name='picture')
+                    span
+                    img(width=100, src= '../../' + car.carphotolink, id='carphotoimg' style='cursor:pointer')
+                    input(type='file', id='carphoto', name='carphoto', style='display:none')
                     br
                     label.section Capacity
-                    label(for='number_of_adults') Number of Adults
+                    label(for='adultscount') Number of Adults
                     br
-                    input#adults.form-control(type='text', name='number_of_adults', value='4')
+                    input#adults.form-control(type='text', name='adultscount', value=car.adultscount)
                     br
-                    label(for='number_of_bags') Number of Bags
+                    label(for='bagscount') Number of Bags
                     br
-                    input#bags.form-control(type='text', name='number_of_bags', value='2')
+                    input#bags.form-control(type='text', name='bagscount', value=car.bagscount)
                     br
                     label(for='number_of_doors') Number of Doors
                     br
-                    input#doors.form-control(type='text', name='number_of_doors', value='4')
+                    input#doors.form-control(type='text', name='number_of_doors', value=car.doorscount)
                     br
                     label.section Car Details
-                    label(for='fuel_type') Fuel Type
-                    select.form-control(name='fuel_type', title='FuelType')
-                        option(value='1', title='Petrol', selected='selected') Petrol
-                        option(value='2', title='Diesel') Diesel
-                        option(value='3', title='Hybrid') Hybrid
-                        option(value='4', title='Electric') Electric
+                    label(for='fueltype') Fuel Type
+                    select.form-control(name='fueltype', title='FuelType')
+                        if (car.fueltype == 'Petrol')
+                            option(value='Petrol', title='Petrol' selected) Petrol
+                        if (car.fueltype == 'Diesel')
+                            option(value='Diesel', title='Diesel' selected) Diesel
+                        if (car.fueltype == 'Hybrid')
+                            option(value='Hybrid', title='Hybrid' selected) Hybrid
+                        if (car.fueltype == 'Electric')
+                            option(value='Electric', title='Electric' selected) Electric
                     br
                     label(for='transmission') Transmission
                     select.form-control(name='transmission', title='Transmission')
-                        option(value='1', title='Manual') Manual
-                        option(value='2', title='Automatic', selected='selected') Automatic
+                        if (car.transmission == 'Manual')
+                            option(value='Manual', title='Manual' selected) Manual
+                        else
+                            option(value='Automatic', title='Automatic' selected) Automatic
                     br
                     label(for='mileage') Mileage
-                    input#mileage.form-control(type='text', name='mileage', value='34')
+                    input#mileage.form-control(type='text', name='mileage', value=car.mileage)
                     br
-                    label(for='year_of_manufacture') Year of Manufacture
-                    select.form-control(name='year_of_manufacture', title='YearofManufacture')
-                        option(value='2010', title='2010') 2010
-                        option(value='2011', title='2011') 2011
-                        option(value='2012', title='2012') 2012
-                        option(value='2013', title='2013') 2013
-                        option(value='2014', title='2014') 2014
-                        option(value='2015', title='2015', selected='selected') 2015
-                        option(value='2016', title='2016') 2016
-                        option(value='2017', title='2017') 2017
+                    label(for='yearofmanufacture') Year of Manufacture
+                    select.form-control(name='yearofmanufacture', title='YearofManufacture')
+                        if (car.yearofmanufacture == '2010')
+                            option(value='2010', title='2010' selected) 2010
+                        if (car.yearofmanufacture == '2011')
+                            option(value='2011', title='2011' selected) 2011
+                        if (car.yearofmanufacture == '2012')
+                            option(value='2012', title='2012' selected) 2012
+                        if (car.yearofmanufacture == '2013')
+                            option(value='2013', title='2013' selected) 2013
+                        if (car.yearofmanufacture == '2014')
+                            option(value='2014', title='2014' selected) 2014
+                        if (car.yearofmanufacture == '2015')
+                            option(value='2015', title='2015' selected) 2015
+                        if (car.yearofmanufacture == '2016')
+                            option(value='2016', title='2016' selected) 2016
+                        if (car.yearofmanufacture == '2017')
+                            option(value='2017', title='2017' selected) 2017
                     br
-                    label(for='air_conditioner') Air Conditioner
-                    input#air_conditioner.fom-control(type='checkbox', name='air_conditioner', checked='')
+                    label(for='airconditioner') Air Conditioner
+                    if car.airconditioner
+                        input#air_conditioner.fom-control(type='checkbox', name='airconditioner', checked)
+                    else
+                        input#air_conditioner.fom-control(type='checkbox', name='airconditioner')
                     br
                     label.section Price
-                    label(for='base_price') Base price per Day
-                    input#base_price.form-control(type='text', name='base_price', value='20')
+                    label(for='baseprice') Base price per Day
+                    input#base_price.form-control(type='text', name='baseprice', value=car.baseprice)
                     br
-                    label(for='special_price') Special price per Day
-                    input#special_price.form-control(type='text', name='special_price', value='14.99')
+                    label(for='specialprice') Special price per Day
+                    input#special_price.form-control(type='text', name='specialprice', value=car.specialprice)
                     br
-                    label(for='activate_special_price') Activate Special Price
-                    input#activate_special_price.fom-control(type='checkbox', name='activate_special_price', checked='')
+                    label(for='specialpriceactivated') Activate Special Price
+                    if car.specialpriceactivated
+                        input#activate_special_price.fom-control(type='checkbox', name='specialpriceactivated', checked)
+                    else
+                        input#activate_special_price.fom-control(type='checkbox', name='specialpriceactivated')
                     br
                     br
                     button.btn.btn-primary(type='submit') Update Car Info
