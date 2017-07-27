@@ -17,3 +17,15 @@ block main
                                     if b.enddate.valueOf() > new Date().valueOf()
                                     a.edit-booking(href="/auth/bookings/" + b._id, title="title") 
                                             | Edit
+                    else
+                        .col-xs-12
+                            article.booking.header
+                                | No bookings in your history!
+                        .col-xs-12
+                            article.booking.header
+                                div Check our awesome cars  
+                                    a.btn.btn-info(href="/cars") cars
+                        .col-xs-12
+                            article.booking.header
+                                div Or find some great offers 
+                                    a.btn.btn-primary(href="/deals") deals

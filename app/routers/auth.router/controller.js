@@ -81,11 +81,6 @@ class AuthController {
         const username = user.username;
         return this.data.users.findByUsername(username)
             .then((dbUser) => {
-                console.log('------- test if exists -------');
-                console.log(dbUser);
-                console.log(user);
-                console.log('------- end test if exists -------');
-
                 if (dbUser) {
                     throw new Error('User already exists');
                 }
@@ -98,11 +93,6 @@ class AuthController {
         return this.data.users.findByUsername(user.username)
             .then((dbUser) => {
                 if (dbUser) {
-                    console.log('------- test update -------');
-                    console.log(dbUser);
-                    console.log(user);
-                    console.log('------- end test update -------');
-
                     user._id = dbUser._id;
                     user.username = dbUser.username;
                     user.role = dbUser.role;

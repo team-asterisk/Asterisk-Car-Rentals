@@ -71,15 +71,13 @@ class BookingsController {
             })
             .then(() => {
                 req.toastr.success(message, 'Thank you!');
-                setTimeout(() => {
-                    return res.redirect('/auth/bookings');
-                }, 1000);
+                return res.redirect('/auth/bookings');
             })
             .catch((err) => {
                 req.toastr.error(err.message);
                 setTimeout(() => {
                     return res.redirect('/auth/bookings/add/' + carId);
-                }, 2000);
+                }, 1000);
             });
     }
 
@@ -113,9 +111,7 @@ class BookingsController {
             })
             .then(() => {
                 req.toastr.success(message, 'Thank you!');
-                setTimeout(() => {
-                    return res.redirect('/auth/bookings');
-                }, 1000);
+                return res.redirect('/auth/bookings');
             })
             .catch((err) => {
                 req.toastr.error(err.message);

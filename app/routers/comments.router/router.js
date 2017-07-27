@@ -8,11 +8,11 @@ const attachTo = (app, data) => {
         .get('/comment', (req, res) => {
             return res.redirect('/cardetails');
         })
-        .post('/comment', (req, res) => {
+        .post('/comment/:id', (req, res) => {
             return controller.addComment(req, res);
         });
 
-    app.use('/cardetails', router);
+    app.use('/car', router);
 };
 
 module.exports = { attachTo };
