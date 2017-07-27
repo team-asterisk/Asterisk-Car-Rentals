@@ -119,7 +119,7 @@ class BookingsController {
                         newBooking.enddate,
                         newBooking._id
                     );
-                    console.log(car);
+
                     return this.data.cars.updateById(car)
                         .then(() => {
                             return car;
@@ -128,14 +128,12 @@ class BookingsController {
                 throw new Error('Cannot book the car for these dates!');
             })
             .then((car) => {
-                console.log(car);
                 return this._addBookingToUser(car, user, newBooking);
             })
             .then((sameUser) => {
                 return this._removeBookingFromUser(sameUser, bookingId);
             })
             .then((updatedUser) => {
-                console.log(updatedUser);
                 return this.data.users.updateById(updatedUser);
             })
             .then(() => {
