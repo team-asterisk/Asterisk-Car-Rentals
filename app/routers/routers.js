@@ -14,6 +14,10 @@ const attachTo = (app, data) => {
             });
     });
 
+    app.get('/401', (req, res) => {
+        return res.render('public/401', { req: req });
+    });
+
     // console.log(data.reviews);
     // cardetails moved to its own folder
 

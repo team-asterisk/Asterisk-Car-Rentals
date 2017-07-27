@@ -4,6 +4,7 @@ const passport = require('passport');
 const attachTo = (app, data) => {
     const router = new Router();
     const controller = require('./controller').init(data);
+    const authController = require('../auth.router/controller').init(data);
 
     router
         .get('/register', (req, res) => {
@@ -12,13 +13,13 @@ const attachTo = (app, data) => {
         .get('/login', (req, res) => {
             return controller.getLogInForm(req, res);
         })
-        .get('/profile', (req, res) => {
+        .get('/profile', authController.verifyIsUser, (req, res) => {
             return controller.getProfileForm(req, res);
         })
-        .get('/bookings', (req, res) => {
+        .get('/bookings', authController.verifyIsUser, (req, res) => {
             return controller.getMyBookings(req, res);
         })
-        .post('/profile', (req, res) => {
+        .post('/profile', authController.verifyIsUser, (req, res) => {
             return controller.updateProfile(req, res);
         })
         .get('/logout', (req, res) => {

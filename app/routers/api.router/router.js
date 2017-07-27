@@ -3,6 +3,7 @@ const { Router } = require('express');
 const attachTo = (app, data) => {
     const router = new Router();
     const controller = require('./controller').init(data);
+    const authController = require('../auth.router/controller').init(data);
 
     router
         .get('/car/:id', (req, res) => {
@@ -20,7 +21,7 @@ const attachTo = (app, data) => {
         .get('/cars/:category', (req, res) => {
             return controller.getCarCategory(req, res);
         })
-        .get('/auth/bookings', (req, res) => { // This is Private route - only for admins
+        .get('/auth/bookings', authController.verifyIsAdmin, (req, res) => {
             return controller.viewAllBookings(req, res);
         });
 
