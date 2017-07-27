@@ -4,28 +4,35 @@ block main
     #main
         .container
             #bookings-history
-                h1#main-title Bookings History for #{user.username}
+                h1#main-title Bookings history for #{user.username}
                 .row
+                    .col-xs-12
+                        article.booking.header
+                          .booking-car-model Car Model
+                          .booking-pickup Pickup Date
+                          .booking-dropoff Dropoff Date
+                          .booking-total-price Total Price
+                          .booking-edit Edit
                     if user.bookings.length
                         each b in user.bookings
                             .col-xs-12
-                                article.booking.header
+                                article.booking
                                     .booking-car-model #{b.car.makemodel}
                                     .booking-pickup #{moment(b.startdate).format('YYYY-MM-DD')}
                                     .booking-dropoff #{moment(b.enddate).format('YYYY-MM-DD')}
                                     .booking-total-price #{b.totalprice} $
                                     if b.enddate.valueOf() > new Date().valueOf()
-                                    a.edit-booking(href="/auth/bookings/" + b._id, title="title") 
-                                            | Edit
+                                        .booking-edit
+                                            a.btn.btn-info(href="/auth/bookings/" + b._id, title="title") edit
                     else
                         .col-xs-12
                             article.booking.header
                                 | No bookings in your history!
                         .col-xs-12
-                            article.booking.header
+                            article.booking
                                 div Check our awesome cars  
                                     a.btn.btn-info(href="/cars") cars
                         .col-xs-12
-                            article.booking.header
+                            article.booking
                                 div Or find some great offers 
                                     a.btn.btn-primary(href="/deals") deals
