@@ -6,7 +6,8 @@ block main
             #leave-review-page
                 h1#main-title Leave Us Review
                 #leave-review
-                    #{req.toastr.render()}
+                    .toastr
+                        #{req.toastr.render()}
                     form#review-form(action='/auth/review', method='POST')
                         label(for='review-form') Give us your rating
                         br

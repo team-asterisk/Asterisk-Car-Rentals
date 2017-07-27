@@ -9,7 +9,8 @@ block main
                 h2()
                     center
                         | Fill in the form to book this car
-                #{req.toastr.render()}
+                .toastr
+                    #{req.toastr.render()}
                 #user-profile
                     form#profile-form(action='/auth/bookings/add/' +context.car.id, method="POST")
                         label(for='makemodel') Car Model

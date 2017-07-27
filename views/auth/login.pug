@@ -6,7 +6,8 @@ block main
             #login-register-page
                 h1#main-title Login
                 #login
-                    #{req.toastr.render()}
+                    .toastr
+                        #{req.toastr.render()}
                     form#login-form(action='/auth/login', method="POST")
                         label(for='login-username') Username
                         br

@@ -16,5 +16,6 @@ mixin comment
                             br
                             button.btn.btn-primary(type='submit') Send
                 .modal-footer
-                    #{req.toastr.render()}
+                    .toastr
+                        #{req.toastr.render()}
 

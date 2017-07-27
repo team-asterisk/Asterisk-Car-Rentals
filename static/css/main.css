@@ -666,6 +666,10 @@
     color: #000;
 }
 
+.toastr {
+    display: none;
+}
+
 
 /*
 * BEGIN JQuery UI override

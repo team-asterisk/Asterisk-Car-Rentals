@@ -9,7 +9,8 @@ block main
                 h2()
                     center
                         | Use this form to change your profile.
-                #{req.toastr.render()}
+                .toastr
+                    #{req.toastr.render()}
                 #user-profile
                     form#profile-form(action='/auth/profile', method="POST")
                         label(for='username') Username

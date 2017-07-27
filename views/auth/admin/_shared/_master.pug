@@ -19,5 +19,6 @@ block main
                             a(href='/auth/viewbookings') View Bookings
                         span
                             a(href='/auth/viewdeals') View Deals
-            #{req.toastr.render()}
+            .toastr
+                #{req.toastr.render()}
             block adminpage
