@@ -27,6 +27,9 @@ const attachTo = (app, data) => {
         .get('/car/:id', (req, res) => {
             return controller.getSingleCar(req, res);
         })
+        .get('/cars/:category', (req, res) => {
+            return controller.getCarsFromCategory(req, res);
+        })
         .get('/searchcars', (req, res) => {
             return res.render('./public/search-cars');
         })

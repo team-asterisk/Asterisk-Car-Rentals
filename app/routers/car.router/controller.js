@@ -31,6 +31,17 @@ class CarController {
             });
     }
 
+    getCarsFromCategory(req, res) {
+        Promise.resolve(this.data.cars.filterBy({ 'category': req.params.category }))
+            .then((cars) => {
+                return res.render('./public/category', {
+                    context: cars,
+                    category: req.params.id,
+                    req: req,
+                });
+            });
+    }
+
     getAllDeals(req, res) {
         Promise.resolve(this.data.cars.filterBy({ 'specialpriceactivated': '1' }))
             .then((deals) => {
