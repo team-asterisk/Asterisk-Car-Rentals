@@ -670,6 +670,23 @@
     display: none;
 }
 
+#unauthorized,
+#page-missing {
+    margin: 10rem 0 20rem;
+    text-align: center;
+}
+
+#unauthorized .oops,
+#page-missing .oops {
+    font-size: 7rem;
+    font-weight: 900;
+}
+
+#unauthorized .text,
+#page-missing .text {
+    font-size: 2rem;
+}
+
 
 /*
 * BEGIN JQuery UI override

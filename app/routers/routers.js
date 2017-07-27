@@ -27,6 +27,10 @@ const attachTo = (app, data) => {
             const modulePath = path.join(__dirname, file);
             require(modulePath).attachTo(app, data);
         });
+
+    app.get('*', (req, res) => {
+        return res.render('public/404', { req: req });
+    });
 };
 
 module.exports = { attachTo };
