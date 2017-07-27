@@ -459,8 +459,7 @@
 #view-users .user-name,
 #view-users .user-phone,
 #view-users .user-email,
-#view-users .user-edit,
-{
+#view-users .user-edit {
     width: 19%;
     display: inline-block;
     text-align: center;

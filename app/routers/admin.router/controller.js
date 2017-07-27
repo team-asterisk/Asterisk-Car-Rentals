@@ -4,7 +4,14 @@ class AdminController {
     }
 
     getViewBookings(req, res) {
-        return res.render('auth/admin/viewbookings', { req: req });
+        Promise.resolve(this.data.users.getAll())
+            .then((users) => {
+                return res.render('auth/admin/viewbookings', {
+                    context: users,
+                    req: req,
+                    moment: require('moment'),
+                });
+            });
     }
 
     getViewCars(req, res) {
@@ -31,10 +38,9 @@ class AdminController {
         Promise.resolve(this.data.cars.filterBy({ 'specialpriceactivated': '1' }))
             .then((deals) => {
                 return res.render('auth/admin/viewdeals', {
-                        context: deals,
-                        req: req,
-                    },
-                );
+                    context: deals,
+                    req: req,
+                }, );
             });
     }
 
@@ -42,7 +48,7 @@ class AdminController {
         Promise.resolve(this.data.users.findById(req.params.id))
             .then((user) => {
                 return res.render('auth/admin/edituser', {
-                        user,
+                    user,
                     req: req,
                 });
             });
