@@ -52,9 +52,7 @@ class CarController {
         Promise.resolve(this.data.cars.findById(req.params.id))
             .then((car) => {
                 return res.render('./public/car-details', {
-                    result: {
                         car,
-                    },
                     req: req,
                 });
             });

@@ -9,7 +9,7 @@ mixin comment
                     h4.modal-title Comment
                 .modal-body
                     #leave-comment-page
-                        form#comment-form(action='/car/comment/' + result.car._id, method='POST')
+                        form#comment-form(action='/car/comment/' + car._id, method='POST')
                             label(for='comment-form') Type your comment here
                             br
                             textarea#review-text.form-control(rows='8', cols='30', name='comment')

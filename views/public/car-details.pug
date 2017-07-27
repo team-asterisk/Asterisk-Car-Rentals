@@ -8,52 +8,52 @@ block main
                 .row
                     .col-xs-12.col-md-4.border-right-1px
                         .car-model
-                            = result.car.makemodel
+                            = car.makemodel
                         .car-price
-                            if result.car.specialpriceactivated
-                                = 'From $' + result.car.specialprice + 'per Day'
+                            if car.specialpriceactivated
+                                = 'From $' + car.specialprice + ' per Day'
                             else
-                                = 'From $' + result.car.baseprice + 'per Day'
+                                = 'From $' + car.baseprice + ' per Day'
                         span.car-image
-                            img(width=250, src= '../' + result.car.carphotolink)
+                            img(width=250, src= '../' + car.carphotolink)
                     .col-xs-12.col-md-8
                         .car-info
                             .car-capacity
                                 span.car-passengers 
-                                    = result.car.adultscount + ' Adults'
+                                    = car.adultscount + ' Adults'
                                 span.car-bags 
-                                    = result.car.bagscount + ' Bags'
+                                    = car.bagscount + ' Bags'
                                 span.car-doors
-                                    = result.car.doorscount + ' Doors'
+                                    = car.doorscount + ' Doors'
                             .car-class
-                                = result.car.category
+                                = car.category
                             .row
                                 .col-xs-12.col-md-5
                                     ul.car-features
                                         li 
-                                            = 'Fuel type: ' + result.car.fueltype
+                                            = 'Fuel type: ' + car.fueltype
                                         li
-                                            = 'Mileage: ' + result.car.mileage + ' Mpg'
+                                            = 'Mileage: ' + car.mileage + ' Mpg'
                                         li
-                                            = 'Transmission: ' + result.car.transmission
+                                            = 'Transmission: ' + car.transmission
                                 .col-xs-12.col-md-5
                                     ul.car-features
-                                        if result.car.airconditioner
+                                        if car.airconditioner
                                             li Air Conditioning
                                         li
-                                            = 'Model ' + result.car.yearofmanufacture
+                                            = 'Model ' + car.yearofmanufacture
                                         li * Unlimited mileage included
-                        a.book-now(href="/auth/bookings/add/" + result.car._id) Book Now
+                        a.book-now(href="/auth/bookings/add/" + car._id) Book Now
             #comments
                 h2#comments-title Comments
-                if result.car.comments.length   
-                    each comment in result.car.comments
+                if car.comments.length   
+                    each comment in car.comments
                         .single-comment
                             .comment-author
-                                strong Author:
-                                    =comment.author
+                                strong
+                                    = 'Author: ' + comment.author
                             .comment-text 
-                                =comment.content
+                                = comment.content
                 else
                     if user
                         | No comments added. Be the first to comment this car!
