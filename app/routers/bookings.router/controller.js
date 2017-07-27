@@ -190,6 +190,10 @@ class BookingsController {
             total = totalDays * car.specialprice;
         }
 
+        if (isNaN(total)) {
+            throw new Error('Empty date is not allowed!');
+        }
+
         const booking = {
             _id: newBooking._id,
             car: {
