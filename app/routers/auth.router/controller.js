@@ -103,6 +103,23 @@ class AuthController {
                 }
             });
     }
+
+    // Access control
+    verifyIsUser(req, res, next) {
+        if (!req.user) {
+            req.toastr.error('You need to be logged in to access this page.');
+            res.status(401).redirect('/auth/login');
+        }
+        return next();
+    }
+
+    verifyIsAdmin(req, res, next) {
+        if (!req.user || req.user.role !== 'admin') {
+            req.toastr.error('You need to be an Admin to access this page.');
+            res.status(401).redirect('/401');
+        }
+        return next();
+    }
 }
 
 const init = (data) => {
