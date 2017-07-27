@@ -28,8 +28,8 @@ block adminpage
                                     =moment(b.enddate).format('YYYY-MM-DD')
                                 .booking-status 
                                     if b.enddate.valueOf() > new Date().valueOf()
-                                        | Expired
-                                    else
                                         | Pending
+                                    else
+                                        | Ended
                                 .booking-total-price
                                     =b.totalprice + '$'
