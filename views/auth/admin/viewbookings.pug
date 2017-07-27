@@ -27,9 +27,13 @@ block adminpage
                                 .booking-dropoff
                                     =moment(b.enddate).format('YYYY-MM-DD')
                                 .booking-status 
-                                    if b.enddate.valueOf() > new Date().valueOf()
+                                    if b.startdate.valueOf() > new Date().valueOf()
                                         | Pending
-                                    else
+                                    else if b.startdate.valueOf() < new Date().valueOf() && b.enddate.valueOf() > new Date().valueOf() 
+                                        | In progress
+                                    else if b.enddate.valueOf() < new Date().valueOf() 
                                         | Ended
+                                    else
+                                        | No status
                                 .booking-total-price
                                     =b.totalprice + '$'
