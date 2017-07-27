@@ -13,11 +13,11 @@ class ReviewController {
         this.data.reviews.create(review, user)
             .then(() => {
                 req.toastr.success('Thank you for your review!!', 'Success!');
-                return res.redirect('/');
+                return res.status(200).redirect('/');
             })
             .catch((err) => {
                 req.toastr.error(err.message);
-                return res.redirect('/auth/review');
+                return res.status(400).redirect('/auth/review');
             });
     }
 }
