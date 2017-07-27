@@ -16,6 +16,12 @@ const attachTo = (app, data) => {
         })
         .get('/viewdeals', (req, res) => {
             return controller.getViewDeals(req, res);
+        })
+        .get('/edituser/:id', (req, res) => {
+            return controller.getEditUserByIdForm(req, res);
+        })
+        .post('/edituser/:id', (req, res) => {
+            return controller.updateUserProfile(req, res);
         });
 
     app.use('/auth', router);
