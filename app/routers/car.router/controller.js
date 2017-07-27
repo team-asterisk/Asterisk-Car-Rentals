@@ -11,6 +11,16 @@ class CarController {
         return res.render('auth/admin/editcar', { req: req });
     }
 
+    getEditCarById(req, res) {
+        Promise.resolve(this.data.cars.findById(req.params.id))
+            .then((car) => {
+                return res.render('auth/admin/editcar', {
+                        car,
+                    req: req,
+                });
+            });
+    }
+
     getAllCars(req, res) {
         Promise.resolve(this.data.cars.getAll())
             .then((cars) => {
@@ -62,6 +72,10 @@ class CarController {
                 return res.status(400)
                     .redirect('/auth/addcar');
             });
+    }
+
+    editCar(req, res) {
+        return res.send('Needs implementation!');
     }
 }
 

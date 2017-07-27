@@ -12,8 +12,14 @@ const attachTo = (app, data) => {
         .get('/auth/editcar', (req, res) => {
             return controller.getEditCarForm(req, res);
         })
+        .get('/auth/editcar/:id', (req, res) => {
+            return controller.getEditCarById(req, res);
+        })
         .post('/auth/addcar', multer.uploadSingle, (req, res) => {
             return controller.addCar(req, res);
+        })
+        .post('/auth/editcar/:id', multer.uploadSingle, (req, res) => {
+            return controller.editCar(req, res);
         })
         .get('/cars', (req, res) => {
             return controller.getAllCars(req, res);
