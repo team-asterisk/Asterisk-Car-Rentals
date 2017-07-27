@@ -11,11 +11,32 @@ class CarController {
         return res.render('auth/admin/editcar', { req: req });
     }
 
+    getEditCarById(req, res) {
+        Promise.resolve(this.data.cars.findById(req.params.id))
+            .then((car) => {
+                return res.render('auth/admin/editcar', {
+                        car,
+                    req: req,
+                });
+            });
+    }
+
     getAllCars(req, res) {
         Promise.resolve(this.data.cars.getAll())
             .then((cars) => {
                 return res.render('./public/cars', {
                     context: cars,
+                    req: req,
+                });
+            });
+    }
+
+    getCarsFromCategory(req, res) {
+        Promise.resolve(this.data.cars.filterBy({ 'category': req.params.category }))
+            .then((cars) => {
+                return res.render('./public/category', {
+                    context: cars,
+                    category: req.params.id,
                     req: req,
                 });
             });
@@ -62,6 +83,10 @@ class CarController {
                 return res.status(400)
                     .redirect('/auth/addcar');
             });
+    }
+
+    editCar(req, res) {
+        return res.send('Needs implementation!');
     }
 }
 

@@ -57,6 +57,10 @@ $(() => {
             elem.html(p);
         });
 
+    $("#carphotoimg").click(function () {
+        $("#carphoto").trigger('click');
+    });
+
     function calculatePrice(d2, d1, base, special, activated) {
         var price = base;
 

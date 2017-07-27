@@ -3,81 +3,25 @@ extends _shared/_master
 block adminpage
     #view-deals
         h2#main-title View Deals
-        .row
-            .col-xs-12
-                article.cars.header
-                    .car-model Model
-                    .car-category Category
-                    .car-fuel-type Fuel Type
-                    .car-price Price per Day
-                    .car-special-price Special Price
-            .col-xs-12
-                article.cars
-                    .car-model Toyota Corolla
-                    .car-category Economy
-                    .car-fuel-type Petrol
-                    .car-price $19
-                    .car-special-price $14.99
-            .col-xs-12
-                article.cars
-                    .car-model Toyota Corolla
-                    .car-category Economy
-                    .car-fuel-type Petrol
-                    .car-price $19
-                    .car-special-price $14.99
-            .col-xs-12
-                article.cars
-                    .car-model Toyota Corolla
-                    .car-category Economy
-                    .car-fuel-type Petrol
-                    .car-price $19
-                    .car-special-price $14.99
-            .col-xs-12
-                article.cars
-                    .car-model Toyota Corolla
-                    .car-category Economy
-                    .car-fuel-type Petrol
-                    .car-price $19
-                    .car-special-price $14.99
-            .col-xs-12
-                article.cars
-                    .car-model Toyota Corolla
-                    .car-category Economy
-                    .car-fuel-type Petrol
-                    .car-price $19
-                    .car-special-price $14.99
-            .col-xs-12
-                article.cars
-                    .car-model Toyota Corolla
-                    .car-category Economy
-                    .car-fuel-type Petrol
-                    .car-price $19
-                    .car-special-price $14.99
-            .col-xs-12
-                article.cars
-                    .car-model Toyota Corolla
-                    .car-category Economy
-                    .car-fuel-type Petrol
-                    .car-price $19
-                    .car-special-price $14.99
-            .col-xs-12
-                article.cars
-                    .car-model Toyota Corolla
-                    .car-category Economy
-                    .car-fuel-type Petrol
-                    .car-price $19
-                    .car-special-price $14.99
-            .col-xs-12
-                article.cars
-                    .car-model Toyota Corolla
-                    .car-category Economy
-                    .car-fuel-type Petrol
-                    .car-price $19
-                    .car-special-price $14.99
-            .col-xs-12
-                article.cars
-                    .car-model Toyota Corolla
-                    .car-category Economy
-                    .car-fuel-type Petrol
-                    .car-price $19
-                    .car-special-price $14.99
+        if context.length
+            .row
+                .col-xs-12
+                    article.cars.header
+                        .car-model Model
+                        .car-category Category
+                        .car-fuel-type Fuel Type
+                        .car-price Price per Day
+                        .car-special-price Special Price
+                each deal, i in context
+                    .col-xs-12
+                        article.cars
+                            .car-model
+                                = deal.makemodel
+                            .car-category
+                                = deal.category
+                            .car-fuel-type
+                                = deal.fueltype
+                            .car-price
+                                = '$' + deal.baseprice
+                            .car-special-price
+                                = '$' + deal.specialprice

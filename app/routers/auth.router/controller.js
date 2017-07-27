@@ -26,22 +26,6 @@ class AuthController {
         return res.render('auth/review', { req: req });
     }
 
-    getViewBookings(req, res) {
-        return res.render('auth/admin/viewbookings', { req: req });
-    }
-
-    getViewCars(req, res) {
-        return res.render('auth/admin/viewcars', { req: req });
-    }
-
-    getViewUsers(req, res) {
-        return res.render('auth/admin/viewusers', { req: req });
-    }
-
-    getViewDeals(req, res) {
-        return res.render('auth/admin/viewdeals', { req: req });
-    }
-
     logOut(req, res) {
         req.logout();
         return res.redirect('/');
