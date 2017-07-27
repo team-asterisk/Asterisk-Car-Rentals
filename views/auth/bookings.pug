@@ -4,41 +4,16 @@ block main
     #main
         .container
             #bookings-history
-                h1#main-title Bookings History
+                h1#main-title Bookings History for #{user.username}
                 .row
-                    .col-xs-12
-                        article.booking.header
-                            .booking-car-model Car Model
-                            .booking-pickup Pickup Date
-                            .booking-dropoff Dropoff Date
-                            .booking-total-price Total Price
-                    .col-xs-12
-                        article.booking
-                            .booking-car-model Toyota Corolla
-                            .booking-pickup 22/07/2017
-                            .booking-dropoff 24/07/2017
-                            .booking-total-price $109
-                    .col-xs-12
-                        article.booking
-                            .booking-car-model Toyota Corolla
-                            .booking-pickup 22/05/2017
-                            .booking-dropoff 24/05/2017
-                            .booking-total-price $49
-                    .col-xs-12
-                        article.booking
-                            .booking-car-model Toyota Corolla
-                            .booking-pickup 22/04/2017
-                            .booking-dropoff 24/04/2017
-                            .booking-total-price $99
-                    .col-xs-12
-                        article.booking
-                            .booking-car-model Toyota Corolla
-                            .booking-pickup 22/03/2017
-                            .booking-dropoff 24/03/2017
-                            .booking-total-price $79
-                    .col-xs-12
-                        article.booking
-                            .booking-car-model Toyota Corolla
-                            .booking-pickup 22/01/2017
-                            .booking-dropoff 24/01/2017
-                            .booking-total-price $89
+                    if user.bookings.length
+                        each b in user.bookings
+                            .col-xs-12
+                                article.booking.header
+                                    .booking-car-model #{b.car.makemodel}
+                                    .booking-pickup #{moment(b.startdate).format('YYYY-MM-DD')}
+                                    .booking-dropoff #{moment(b.enddate).format('YYYY-MM-DD')}
+                                    .booking-total-price #{b.totalprice} $
+                                    if b.enddate.valueOf() > new Date().valueOf()
+                                    a.edit-booking(href="/auth/bookings/" + b._id, title="title") 
+                                            | Edit

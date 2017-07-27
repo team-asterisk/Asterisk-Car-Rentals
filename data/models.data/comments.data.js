@@ -4,9 +4,10 @@ const Comment = require('../../models/comment.model');
 class CommentsData extends BaseData {
     constructor(db) {
         super(db, Comment);
+        this.cars = this.db.collection('cars');
     }
 
-    create(comment, user) {
+    create(comment, user, carId) {
         // Property validation instead of method validation
         let newInstance;
 
@@ -16,7 +17,10 @@ class CommentsData extends BaseData {
             return Promise.reject(error);
         }
 
-        return this.collection.insert(newInstance)
+        const newCar = this.db.cars.findById(carId);
+        newCar.comments.push(newInstance);
+
+        return this.cars.ipdateByID(newCar)
             .then(() => {
                 return newInstance;
             });

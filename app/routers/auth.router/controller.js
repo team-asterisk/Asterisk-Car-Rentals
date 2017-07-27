@@ -16,7 +16,10 @@ class AuthController {
     }
 
     getMyBookings(req, res) {
-        return res.render('auth/bookings', { req: req });
+        return res.render('auth/bookings', {
+            req: req,
+            moment: require('moment'),
+        });
     }
 
     getReviewForm(req, res) {

@@ -7,15 +7,15 @@ class BookingsController {
 
     async getAddBookingMenu(req, res) {
         const carId = req.params.id;
-        const viewModel = await this._generateViewModel(this.data, carId);
+        const carInfo = await this._generateCarData(this.data, carId);
 
         return res.render('auth/bookings/add', {
-            context: viewModel,
+            context: carInfo,
             req: req,
         });
     }
 
-    async _generateViewModel(data, carId) {
+    async _generateCarData(data, carId) {
         const car = await data.cars.findById(carId);
 
         const viewModel = {
@@ -31,14 +31,20 @@ class BookingsController {
         return viewModel;
     }
 
-    getEditBookingMenu(req, res) {
+    async getEditBookingMenu(req, res) {
         const bookingId = req.params.id;
         const currentBooking = req.user.bookings
-            .find((x) => x._id === bookingId);
+            .find((x) => x._id == bookingId);
+        const carId = currentBooking.car._id;
+        const carInfo = await this._generateCarData(this.data, carId);
 
-        return res.render('auth/bookings/:id', {
-            context: { currentBooking },
+        return res.render('auth/bookings/edit', {
+            context: {
+                currentBooking,
+                carInfo,
+            },
             req: req,
+            moment: require('moment'),
         });
     }
 
@@ -80,10 +86,11 @@ class BookingsController {
     editBooking(req, res, message) {
         const bookingId = req.params.id;
         const newBooking = req.body;
+        newBooking._id = new ObjectID();
         const user = req.user;
 
         const current = req.user.bookings
-            .find((x) => x._id === bookingId);
+            .find((x) => x._id == bookingId);
 
         this.data.cars.findById(current.car._id)
             .then((car) => {
@@ -162,13 +169,13 @@ class BookingsController {
     _removeBookingFromUser(user, bookingId) {
         const currentBookingIndex = user.bookings
             .indexOf(user.bookings
-                .find((x) => x._id === booking._id));
+                .find((x) => x._id == bookingId));
 
         if (currentBookingIndex >= 0) {
             user.bookings.splice(currentBookingIndex, 1);
         }
 
-        return Promise.resolce(user);
+        return Promise.resolve(user);
     }
 
     _addBookingToUser(car, user, newBooking) {
