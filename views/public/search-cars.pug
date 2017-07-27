@@ -9,11 +9,10 @@ block main
                     span.chosen-dates 22.07 - 24.07
                 .sort-cars-by
                     span.sort-by-text Sort by:
-                    span Price
                     select#sort_by_category(name='sort_by_category')
-                        option(value='', disabled='', selected='') Category
-                        option(value='small_to_large', title='small to large') small to large
-                        option(value='large_to_small', title='large to small') large to small
+                        option(value='', disabled='', selected='') By Price
+                        option(value='ascending', title='ascending') ascending
+                        option(value='descending', title='descending') descending
                 .row
                     .col-xs-12
                         article.car-single-search
