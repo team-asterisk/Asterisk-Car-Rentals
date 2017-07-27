@@ -18,8 +18,10 @@ const applyTo = (app) => {
     app.use('/static', express.static(staticsPath));
 
     app.use('/css', express.static(path.join(__dirname, '../../static/css/')));
+    app.use('/fonts', express.static(path.join(__dirname, '../../static/fonts/')));
     app.use('/js', express.static(path.join(__dirname, '../../static/js/')));
     app.use('/images', express.static(path.join(__dirname, '../../static/images/')));
+    app.use('/libs', express.static(path.join(__dirname, '../../node_modules/')));
 
     app.use(cookieParser('keyboard cat'));
 };
