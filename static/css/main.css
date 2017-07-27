@@ -93,6 +93,10 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+#top-container #select-category {
+    min-width: 160px;
+}
+
 .search-form {
     position: relative;
     top: 160px;

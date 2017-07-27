@@ -4,33 +4,18 @@ block topContainer
     #top-container
         .search-form
             form(action='/searchcars', method='GET')
-                input.search-form-input(name='from_where' type='text', placeholder='From Where', maxlength='90')
+                select(name='category', id='select-category', title='category')
+                    option(value='', disabled='', selected='') Choose category
+                    option(value='Economy', title='Economy') Economy
+                    option(value='Compact', title='Compact') Compact
+                    option(value='Fullsize', title='Fullsize') Full-size
+                    option(value='Premium', title='Premium') Premium
+                    option(value='SUV', title='SUV') SUV
+                    option(value='Van', title='Van') Van
                 input.search-form-input.datepicker-from(name='pickup_date' type='text', placeholder='Pickup Date')
-                select#pickup_hour(name='pickup_hour', title='Noon')
-                    option(value='8', title='8:00 am') 8:00 am
-                    option(value='9', title='9:00 am') 9:00 am
-                    option(value='10', title='10:00 am') 10:00 am
-                    option(value='11', title='11:00 am') 11:00 am
-                    option(value='12', title='12:00 am', selected='selected') 12:00 am
-                    option(value='13', title='1:00 pm') 1:00 pm
-                    option(value='14', title='2:00 pm') 2:00 pm
-                    option(value='15', title='3:00 pm') 3:00 pm
-                    option(value='16', title='4:00 pm') 4:00 pm
-                    option(value='17', title='5:00 pm') 5:00 pm
-                    option(value='18', title='6:00 pm') 6:00 pm
+                
                 input.search-form-input.datepicker-to(name='dropoff_date' type='text', placeholder='Dropoff Date')
-                select#dropoff_hour(name='dropoff_hour', title='Noon')
-                    option(value='8', title='8:00 am') 8:00 am
-                    option(value='9', title='9:00 am') 9:00 am
-                    option(value='10', title='10:00 am') 10:00 am
-                    option(value='11', title='11:00 am') 11:00 am
-                    option(value='12', title='12:00 am', selected='selected') 12:00 am
-                    option(value='13', title='1:00 pm') 1:00 pm
-                    option(value='14', title='2:00 pm') 2:00 pm
-                    option(value='15', title='3:00 pm') 3:00 pm
-                    option(value='16', title='4:00 pm') 4:00 pm
-                    option(value='17', title='5:00 pm') 5:00 pm
-                    option(value='18', title='6:00 pm') 6:00 pm
+                
                 button.search-form-btn(type='submit')
                     span Search
 
