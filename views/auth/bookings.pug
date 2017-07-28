@@ -23,7 +23,9 @@ block main
                                     .booking-total-price #{b.totalprice} $
                                     if b.enddate.valueOf() > new Date().valueOf()
                                         .booking-edit
-                                            a.btn.btn-info(href="/auth/bookings/" + b._id, title="title") edit
+                                            a(href="/auth/bookings/" + b._id, title="title") edit
+                                    else
+                                        .booking-edit Expired
                     else
                         .col-xs-12
                             article.booking.header

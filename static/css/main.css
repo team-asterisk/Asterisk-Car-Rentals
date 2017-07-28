@@ -429,7 +429,7 @@ select#select-category {
 .booking-dropoff,
 .booking-total-price,
 .booking-edit {
-    width: 19%;
+    width: 20%;
     display: inline-block;
     text-align: center;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -465,7 +465,7 @@ select#select-category {
 #view-users .user-phone,
 #view-users .user-email,
 #view-users .user-edit {
-    width: 19%;
+    width: 20%;
     display: inline-block;
     text-align: center;
     border: 1px solid rgba(0, 0, 0, 0.2);
