@@ -43,13 +43,11 @@ class BookingsController {
             cars = await this._searchCarsByQuery(category, now, start, end);
         } catch (err) {
             req.toastr.error('Search was not successfull, please try again' + err, 'Sorry!');
-            return res.status(401).redirect('/');
+            res.status(401).redirect('/');
         }
 
-        console.log('--------- final');
-        console.log(cars);
-
-        return res.render('./public/search-cars', {
+        req.toastr.success('Results will appear in a second!', 'Searching...');
+        res.render('./public/search-cars', {
             context: { cars, start, end },
             req: req,
             moment: require('moment'),
@@ -63,12 +61,9 @@ class BookingsController {
         let cars;
         let filteredCars;
 
-        console.log('--------- test');
-        console.log(nowDate);
-        console.log(startDate);
-        console.log(endDate);
-        console.log(category);
-
+        if (isNaN(start) || isNaN(end)) {
+            throw new Error('Please provide correct dates.');
+        }
         if (start < now) {
             throw new Error('Please choose today or a future date.');
         }
@@ -79,24 +74,17 @@ class BookingsController {
             throw new Error('Dropoff date must follow pickup date.');
         }
 
-        console.log('--------- cars');
-
         if (category === 'All') {
             cars = await this.data.cars.getAll();
         } else {
             cars = await this.data.cars.filterBy({ 'category': category });
         }
 
-        console.log(cars);
-        console.log('-------------- filter');
-
         if (cars) {
             filteredCars = await cars.filter((car) => {
                 return this._checkIfCarIsBooked(car, startDate, endDate);
             });
         }
-
-        console.log(filteredCars);
 
         return filteredCars;
     }

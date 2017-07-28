@@ -25,7 +25,8 @@ $(() => {
 
     $('.datepicker-from, .datepicker-to').datepicker({
         format: 'yyyy-mm-dd',
-        autoclose: true
+        autoclose: true,
+        orientation: "auto bottom",
     });
 
     $('.datepicker-from')
@@ -64,19 +65,19 @@ $(() => {
             elem.html(p);
         });
 
-    $('.search-form-btn')
-        .hover(() => {
+    // $('.search-form-btn')
+    //     .click(() => {
 
-            startDate = $('.datepicker-from').val();
-            endDate = $('.datepicker-to').val();
+    //         startDate = $('.datepicker-from').val();
+    //         endDate = $('.datepicker-to').val();
 
-            if (!startDate || !endDate) {
-                toastr.info('Dates are required!', 'Note.');
-            }
-            if (startDate.valueOf() < now.valueOf() || endDate.valueOf() < now.valueOf()) {
-                toastr.warning('Please provide correct dates!', 'Attention!');
-            }
-        });
+    //         if (!startDate || !endDate) {
+    //             toastr.info('Dates are required!', 'Note.');
+    //         }
+    //         if (startDate.valueOf() < now.valueOf() || endDate.valueOf() < now.valueOf()) {
+    //             toastr.warning('Please provide correct dates!', 'Attention!');
+    //         }
+    //     });
 
     $('.add-booking-button')
         .on('click', () => {
