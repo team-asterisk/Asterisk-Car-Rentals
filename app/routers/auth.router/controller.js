@@ -33,7 +33,8 @@ class AuthController {
 
     updateProfile(req, res) {
         const bodyUser = req.body;
-        return this._updateUserProperties(bodyUser)
+        const reqUser = req.user;
+        return this._updateUserProperties(reqUser, bodyUser)
             .then((user) => {
                 return this.data.users.updateById(user);
             })
@@ -73,27 +74,27 @@ class AuthController {
             });
     }
 
-    _updateUserProperties(user) {
+    _updateUserProperties(user, bodyUser) {
         return this.data.users.findByUsername(user.username)
             .then((dbUser) => {
                 if (dbUser) {
-                    user._id = dbUser._id;
-                    user.username = dbUser.username;
-                    user.role = dbUser.role;
-                    user.bookings = dbUser.bookings;
+                    bodyUser._id = dbUser._id;
+                    bodyUser.username = dbUser.username;
+                    bodyUser.role = dbUser.role;
+                    bodyUser.bookings = dbUser.bookings;
 
-                    if (user.password === '' ||
-                        typeof user.password === 'undefined') {
-                        delete user.password;
-                        delete user['repeat-password'];
-                        user.passHash = dbUser.passHash;
-                        return Promise.resolve(user);
+                    if (bodyUser.password === '' ||
+                        typeof bodyUser.password === 'undefined') {
+                        delete bodyUser.password;
+                        delete bodyUser['repeat-password'];
+                        bodyUser.passHash = dbUser.passHash;
+                        return Promise.resolve(bodyUser);
                     }
 
-                    if (user.password !== user['repeat-password']) {
+                    if (bodyUser.password !== bodyUser['repeat-password']) {
                         throw new Error(`Passwords do not match!`);
                     }
-                    return Promise.resolve(user);
+                    return Promise.resolve(bodyUser);
                 }
 
                 if (user.username) {
