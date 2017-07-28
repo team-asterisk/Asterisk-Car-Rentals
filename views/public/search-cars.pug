@@ -7,7 +7,7 @@ block main
                 .cars-title
                     | Showing cars available for your chosen dates: 
                     span.chosen-dates #{moment(context.start).format('MM/DD')} - #{moment(context.end).format('MM/DD')}
-            if context.cars.length > 0
+            if context.cars.length
                 .sort-cars-by
                     span.sort-by-text Sort by:
                     select#sort_by_category(name='sort_by_category')
