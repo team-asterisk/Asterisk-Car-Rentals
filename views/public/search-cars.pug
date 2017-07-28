@@ -7,7 +7,7 @@ block main
                 .cars-title
                     | Showing cars available for your chosen dates: 
                     span.chosen-dates #{moment(context.start).format('MM/DD')} - #{moment(context.end).format('MM/DD')}
-            if context.cars
+            if context.cars.length > 0
                 .sort-cars-by
                     span.sort-by-text Sort by:
                     select#sort_by_category(name='sort_by_category')
@@ -36,5 +36,5 @@ block main
                                             img(src=car.carphotolink, alt=car.category + 'car')
             else
                 .col-xs-12
-                    article.car-single-search
+                    h1
                         | Sorry, no cars are available for this period.
