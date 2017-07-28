@@ -4,6 +4,7 @@ block topContainer
     #top-container
         .search-form
             form(action='/searchcars', method='GET')
+                input(type='hidden', name='_csrf', value=csrfTokenFunc())
                 select(name='category', id='select-category', title='category')
                     option(value='', disabled='', selected='') Choose category
                     option(value='All', title='AllCategories') All

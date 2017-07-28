@@ -7,6 +7,7 @@ block adminpage
             .col-xs-12
                 != messages()
                 form#add-car-form(action='/auth/addcar', method='POST', encType='multipart/form-data')
+                    input(type='hidden', name='_csrf', value=csrfTokenFunc())
                     label(for='makemodel') Car Make and Model
                     br
                     input#name.form-control(type='text', name='makemodel', placeholder='E.g. Toyota Corolla')

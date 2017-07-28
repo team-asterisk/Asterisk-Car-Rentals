@@ -9,6 +9,7 @@ block main
                     .toastr
                         #{req.toastr.render()}
                     form#review-form(action='/auth/review', method='POST')
+                        input(type='hidden', name='_csrf', value=csrfTokenFunc())
                         label(for='review-form') Give us your rating
                         br
                         select.select-rating(name='rating')

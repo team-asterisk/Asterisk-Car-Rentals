@@ -9,6 +9,7 @@ block main
                     .toastr
                         #{req.toastr.render()}
                     form#login-form(action='/auth/login', method="POST")
+                        input(type='hidden', name='_csrf', value=csrfTokenFunc())
                         label(for='login-username') Username
                         br
                         input#login-username.form-control(type='text', name='username')

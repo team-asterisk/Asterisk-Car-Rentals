@@ -10,6 +10,7 @@ mixin comment
                 .modal-body
                     #leave-comment-page
                         form#comment-form(action='/car/comment/' + car._id, method='POST')
+                            input(type='hidden', name='_csrf', value=csrfTokenFunc())
                             label(for='comment-form') Type your comment here
                             br
                             textarea#review-text.form-control(rows='8', cols='30', name='comment')

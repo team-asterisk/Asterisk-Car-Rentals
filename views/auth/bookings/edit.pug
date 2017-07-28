@@ -16,6 +16,7 @@ block main
                 - var end = moment(booking.enddate).format('YYYY-MM-DD')
                 #user-profile
                     form#profile-form(action='/auth/bookings/' +booking._id, method="POST")
+                        input(type='hidden', name='_csrf', value=csrfTokenFunc())
                         label(for='makemodel') Car Model
                         br
                         input#username.form-control(type='text', name='makemodel', value=car.makemodel, disabled='')

@@ -3,8 +3,10 @@ const passport = require('passport');
 const { Strategy } = require('passport-local');
 const MongoStore = require('connect-mongo')(session);
 const bcrypt = require('bcrypt');
+const csrf = require('csurf');
 
 const config = require('../../config');
+const csrfProtection = csrf();
 
 const applyTo = (app, data) => {
     passport.use(new Strategy((username, password, done) => {
@@ -36,6 +38,8 @@ const applyTo = (app, data) => {
         saveUninitialized: true,
     }));
 
+    app.use(csrfProtection);
+
     app.use(passport.initialize());
     app.use(passport.session());
 
@@ -57,6 +61,22 @@ const applyTo = (app, data) => {
         };
 
         next();
+    });
+
+    app.use((req, res, next) => {
+        res.locals.csrfTokenFunc = req.csrfToken;
+
+        next();
+    });
+
+    app.use((err, req, res, next) => {
+        if (err.code !== 'EBADCSRFTOKEN') {
+            return next(err);
+        }
+
+        // handle CSRF token errors here
+        res.status(403);
+        res.send('session has expired or form tampered with');
     });
 };
 

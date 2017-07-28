@@ -11,6 +11,7 @@ block adminpage
             #{req.toastr.render()}
         #user-profile
             form#profile-form(action='/auth/edituser/' + user._id, method="POST")
+                input(type='hidden', name='_csrf', value=csrfTokenFunc())
                 label(for='username') Username
                 br
                 input#username.form-control(type='text', name='username', value=user.username, disabled='')
