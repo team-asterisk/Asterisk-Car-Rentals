@@ -57,7 +57,7 @@ class Car {
     }
 
     set _carphotolink(value) {
-        const link = convert(value);
+        const link = convert(value).replace(/&#x2F;/g, '/');
         if (validator.validateImageExtension(link)) {
             this.carphotolink = link;
         } else {
