@@ -189,9 +189,9 @@ block adminpage
                     br
                     label(for='airconditioner') Air Conditioner
                     if car.airconditioner
-                        input#air_conditioner.fom-control(type='checkbox', name='airconditioner', checked)
+                        input#air_conditioner.fom-control(type='checkbox', value='1', name='airconditioner', checked)
                     else
-                        input#air_conditioner.fom-control(type='checkbox', name='airconditioner')
+                        input#air_conditioner.fom-control(type='checkbox', value='0', name='airconditioner')
                     br
                     label.section Price
                     label(for='baseprice') Base price per Day
@@ -202,9 +202,9 @@ block adminpage
                     br
                     label(for='specialpriceactivated') Activate Special Price
                     if car.specialpriceactivated
-                        input#activate_special_price.fom-control(type='checkbox', name='specialpriceactivated', checked)
+                        input#activate_special_price.fom-control(type='checkbox', value='1', name='specialpriceactivated', checked)
                     else
-                        input#activate_special_price.fom-control(type='checkbox', name='specialpriceactivated')
+                        input#activate_special_price.fom-control(type='checkbox', value='0', name='specialpriceactivated')
                     br
                     br
                     button.btn.btn-primary(type='submit') Update Car Info
