@@ -31,6 +31,76 @@ class BookingsController {
         return viewModel;
     }
 
+    async searchCars(req, res) {
+        const now = new Date();
+        const start = new Date(req.query.pickup_date);
+        const end = new Date(req.query.dropoff_date);
+        const category = !req.query.category ? 'All' : req.query.category;
+
+        let cars;
+
+        try {
+            cars = await this._searchCarsByQuery(category, now, start, end);
+        } catch (err) {
+            req.toastr.error('Search was not successfull, please try again' + err, 'Sorry!');
+            return res.status(401).redirect('/');
+        }
+
+        console.log('--------- final');
+        console.log(cars);
+
+        return res.render('./public/search-cars', {
+            context: { cars, start, end },
+            req: req,
+            moment: require('moment'),
+        });
+    }
+
+    async _searchCarsByQuery(category, nowDate, startDate, endDate) {
+        const now = nowDate.valueOf() - 24 * 60 * 60 * 1000;
+        const start = startDate.valueOf();
+        const end = endDate.valueOf();
+        let cars;
+        let filteredCars;
+
+        console.log('--------- test');
+        console.log(nowDate);
+        console.log(startDate);
+        console.log(endDate);
+        console.log(category);
+
+        if (start < now) {
+            throw new Error('Please choose today or a future date.');
+        }
+        if (end < now) {
+            throw new Error('Please choose a future date.');
+        }
+        if (start > end) {
+            throw new Error('Dropoff date must follow pickup date.');
+        }
+
+        console.log('--------- cars');
+
+        if (category === 'All') {
+            cars = await this.data.cars.getAll();
+        } else {
+            cars = await this.data.cars.filterBy({ 'category': category });
+        }
+
+        console.log(cars);
+        console.log('-------------- filter');
+
+        if (cars) {
+            filteredCars = await cars.filter((car) => {
+                return this._checkIfCarIsBooked(car, startDate, endDate);
+            });
+        }
+
+        console.log(filteredCars);
+
+        return filteredCars;
+    }
+
     async getEditBookingMenu(req, res) {
         const bookingId = req.params.id;
         const currentBooking = req.user.bookings
@@ -104,7 +174,6 @@ class BookingsController {
 
         this.data.cars.findById(current.car._id)
             .then((car) => {
-                console.log(car);
                 this._removeBookedDatesFromCar(car, bookingId);
                 if (this._checkOtherDates(
                         car,
@@ -172,24 +241,35 @@ class BookingsController {
         return car;
     }
 
+    // checks if 2 periods overlap or contain each other
+    // s1, e1 - (start, end of first period)
+    // s2, e2 - (start, end of second period)
+    _checkIfPeriodsCollide(s1, e1, s2, e2) {
+        return ((s1 >= s2 && s1 <= e2) || (s1 <= s2 && e1 >= s2));
+    }
+
     // this method checks all saved periods for this car
     _checkIfCarIsBooked(car, start, end) {
         const booked = car.booked;
 
-        const startdate = new Date(start);
-        const enddate = new Date(end);
+        const startdate = start instanceof Date ? start : new Date(start);
+        const enddate = end instanceof Date ? end : new Date(end);
 
         if (booked.length > 0) {
-            booked.forEach((dates) => {
+            const len = booked.length;
+            for (let i = 0; i < len; i++) {
+                const dates = booked[i];
                 const startBooking = new Date(dates.startdate);
                 const endBooking = new Date(dates.enddate);
-                if ((startBooking.valueOf() <= startdate.valueOf() &&
-                        endBooking.valueOf() >= startdate.valueOf()) ||
-                    (startBooking.valueOf() >= startdate.valueOf() &&
-                        startBooking.valueOf() <= enddate.valueOf())) {
-                    throw new Error('Cannot book the car for these dates!');
+                if (this._checkIfPeriodsCollide(
+                        startBooking.valueOf(),
+                        endBooking.valueOf(),
+                        startdate.valueOf(),
+                        enddate.valueOf()
+                    )) {
+                    return false;
                 }
-            });
+            }
         }
         return true;
     }
@@ -204,22 +284,26 @@ class BookingsController {
         const oldend = new Date(oend);
 
         if (booked.length > 0) {
-            booked.forEach((dates) => {
+            const len = booked.length;
+            for (let i = 0; i < len; i++) {
+                const dates = booked[i];
                 const startBooking = new Date(dates.startdate);
                 const endBooking = new Date(dates.enddate);
 
                 if (startBooking.valueOf() === oldstart.valueOf() &&
                     endBooking.valueOf() === oldend.valueOf()) {
-                    return;
+                    continue;
                 }
 
-                if ((startBooking.valueOf() <= startdate.valueOf() &&
-                        endBooking.valueOf() >= startdate.valueOf()) ||
-                    (startBooking.valueOf() >= startdate.valueOf() &&
-                        startBooking.valueOf() <= enddate.valueOf())) {
-                    throw new Error('Cannot book the car for these dates!');
+                if (this._checkIfPeriodsCollide(
+                        startBooking.valueOf(),
+                        endBooking.valueOf(),
+                        startdate.valueOf(),
+                        enddate.valueOf()
+                    )) {
+                    return false;
                 }
-            });
+            }
         }
         return true;
     }

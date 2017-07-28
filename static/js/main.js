@@ -21,7 +21,7 @@ $(() => {
 
     var startDate;
     var endDate;
-    var now = new Date();
+    var now = new Date() - 24 * 60 * 60 * 1000;
 
     $('.datepicker-from, .datepicker-to').datepicker({
         format: 'yyyy-mm-dd',
@@ -31,9 +31,9 @@ $(() => {
     $('.datepicker-from')
         .datepicker()
         .on('changeDate', (ev) => {
-            if (ev.date.valueOf() < now.valueOf() + 3600000) {
+            if (ev.date.valueOf() < now.valueOf()) {
                 console.log(ev.date.valueOf());
-                conosle.log(now.valueOf())
+                console.log(now.valueOf());
                 toastr.error('Today or future date is required!', 'Attention!');
                 $(ev.target).val('');
             }
@@ -62,6 +62,20 @@ $(() => {
             var activated = +elem.attr('activated');
             var p = calculatePrice(endDate, startDate, base, special, activated);
             elem.html(p);
+        });
+
+    $('.search-form-btn')
+        .hover(() => {
+
+            startDate = $('.datepicker-from').val();
+            endDate = $('.datepicker-to').val();
+
+            if (!startDate || !endDate) {
+                toastr.info('Dates are required!', 'Note.');
+            }
+            if (startDate.valueOf() < now.valueOf() || endDate.valueOf() < now.valueOf()) {
+                toastr.warning('Please provide correct dates!', 'Attention!');
+            }
         });
 
     $('.add-booking-button')

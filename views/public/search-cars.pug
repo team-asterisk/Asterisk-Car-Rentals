@@ -5,8 +5,9 @@ block main
         .container
             #car-rentals
                 .cars-title
-                    | Showing cars available for your chosen dates:
-                    span.chosen-dates 22.07 - 24.07
+                    | Showing cars available for your chosen dates: 
+                    span.chosen-dates #{moment(context.start).format('MM/DD')} - #{moment(context.end).format('MM/DD')}
+            if context.cars
                 .sort-cars-by
                     span.sort-by-text Sort by:
                     select#sort_by_category(name='sort_by_category')
@@ -14,57 +15,26 @@ block main
                         option(value='ascending', title='ascending') ascending
                         option(value='descending', title='descending') descending
                 .row
-                    .col-xs-12
-                        article.car-single-search
-                            a(href='#')
-                                .car-category
-                                    .price-container
-                                        span.total-price $50 / day
-                                        span.total Total
-                                        button.view-deal-button View Deal
-                                    .car-info
-                                        .car-class Economy
-                                        .car-model Toyota Corolla or similar
-                                        .car-capacity
-                                            span.car-passengers 5 Adults
-                                            span.car-bags 2 Bags
-                                            span.car-doors 2-4 Doors
-                                        .offer-details * Unlimited mileage included
-                                    span.car-image
-                                        img(src='./images/4door-sedan.png', alt='Economy car')
-                    .col-xs-12
-                        article.car-single-search
-                            a(href='#')
-                                .car-category
-                                    .price-container
-                                        span.total-price $50 / day
-                                        span.total Total
-                                        button.view-deal-button View Deal
-                                    .car-info
-                                        .car-class Economy
-                                        .car-model Toyota Corolla or similar
-                                        .car-capacity
-                                            span.car-passengers 5 Adults
-                                            span.car-bags 2 Bags
-                                            span.car-doors 2-4 Doors
-                                        .offer-details * Unlimited mileage included
-                                    span.car-image
-                                        img(src='./images/4door-sedan.png', alt='Economy car')
-                    .col-xs-12
-                        article.car-single-search
-                            a(href='#')
-                                .car-category
-                                    .price-container
-                                        span.total-price $50 / day
-                                        span.total Total
-                                        button.view-deal-button View Deal
-                                    .car-info
-                                        .car-class Economy
-                                        .car-model Toyota Corolla or similar
-                                        .car-capacity
-                                            span.car-passengers 5 Adults
-                                            span.car-bags 2 Bags
-                                            span.car-doors 2-4 Doors
-                                        .offer-details * Unlimited mileage included
-                                    span.car-image
-                                        img(src='./images/4door-sedan.png', alt='Economy car')
+                    each car in context.cars
+                        .col-xs-12
+                            article.car-single-search
+                                a(href='/car/' + car._id)
+                                    .car-category
+                                        .price-container
+                                            span.total-price #{car.baseprice} / day
+                                            span.total Total
+                                            button.view-deal-button View Deal
+                                        .car-info
+                                            .car-class #{car.category}
+                                            .car-model #{car.makemodel} or similar
+                                            .car-capacity
+                                                span.car-passengers #{car.adultscount} Adults
+                                                span.car-bags #{car.bagscount} Bags
+                                                span.car-doors #{car.doorscount} Doors
+                                            .offer-details * Unlimited mileage included
+                                        span.car-image
+                                            img(src=car.carphotolink, alt=car.category + 'car')
+            else
+                .col-xs-12
+                    article.car-single-search
+                        | Sorry, no cars are available for this period.

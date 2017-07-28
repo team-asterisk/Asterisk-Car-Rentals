@@ -10,20 +10,23 @@ const attachTo = (app, data) => {
     const authController = require('../auth.router/controller').init(data);
 
     router
-        .get('/add/:id', authController.verifyIsUser, (req, res) => {
+        .get('/searchcars', (req, res) => {
+            return controller.searchCars(req, res);
+        })
+        .get('/auth/bookings/add/:id', authController.verifyIsUser, (req, res) => {
             return controller.getAddBookingMenu(req, res);
         })
-        .get('/:id', authController.verifyIsUser, (req, res) => {
+        .get('/auth/bookings/:id', authController.verifyIsUser, (req, res) => {
             return controller.getEditBookingMenu(req, res);
         })
-        .post('/add/:id', authController.verifyIsUser, (req, res) => {
+        .post('/auth/bookings/add/:id', authController.verifyIsUser, (req, res) => {
             return controller.addBooking(req, res, messages.add);
         })
-        .post('/:id', authController.verifyIsUser, (req, res) => {
+        .post('/auth/bookings/:id', authController.verifyIsUser, (req, res) => {
             return controller.editBooking(req, res, messages.edit);
         });
 
-    app.use('/auth/bookings', router);
+    app.use(router);
 };
 
 module.exports = { attachTo };
