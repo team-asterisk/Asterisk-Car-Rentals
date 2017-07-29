@@ -1,5 +1,6 @@
 const BaseData = require('../base/base.data');
-const Review = require('../../models/review.model');
+let initReview = require('../../models/review.model').initReview;
+const Review = require('../../models/review.model').Review;
 
 class ReviewsData extends BaseData {
     constructor(db) {
@@ -11,7 +12,7 @@ class ReviewsData extends BaseData {
         let newInstance;
 
         try {
-            newInstance = new Review(review, user);
+            newInstance = initReview(review, user);
         } catch (error) {
             return Promise.reject(error);
         }
