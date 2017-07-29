@@ -29,7 +29,7 @@ const attachTo = (app, data) => {
         });
 
     app.get('*', (req, res) => {
-        return res.render('public/404', { req: req });
+        return res.status(404).render('public/404', { req: req });
     });
 };
 
