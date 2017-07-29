@@ -44,16 +44,26 @@ describe('User Model tests', () => {
     const expectedPassword = 'password1';
     const expectedPhone = '0955444434';
     const expectedEmail = 'dan@dan.bg';
+    const validRole = 'user';
+    const invalidRole = 'user4o';
 
     const model = {};
-
     model.name = expectedName;
     model.username = expectedUsername;
     model.password = expectedPassword;
     model.phone = expectedPhone;
     model.email = expectedEmail;
-    model.role = 'user';
+    model.role = validRole;
     model.bookings = [];
+
+    const invalidModel = {};
+    invalidModel.name = expectedName;
+    invalidModel.username = expectedUsername;
+    invalidModel.password = expectedPassword;
+    invalidModel.phone = expectedPhone;
+    invalidModel.email = expectedEmail;
+    invalidModel.role = invalidRole;
+    invalidModel.bookings = [];
 
     it('Expect User to be created with passed arguments when valid arguments are provided', () => {
         const sut = new User(model);
@@ -62,8 +72,12 @@ describe('User Model tests', () => {
         expect(sut._password).to.equal(expectedPassword);
         expect(sut._phone).to.equal(expectedPhone);
         expect(sut._email).to.equal(expectedEmail);
-        expect(sut._role).to.equal('user');
+        expect(sut._role).to.equal(validRole);
         expect(sut._bookings.length).to.equal(0);
+    });
+
+    it('User constructor should throw when invalid role is provided', () => {
+        expect(() => new User(invalidModel).to.throw(/Invalid role/));
     });
 
     it('Expect User constructor to call validator to check if the passed name is of type string', () => {
