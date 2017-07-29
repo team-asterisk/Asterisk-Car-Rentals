@@ -103,4 +103,9 @@ class User {
     }
 }
 
-module.exports = User;
+
+const initUser = (model) => {
+    return new User(model);
+};
+
+module.exports = { User, initUser };
