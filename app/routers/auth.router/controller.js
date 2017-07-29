@@ -34,14 +34,8 @@ class AuthController {
     updateProfile(req, res) {
         const bodyUser = req.body;
         const reqUser = req.user;
-        console.log('------------users');
-        console.log(bodyUser);
-        console.log(reqUser);
-        console.log(req.body);
         return this._updateUserProperties(reqUser, bodyUser)
             .then((user) => {
-                console.log('------------update');
-                console.log(user);
                 return this.data.users.updateUser(user);
             })
             .then((dbUser) => {
@@ -83,8 +77,6 @@ class AuthController {
     _updateUserProperties(user, bodyUser) {
         return this.data.users.findByUsername(user.username)
             .then((dbUser) => {
-                console.log('-----------dbuser');
-                console.log(dbUser);
                 if (dbUser) {
                     bodyUser._id = dbUser._id;
                     bodyUser.username = dbUser.username;
@@ -103,8 +95,6 @@ class AuthController {
                         throw new Error(`Passwords do not match!`);
                     }
 
-                    console.log('-----------bodyuser');
-                    console.log(bodyUser);
                     return Promise.resolve(bodyUser);
                 }
 
