@@ -33,18 +33,20 @@ class UsersData extends BaseData {
             });
     }
 
-    update(model) {
+    updateUser(model) {
         let newInstance;
 
         try {
             newInstance = initUser(model);
+            console.log(newInstance);
         } catch (error) {
             return Promise.reject(error);
         }
 
         return this._generateHash(newInstance)
             .then((user) => {
-                return this.collection.update(user);
+                console.log(user);
+                return super.updateById(user);
             })
             .then((updated) => {
                 return updated;
@@ -52,27 +54,17 @@ class UsersData extends BaseData {
     }
 
     _generateHash(bodyUser) {
-        const promise = new Promise((res, rej) => {
-            bcrypt.genSalt(10, (err, salt) => {
-                if (err) {
-                    return rej(err);
+        return bcrypt.hash(bodyUser.password, 10)
+            .then((hash) => {
+                bodyUser.passHash = hash;
+                delete bodyUser.password;
+
+                if (bodyUser['repeat-password']) {
+                    delete bodyUser['repeat-password'];
                 }
-                return bcrypt.hash(bodyUser.password, salt, (error, hash) => {
-                    if (err) {
-                        return rej(error);
-                    }
 
-                    bodyUser.passHash = hash;
-                    delete bodyUser.password;
-
-                    if (bodyUser['repeat-password']) {
-                        delete bodyUser['repeat-password'];
-                    }
-                    return res(bodyUser);
-                });
+                return Promise.resolve(bodyUser);
             });
-        });
-        return promise;
     }
 }
 
