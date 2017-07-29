@@ -29,7 +29,7 @@ describe('when there are items in db', () => {
             });
         });
 
-        it('expect to return array of users', () => {
+        it('expect to return user', () => {
             return data.findByUsername(username)
                 .then((models) => {
                     expect(models).to.deep.equal(expected);
@@ -38,24 +38,27 @@ describe('when there are items in db', () => {
     });
 
     describe('users.data create(model)', () => {
-        const model = {};
-        const instance = { one: 1, two: 2, three: 3 };
-        const hash = '$2a$10$c3mgVbBZmwcDBtgmGLTB.uTNCUo3rQBftsuDaQMdXbCgC2jsPzzGy';
+        const user = {
+            'username': 'gosho',
+            'password': 1234,
+            'repeat-password': 1234,
+        };
+
+        const instance = {
+            'username': 'gosho',
+        };
+
         const insert = () => {
             return Promise.resolve(instance);
         };
 
         const newUserMock = () => {
-            return instance;
+            return user;
         };
 
         beforeEach(() => {
             sinon.stub(db, 'collection').callsFake(() => {
                 return { insert };
-            });
-
-            sinon.stub(data, '_generateHash').callsFake(() => {
-                return hash;
             });
 
             UsersData.__set__('initUser', newUserMock);
@@ -67,17 +70,25 @@ describe('when there are items in db', () => {
         });
 
         it('expect to return instance', () => {
-            return data.create(model)
-                .then((models) => {
-                    expect(models).to.deep.equal(instance);
+            return data.create(user)
+                .then((model) => {
+                    expect(model).to.deep.equal(instance);
                 });
         });
     });
 
     describe('users.data create(model)', () => {
-        const model = {};
-        const instance = { one: 1, two: 2, three: 3 };
-        const hash = '$2a$10$c3mgVbBZmwcDBtgmGLTB.uTNCUo3rQBftsuDaQMdXbCgC2jsPzzGy';
+        const user = {
+            'username': 'gosho',
+            'password': 1234,
+            'repeat-password': 1234,
+        };
+
+        const instance = {
+            'username': 'gosho',
+            'passHash': '$2a$10$c3mgVbBZmwcDBtgmGLTB.uTNCUo3rQBftsuDaQMdXbCgC2jsPzzGy',
+        };
+
         const insert = () => {
             return Promise.resolve(instance);
         };
@@ -91,9 +102,9 @@ describe('when there are items in db', () => {
                 return { insert };
             });
 
-            sinon.stub(data, '_generateHash').callsFake(() => {
-                return hash;
-            });
+            // sinon.stub(data, '_generateHash').callsFake(() => {
+            //     return Promise.resolve();
+            // });
 
             UsersData.__set__('initUser', newUserMock);
             data = new UsersData(db);
@@ -104,15 +115,22 @@ describe('when there are items in db', () => {
         });
 
         it('expect to reject when user cretation return error', () => {
-            return expect(data.create(model))
+            return expect(data.create(user))
                 .to.be.rejectedWith('error');
         });
     });
 
     describe('users.data update(model)', () => {
-        const model = {};
-        const instance = { one: 1, two: 2, three: 3 };
-        const hash = '$2a$10$c3mgVbBZmwcDBtgmGLTB.uTNCUo3rQBftsuDaQMdXbCgC2jsPzzGy';
+        const user = {
+            'username': 'gosho',
+            'password': 1234,
+            'repeat-password': 1234,
+        };
+
+        const instance = {
+            'username': 'gosho',
+            'passHash': '$2a$10$c3mgVbBZmwcDBtgmGLTB.uTNCUo3rQBftsuDaQMdXbCgC2jsPzzGy',
+        };
         const update = () => {
             return Promise.resolve(instance);
         };
@@ -126,9 +144,9 @@ describe('when there are items in db', () => {
                 return { update };
             });
 
-            sinon.stub(data, '_generateHash').callsFake(() => {
-                return hash;
-            });
+            // sinon.stub(data, '_generateHash').callsFake(() => {
+            //     return Promise.resolve();
+            // });
 
             UsersData.__set__('initUser', newUserMock);
             data = new UsersData(db);
@@ -139,17 +157,25 @@ describe('when there are items in db', () => {
         });
 
         it('expect to return instance', () => {
-            return data.update(model)
-                .then((models) => {
-                    expect(models).to.deep.equal(instance);
+            return data.update(user)
+                .then((model) => {
+                    expect(model).to.deep.equal(instance);
                 });
         });
     });
 
     describe('users.data update(model)', () => {
-        const model = {};
-        const instance = { one: 1, two: 2, three: 3 };
-        const hash = '$2a$10$c3mgVbBZmwcDBtgmGLTB.uTNCUo3rQBftsuDaQMdXbCgC2jsPzzGy';
+        const user = {
+            'username': 'gosho',
+            'password': 1234,
+            'repeat-password': 1234,
+        };
+
+        const instance = {
+            'username': 'gosho',
+            'passHash': '$2a$10$c3mgVbBZmwcDBtgmGLTB.uTNCUo3rQBftsuDaQMdXbCgC2jsPzzGy',
+        };
+
         const update = () => {
             return Promise.resolve(instance);
         };
@@ -163,9 +189,9 @@ describe('when there are items in db', () => {
                 return { update };
             });
 
-            sinon.stub(data, '_generateHash').callsFake(() => {
-                return hash;
-            });
+            // sinon.stub(data, '_generateHash').callsFake(() => {
+            //     return Promise.resolve();
+            // });
 
             UsersData.__set__('initUser', newUserMock);
             data = new UsersData(db);
@@ -176,8 +202,31 @@ describe('when there are items in db', () => {
         });
 
         it('expect to reject when user cretation return error', () => {
-            return expect(data.update(model))
+            return expect(data.update(user))
                 .to.be.rejectedWith('error');
+        });
+    });
+
+    describe('users.data _generateHash(user)', () => {
+        const user = {
+            'password': 1234,
+            'repeat-password': 1234,
+        };
+
+        const expected = {
+            'passHash': '$2a$10$c3mgVbBZmwcDBtgmGLTB.uTNCUo3rQBftsuDaQMdXbCgC2jsPzzGy',
+        };
+
+        beforeEach(() => {
+            sinon.stub(db, 'collection').callsFake(() => {
+                return Promise.resolve();
+            });
+
+            data = new UsersData(db);
+        });
+
+        it('expect to return correct user with calculated hash', () => {
+            return data._generateHash(user).should.eventually.equal(expected);
         });
     });
 });
