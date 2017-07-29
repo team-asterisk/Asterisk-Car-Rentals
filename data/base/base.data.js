@@ -1,10 +1,10 @@
 const { ObjectID } = require('mongodb');
 
 class BaseMongoDbData {
-    constructor(db, ModelClass, validator) {
+    constructor(db, ModelClass) {
         this.db = db;
         this.ModelClass = ModelClass;
-        this.validator = validator;
+        // this.validator = validator;
         this.collectionName = this._getCollectionName();
         this.collection = this.db.collection(this.collectionName);
     }
@@ -35,20 +35,20 @@ class BaseMongoDbData {
         });
     }
 
-    findOrCreateBy(props) {
-        return this.filterBy(props)
-            .then(([model]) => {
-                if (!model) {
-                    model = {};
-                    return this.collection.insert(model)
-                        .then(() => {
-                            return model;
-                        });
-                }
+    // findOrCreateBy(props) {
+    //     return this.filterBy(props)
+    //         .then(([model]) => {
+    //             if (!model) {
+    //                 model = {};
+    //                 return this.collection.insert(model)
+    //                     .then(() => {
+    //                         return model;
+    //                     });
+    //             }
 
-                return model;
-            });
-    }
+    //             return model;
+    //         });
+    // }
 
     updateById(model) {
         return this.collection.updateOne({
