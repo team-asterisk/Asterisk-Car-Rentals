@@ -8,7 +8,7 @@ describe('when there are items in db', () => {
     const db = { collection: () => {} };
     let data = null;
 
-    describe('Base Data create(model)', () => {
+    describe('Reviews Data create(model)', () => {
         const review = {};
         const user = {};
         const instance = { one: 1, two: 2, three: 3 };
@@ -33,7 +33,7 @@ describe('when there are items in db', () => {
             db.collection.restore();
         });
 
-        it('expect to return model', () => {
+        it('expect to return instance', () => {
             return data.create(review, user)
                 .then((models) => {
                     expect(models).to.deep.equal(instance);
