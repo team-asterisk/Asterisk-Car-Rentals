@@ -1,6 +1,8 @@
 const BaseData = require('../base/base.data');
-const Car = require('../../models/car.model');
-const Comment = require('../../models/comment.model');
+const Car = require('../../models/car.model').Car;
+let initCar = require('../../models/car.model').initCar;
+const Comment = require('../../models/comment.model').Comment;
+let initComment = require('../../models/comment.model').initComment;
 const { ObjectID } = require('mongodb');
 
 class CarsData extends BaseData {
@@ -18,7 +20,7 @@ class CarsData extends BaseData {
         let newInstance;
 
         try {
-            newInstance = new Car(car, photoLink);
+            newInstance = initCar(car, photoLink);
         } catch (error) {
             return Promise.reject(error);
         }
@@ -33,7 +35,7 @@ class CarsData extends BaseData {
         let newInstance;
 
         try {
-            newInstance = new Comment(comment, user);
+            newInstance = initComment(comment, user);
         } catch (error) {
             return Promise.reject(error);
         }
