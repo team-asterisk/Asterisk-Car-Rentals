@@ -1,10 +1,12 @@
 const BaseData = require('../base/base.data');
-const User = require('../../models/user.model');
+const User = require('../../models/user.model').User;
+// eslint-disable-next-line prefer-const
+let initUser = require('../../models/user.model').initUser;
 const bcrypt = require('bcrypt');
 
 class UsersData extends BaseData {
     constructor(db) {
-        super(db, User, User);
+        super(db, User);
     }
 
     findByUsername(username) {
@@ -17,7 +19,7 @@ class UsersData extends BaseData {
         let newInstance;
 
         try {
-            newInstance = new User(model);
+            newInstance = initUser(model);
         } catch (error) {
             return Promise.reject(error);
         }
@@ -35,7 +37,7 @@ class UsersData extends BaseData {
         let newInstance;
 
         try {
-            newInstance = new User(model);
+            newInstance = initUser(model);
         } catch (error) {
             return Promise.reject(error);
         }
