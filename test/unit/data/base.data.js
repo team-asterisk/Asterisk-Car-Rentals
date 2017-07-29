@@ -1,7 +1,7 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const BaseData = require('../../../../data/base/base.data');
+const BaseData = require('../../../data/base/base.data');
 
 describe('when there are items in db', () => {
     const db = { collection: () => {} };
