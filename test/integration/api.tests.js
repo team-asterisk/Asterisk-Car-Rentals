@@ -1,7 +1,7 @@
 const request = require('supertest');
 const expect = require('chai').expect;
 
-describe('/API tests', () => {
+describe('-- API tests --', () => {
     const connectionString = 'mongodb://localhost/car-rentals-db-tests';
     let app = null;
 

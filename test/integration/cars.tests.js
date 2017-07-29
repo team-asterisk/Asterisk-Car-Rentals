@@ -1,7 +1,7 @@
 const request = require('supertest');
 const expect = require('chai').expect;
 
-describe('/API tests', () => {
+describe('-- Cars tests --', () => {
     const connectionString = 'mongodb://localhost/car-rentals-db-tests';
     let app = null;
 
@@ -87,10 +87,10 @@ describe('/API tests', () => {
                 .expect('Location', '/401')
                 .end((err, res) => {
                     if (err) {
-                        return done(err);
+                        done(err);
                     }
 
-                    return done();
+                    done();
                 });
         });
     });
