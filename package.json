@@ -6,7 +6,8 @@
     "scripts": {
         "start": "gulp server",
         "dev": "gulp dev",
-        "test": "./node_modules/.bin/mocha test/**/*.js",
+        "test": "./node_modules/.bin/mocha test/integration/**/*.js",
+        "unit": "./node_modules/.bin/mocha test/unit/**/*.js",
         "cover": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha ./test/unit/**/*.js"
     },
     "repository": {

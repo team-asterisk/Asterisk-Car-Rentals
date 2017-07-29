@@ -33,7 +33,7 @@ describe('when there are items in db', () => {
             db.collection.restore();
         });
 
-        it('expect to return model', () => {
+        it('expect to return instamce', () => {
             return data.create(car, link)
                 .then((models) => {
                     expect(models).to.deep.equal(instance);
