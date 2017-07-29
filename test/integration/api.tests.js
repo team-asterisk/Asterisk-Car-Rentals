@@ -23,10 +23,10 @@ describe('-- API tests --', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) {
-                        return done(err);
+                        done(err);
                     }
 
-                    return done();
+                    done();
                 });
         });
     });
@@ -39,10 +39,10 @@ describe('-- API tests --', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) {
-                        return done(err);
+                        done(err);
                     }
 
-                    return done();
+                    done();
                 });
         });
     });
@@ -55,10 +55,10 @@ describe('-- API tests --', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) {
-                        return done(err);
+                        done(err);
                     }
 
-                    return done();
+                    done();
                 });
         });
     });
@@ -71,10 +71,10 @@ describe('-- API tests --', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) {
-                        return done(err);
+                        done(err);
                     }
 
-                    return done();
+                    done();
                 });
         });
     });
@@ -87,10 +87,10 @@ describe('-- API tests --', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) {
-                        return done(err);
+                        done(err);
                     }
 
-                    return done();
+                    done();
                 });
         });
     });
