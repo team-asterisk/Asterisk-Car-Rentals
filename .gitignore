@@ -7,7 +7,6 @@
 *.userosscache
 *.sln.docstates
 config/config.js
-coverage/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -199,3 +198,8 @@ FakesAssemblies/
 
 # Visual Studio 6 workspace options file
 *.opt
+coverage/lcov-report/base/index.html
+coverage/coverage.json
+coverage/lcov.info
+coverage/lcov-report/index.html
+coverage/lcov-report/base/base.data.js.html
