@@ -20,9 +20,9 @@ class BaseMongoDbData {
     }
 
     create(model) {
-        if (!this._isModelValid(model)) {
-            return Promise.reject('Validation failed!');
-        }
+        // if (!this._isModelValid(model)) {
+        //     return Promise.reject('Validation failed!');
+        // }
         return this.collection.insert(model)
             .then(() => {
                 return model;
@@ -56,14 +56,14 @@ class BaseMongoDbData {
         }, model);
     }
 
-    _isModelValid(model) {
-        if ('undefined' === typeof this.validator ||
-            'function' !== typeof this.validator.isValid) {
-            return true;
-        }
+    // _isModelValid(model) {
+    //     if ('undefined' === typeof this.validator ||
+    //         'function' !== typeof this.validator.isValid) {
+    //         return true;
+    //     }
 
-        return this.validator.isValid(model);
-    }
+    //     return this.validator.isValid(model);
+    // }
 
     _getCollectionName() {
         return this.ModelClass.name.toLowerCase() + 's';
