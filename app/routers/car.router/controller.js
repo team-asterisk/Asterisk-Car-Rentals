@@ -39,7 +39,7 @@ class CarController {
             .then((cars) => {
                 return res.render('./public/category', {
                     context: cars,
-                    category: req.params.id,
+                    category: req.params.category,
                     req: req,
                 });
             });
