@@ -1,5 +1,4 @@
-const validator = require('../utils').validator;
-const size = require('../utils').constants.size;
+const { validator } = require('../utils/validator');
 const convert = require('../utils/inputConverter').convert;
 
 class Review {
@@ -18,12 +17,11 @@ class Review {
     }
 
     set _author(value) {
-        const name = convert(value);
-        if (validator.validateString(name, size.MIN_NAME, size.MAX_NAME)) {
-            this.author = name;
-        } else {
-            throw new Error('Invalid author');
-        }
+        const usernameVal = convert(value);
+        validator.validateIfUndefinedOrNull(usernameVal, 'Username');
+        validator.validateUsername(usernameVal);
+        validator.validateIfEmptyString(usernameVal, 'Username');
+        this.author = usernameVal;
     }
 
     get _content() {
@@ -32,11 +30,10 @@ class Review {
 
     set _content(value) {
         const text = convert(value);
-        if (validator.validateString(text, size.MIN_TEXT, size.MAX_TEXT)) {
-            this.content = text;
-        } else {
-            throw new Error('Invalid content');
-        }
+        validator.validateIfUndefinedOrNull(text, 'Review');
+        validator.validateTypeOf(text, 'Review', 'string');
+        validator.validateIfEmptyString(text, 'Review');
+        this.content = text;
     }
 
     get _rating() {
@@ -45,8 +42,11 @@ class Review {
 
     set _rating(value) {
         const rating = parseInt(value, 10);
-        if (typeof rating !== 'number' || (rating < 0 && rating > 5)) {
-            throw new Error('Invalid rating');
+        validator.validateIfUndefinedOrNull(rating, 'Rating');
+        validator.validateIfNumber(rating, 'Rating');
+        validator.validateIfEmptyString(rating, 'Rating');
+        if (rating < 1 || rating > 5) {
+            throw new Error('Invalid Rating');
         }
         this.rating = rating;
     }
