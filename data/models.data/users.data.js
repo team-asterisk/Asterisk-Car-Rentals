@@ -2,7 +2,8 @@ const BaseData = require('../base/base.data');
 const User = require('../../models/user.model').User;
 // eslint-disable-next-line prefer-const
 let initUser = require('../../models/user.model').initUser;
-const bcrypt = require('bcrypt');
+// eslint-disable-next-line prefer-const
+let generateHash = require('./users.hash.generator');
 
 class UsersData extends BaseData {
     constructor(db) {
@@ -24,7 +25,7 @@ class UsersData extends BaseData {
             return Promise.reject(error);
         }
 
-        return this._generateHash(newInstance)
+        return generateHash(newInstance)
             .then((user) => {
                 return this.collection.insert(user);
             })
@@ -33,7 +34,7 @@ class UsersData extends BaseData {
             });
     }
 
-    update(model) {
+    updateUser(model) {
         let newInstance;
 
         try {
@@ -42,37 +43,15 @@ class UsersData extends BaseData {
             return Promise.reject(error);
         }
 
-        return this._generateHash(newInstance)
+        return generateHash(newInstance)
             .then((user) => {
-                return this.collection.update(user);
+                return this.collection.updateOne({
+                    _id: user._id,
+                }, user);
             })
             .then((updated) => {
                 return updated;
             });
-    }
-
-    _generateHash(bodyUser) {
-        const promise = new Promise((res, rej) => {
-            bcrypt.genSalt(10, (err, salt) => {
-                if (err) {
-                    return rej(err);
-                }
-                return bcrypt.hash(bodyUser.password, salt, (error, hash) => {
-                    if (err) {
-                        return rej(error);
-                    }
-
-                    bodyUser.passHash = hash;
-                    delete bodyUser.password;
-
-                    if (bodyUser['repeat-password']) {
-                        delete bodyUser['repeat-password'];
-                    }
-                    return res(bodyUser);
-                });
-            });
-        });
-        return promise;
     }
 }
 

@@ -36,7 +36,7 @@ class AuthController {
         const reqUser = req.user;
         return this._updateUserProperties(reqUser, bodyUser)
             .then((user) => {
-                return this.data.users.updateById(user);
+                return this.data.users.updateUser(user);
             })
             .then((dbUser) => {
                 return res.status(200).redirect('/');
@@ -94,6 +94,7 @@ class AuthController {
                     if (bodyUser.password !== bodyUser['repeat-password']) {
                         throw new Error(`Passwords do not match!`);
                     }
+
                     return Promise.resolve(bodyUser);
                 }
 

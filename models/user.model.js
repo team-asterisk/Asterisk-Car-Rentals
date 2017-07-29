@@ -3,6 +3,7 @@ const { validator } = require('../utils/validator');
 
 class User {
     constructor(model) {
+        this.id = model._id;
         this._name = model.name;
         this._username = model.username;
         this._password = model.password;
@@ -14,6 +15,10 @@ class User {
 
     get id() {
         return this._id;
+    }
+
+    set id(value) {
+        this._id = value;
     }
 
     get _name() {
