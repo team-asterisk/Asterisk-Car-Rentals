@@ -21,7 +21,7 @@ describe('when there are items in db', () => {
         return Promise.resolve(items);
     };
 
-    describe('Base Data getAll()', () => {
+    describe('base.data getAll()', () => {
         beforeEach(() => {
             const find = () => {
                 return { toArray };
@@ -46,7 +46,7 @@ describe('when there are items in db', () => {
         });
     });
 
-    describe('Base Data filterBy(props)', () => {
+    describe('base.data filterBy(props)', () => {
         const filterProps = {};
 
         beforeEach(() => {
@@ -73,7 +73,7 @@ describe('when there are items in db', () => {
         });
     });
 
-    describe('Base Data filterBy(props)', () => {
+    describe('base.data filterBy(props)', () => {
         const findOne = () => {
             return Promise.resolve(items);
         };
@@ -99,7 +99,7 @@ describe('when there are items in db', () => {
         });
     });
 
-    describe('Base Data updateById(model)', () => {
+    describe('base.data updateById(model)', () => {
         const updateOne = () => {
             return Promise.resolve(model);
         };
@@ -125,7 +125,7 @@ describe('when there are items in db', () => {
         });
     });
 
-    describe('Base Data create(model)', () => {
+    describe('base.data create(model)', () => {
         const insert = () => {
             return Promise.resolve(model);
         };

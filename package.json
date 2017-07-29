@@ -53,6 +53,7 @@
     "devDependencies": {
         "babel-eslint": "^7.2.3",
         "chai": "^4.0.2",
+        "chai-as-promised": "^7.1.1",
         "eslint": "^4.2.0",
         "eslint-config-google": "^0.9.1",
         "gulp": "^3.9.1",
