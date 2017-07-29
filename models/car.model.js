@@ -215,4 +215,9 @@ class Car {
     }
 }
 
-module.exports = Car;
+
+const initCar = (model, photoLink) => {
+    return new Car(model, photoLink);
+};
+
+module.exports = { Car, initCar };
