@@ -108,4 +108,76 @@ describe('when there are items in db', () => {
                 .to.be.rejectedWith('error');
         });
     });
+
+    describe('users.data update(model)', () => {
+        const model = {};
+        const instance = { one: 1, two: 2, three: 3 };
+        const hash = '$2a$10$c3mgVbBZmwcDBtgmGLTB.uTNCUo3rQBftsuDaQMdXbCgC2jsPzzGy';
+        const update = () => {
+            return Promise.resolve(instance);
+        };
+
+        const newUserMock = () => {
+            return instance;
+        };
+
+        beforeEach(() => {
+            sinon.stub(db, 'collection').callsFake(() => {
+                return { update };
+            });
+
+            sinon.stub(data, '_generateHash').callsFake(() => {
+                return hash;
+            });
+
+            UsersData.__set__('initUser', newUserMock);
+            data = new UsersData(db);
+        });
+
+        afterEach(() => {
+            db.collection.restore();
+        });
+
+        it('expect to return instance', () => {
+            return data.update(model)
+                .then((models) => {
+                    expect(models).to.deep.equal(instance);
+                });
+        });
+    });
+
+    describe('users.data update(model)', () => {
+        const model = {};
+        const instance = { one: 1, two: 2, three: 3 };
+        const hash = '$2a$10$c3mgVbBZmwcDBtgmGLTB.uTNCUo3rQBftsuDaQMdXbCgC2jsPzzGy';
+        const update = () => {
+            return Promise.resolve(instance);
+        };
+
+        const newUserMock = () => {
+            throw new Error('error');
+        };
+
+        beforeEach(() => {
+            sinon.stub(db, 'collection').callsFake(() => {
+                return { update };
+            });
+
+            sinon.stub(data, '_generateHash').callsFake(() => {
+                return hash;
+            });
+
+            UsersData.__set__('initUser', newUserMock);
+            data = new UsersData(db);
+        });
+
+        afterEach(() => {
+            db.collection.restore();
+        });
+
+        it('expect to reject when user cretation return error', () => {
+            return expect(data.update(model))
+                .to.be.rejectedWith('error');
+        });
+    });
 });
