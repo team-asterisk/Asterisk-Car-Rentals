@@ -1,92 +1,70 @@
-function validateString(str, min, max, chars) {
-    if (typeof str !== 'string' || str.length < min || str.length > max) {
-        throw new Error(`Invalid text: Length must be between ${min} and ${max}`);
-    }
+const validator = {
+    validateTypeOf: (value, property, type) => {
+        if (typeof value !== type) {
+            throw new Error(property + ' is not of type ' + type);
+        }
+    },
+    validateIfEmptyString: (value, property) => {
+        if (value === '') {
+            throw new Error(property + ' is Empty');
+        }
+    },
+    validateIfNumber: (value, property) => {
+        if (Number.isNaN(Number(value))) {
+            throw new Error(property + ' is not a Number');
+        }
+    },
+    validateImageExtension: (image) => {
+        if (!image || image.length === 0) {
+            throw new Error('Invalid image: Only JPG, PNG, Gif and BMP is allowed');
+        }
 
-    // can add chars as parameter optionally
-    if (chars) {
-        str = str.split('');
-        if (str.some((char) => {
-                return chars.indexOf(char) < 0;
-            })) {
-            throw new Error(`Invalid username: Chars can be ${chars}`);
+        const pattern = /\.(jpe?g|png|gif|bmp)$/;
+
+        if (!pattern.test(image)) {
+            throw new Error('Invalid image: Please upload image with correct extension');
+        }
+    },
+    validateUrl: (url) => {
+        if (!url || url.length === 0) {
+            throw new Error('Invalid url');
+        }
+        // copied from http://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-an-url#answer-5717133
+        const pattern = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
+
+        if (!pattern.test(url)) {
+            throw new Error('Invalid url');
+        }
+    },
+    validateIfUndefinedOrNull: (value, property) => {
+        if (typeof value === 'undefined' || value === null) {
+            throw new Error(property + ' is undefined or null');
+        }
+    },
+    validateEmail: (email) => {
+        const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!regex.test(email)) {
+            throw new Error('Invalid Email');
+        }
+    },
+    validatePhone: (phone) => {
+        const regex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+        if (!regex.test(phone)) {
+            throw new Error('Invalid Phone');
+        }
+    },
+    validatePassword: (password) => {
+        const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/;
+        if (!regex.test(password)) {
+            throw new Error('Password has to be Minimum 4 characters at least 1 Alphabet and 1 Number');
+        }
+    },
+    validateUsername: (username) => {
+        const regex = /^[A-Za-z0-9_-]*[A-Za-z0-9][A-Za-z0-9_-]{3,}$/;
+        if (!regex.test(username)) {
+            throw new Error('Username must be at least 4 symbols and all should be valid');
         }
     }
-
-    return true;
-}
-
-function validateEmail(email) {
-    if (!email || email.length === 0) {
-        throw new Error('Invalid email: Email cannot be empty');
-    }
-
-    // copied from http://emailregex.com/
-    const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    if (!pattern.test(email)) {
-        throw new Error('Invalid email: Please use name@url.ext pattern');
-    }
-
-    return true;
-}
-
-function validateImageExtension(image) {
-    if (!image || image.length === 0) {
-        throw new Error('Invalid image: Only JPG and PNG is allowed');
-    }
-
-    const pattern = /\.(jpe?g|png|gif|bmp)$/;
-
-    if (!pattern.test(image)) {
-        throw new Error('Invalid image: Please upload image with correct extension');
-    }
-
-    return true;
-}
-
-function validateUrl(url) {
-    if (!url || url.length === 0) {
-        throw new Error('Invalid url');
-    }
-    // copied from http://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-an-url#answer-5717133
-    const pattern = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
-
-    if (!pattern.test(url)) {
-        throw new Error('Invalid url');
-    }
-
-    return true;
-}
-
-function validatePhone(phone) {
-    if (!phone || phone.length === 0) {
-        throw new Error('Invalid phone');
-    }
-
-    const pattern = /([0-9-\.\+\(\)\s])+/;
-
-    if (!pattern.test(phone)) {
-        throw new Error('Invalid phone');
-    }
-
-    return true;
-}
-
-function validatePassword(password) {
-    if (typeof password !== 'string' || password.length === 0) {
-        const message = 'Invalid password: Password cannot be empty!';
-        throw new Error(message);
-    }
-
-    return true;
-}
-
-module.exports = {
-    validateString,
-    validateEmail,
-    validateUrl,
-    validatePhone,
-    validatePassword,
-    validateImageExtension,
 };
+
+module.exports = { validator };

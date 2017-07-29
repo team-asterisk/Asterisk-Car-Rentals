@@ -1,6 +1,5 @@
-const validator = require('../utils').validator;
-const size = require('../utils').constants.size;
 const convert = require('../utils/inputConverter').convert;
+const { validator } = require('../utils/validator');
 
 class User {
     constructor(model) {
@@ -28,11 +27,10 @@ class User {
 
     set _name(value) {
         const nameVal = convert(value);
-        if (validator.validateString(nameVal, size.MIN_NAME, size.MAX_NAME)) {
-            this.name = nameVal;
-        } else {
-            throw new Error('Invalid name');
-        }
+        validator.validateIfUndefinedOrNull(nameVal, 'Name');
+        validator.validateTypeOf(nameVal, 'Name', 'string');
+        validator.validateIfEmptyString(nameVal, 'Name');
+        this.name = nameVal;
     }
 
     get _username() {
@@ -41,11 +39,11 @@ class User {
 
     set _username(value) {
         const usernameVal = convert(value);
-        if (validator.validateString(usernameVal, size.MIN_NAME, size.MAX_NAME)) {
-            this.username = usernameVal;
-        } else {
-            throw new Error('Invalid username');
-        }
+        validator.validateIfUndefinedOrNull(usernameVal, 'Username');
+        validator.validateUsername(usernameVal);
+        validator.validateIfEmptyString(usernameVal, 'Username');
+        this.username = usernameVal;
+        
     }
 
     get _password() {
@@ -54,11 +52,10 @@ class User {
 
     set _password(value) {
         const passwordVal = convert(value);
-        if (validator.validatePassword(passwordVal)) {
-            this.password = passwordVal;
-        } else {
-            throw new Error('Invalid password');
-        }
+        validator.validateIfUndefinedOrNull(passwordVal, 'Password');
+        validator.validatePassword(passwordVal);
+        validator.validateIfEmptyString(passwordVal, 'Password');
+        this.password = passwordVal;
     }
 
     get _phone() {
@@ -67,11 +64,10 @@ class User {
 
     set _phone(value) {
         const phoneVal = convert(value);
-        if (validator.validatePhone(phoneVal)) {
-            this.phone = phoneVal;
-        } else {
-            throw new Error('Invalid phone number');
-        }
+        validator.validateIfUndefinedOrNull(phoneVal, 'Phone');
+        validator.validatePhone(phoneVal);
+        validator.validateIfEmptyString(phoneVal, 'Phone');
+        this.phone = phoneVal;
     }
 
     get _email() {
@@ -80,11 +76,10 @@ class User {
 
     set _email(value) {
         const emailVal = convert(value);
-        if (validator.validatePhone(emailVal)) {
-            this.email = emailVal;
-        } else {
-            throw new Error('Invalid email');
-        }
+        validator.validateIfUndefinedOrNull(emailVal, 'Email');
+        validator.validateEmail(emailVal);
+        validator.validateIfEmptyString(emailVal, 'Email');
+        this.email = emailVal;
     }
 
     get _role() {
