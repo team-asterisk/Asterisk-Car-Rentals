@@ -6,7 +6,6 @@ const BaseData = require('../../../../data/base/base.data');
 describe('Base Data getAll()', () => {
     const db = { collection: () => {} };
     let ModelClass = null;
-    const validator = null;
     let data = null;
 
     let items = [];
@@ -24,7 +23,7 @@ describe('Base Data getAll()', () => {
                 return { find };
             });
             ModelClass = class Test {};
-            data = new BaseData(db, ModelClass, validator);
+            data = new BaseData(db, ModelClass);
         });
 
         afterEach(() => {
