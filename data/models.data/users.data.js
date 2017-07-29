@@ -2,7 +2,8 @@ const BaseData = require('../base/base.data');
 const User = require('../../models/user.model').User;
 // eslint-disable-next-line prefer-const
 let initUser = require('../../models/user.model').initUser;
-const bcrypt = require('bcrypt');
+// eslint-disable-next-line prefer-const
+let generateHash = require('./users.hash.generator');
 
 class UsersData extends BaseData {
     constructor(db) {
@@ -24,7 +25,7 @@ class UsersData extends BaseData {
             return Promise.reject(error);
         }
 
-        return this._generateHash(newInstance)
+        return generateHash(newInstance)
             .then((user) => {
                 return this.collection.insert(user);
             })
@@ -38,32 +39,18 @@ class UsersData extends BaseData {
 
         try {
             newInstance = initUser(model);
-            console.log(newInstance);
         } catch (error) {
             return Promise.reject(error);
         }
 
-        return this._generateHash(newInstance)
+        return generateHash(newInstance)
             .then((user) => {
-                console.log(user);
-                return super.updateById(user);
+                return this.collection.updateOne({
+                    _id: user._id,
+                }, user);
             })
             .then((updated) => {
                 return updated;
-            });
-    }
-
-    _generateHash(bodyUser) {
-        return bcrypt.hash(bodyUser.password, 10)
-            .then((hash) => {
-                bodyUser.passHash = hash;
-                delete bodyUser.password;
-
-                if (bodyUser['repeat-password']) {
-                    delete bodyUser['repeat-password'];
-                }
-
-                return Promise.resolve(bodyUser);
             });
     }
 }
