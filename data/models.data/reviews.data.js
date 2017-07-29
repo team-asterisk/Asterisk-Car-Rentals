@@ -1,4 +1,5 @@
 const BaseData = require('../base/base.data');
+// eslint-disable-next-line prefer-const
 let initReview = require('../../models/review.model').initReview;
 const Review = require('../../models/review.model').Review;
 
