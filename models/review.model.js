@@ -52,4 +52,8 @@ class Review {
     }
 }
 
-module.exports = Review;
+const initReview = (model, user) => {
+    return new Review(model, user);
+};
+
+module.exports = { Review, initReview };
