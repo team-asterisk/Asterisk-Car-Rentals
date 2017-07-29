@@ -11,9 +11,6 @@ describe('Review Model tests', () => {
     let validatorTypeOfStub;
     let validatorIfEmptyStringStub;
     let validatorIfUndefinedOrNullStub;
-    let validatorEmailStub;
-    let validatorPhoneStub;
-    let validatorPasswordStub;
     let validatorUsernameStub;
     let validatorIfNumberStub;
 
@@ -21,9 +18,6 @@ describe('Review Model tests', () => {
         validatorTypeOfStub = sinon.stub(validator, 'validateTypeOf');
         validatorIfEmptyStringStub = sinon.stub(validator, 'validateIfEmptyString');
         validatorIfUndefinedOrNullStub = sinon.stub(validator, 'validateIfUndefinedOrNull');
-        validatorEmailStub = sinon.stub(validator, 'validateEmail');
-        validatorPhoneStub = sinon.stub(validator, 'validatePhone');
-        validatorPasswordStub = sinon.stub(validator, 'validatePassword');
         validatorUsernameStub = sinon.stub(validator, 'validateUsername');
         validatorIfNumberStub = sinon.stub(validator, 'validateIfNumber');
     });
@@ -32,9 +26,6 @@ describe('Review Model tests', () => {
         validatorTypeOfStub.restore();
         validatorIfEmptyStringStub.restore();
         validatorIfUndefinedOrNullStub.restore();
-        validatorEmailStub.restore();
-        validatorPhoneStub.restore();
-        validatorPasswordStub.restore();
         validatorUsernameStub.restore();
         validatorIfNumberStub.restore();
     });
