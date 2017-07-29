@@ -1,5 +1,4 @@
-const validator = require('../utils').validator;
-const size = require('../utils').constants.size;
+const { validator } = require('../utils/validator');
 const convert = require('../utils/inputConverter').convert;
 
 class Comment {
@@ -17,12 +16,11 @@ class Comment {
     }
 
     set _author(value) {
-        const name = convert(value);
-        if (validator.validateString(name, size.MIN_NAME, size.MAX_NAME)) {
-            this.author = name;
-        } else {
-            throw new Error('Invalid author');
-        }
+        const usernameVal = convert(value);
+        validator.validateIfUndefinedOrNull(usernameVal, 'Username');
+        validator.validateUsername(usernameVal);
+        validator.validateIfEmptyString(usernameVal, 'Username');
+        this.author = usernameVal;
     }
 
     get _content() {
@@ -31,11 +29,10 @@ class Comment {
 
     set _content(value) {
         const text = convert(value);
-        if (validator.validateString(text, size.MIN_TEXT, size.MAX_TEXT)) {
-            this.content = text;
-        } else {
-            throw new Error('Invalid content');
-        }
+        validator.validateIfUndefinedOrNull(text, 'Comment');
+        validator.validateTypeOf(text, 'Comment', 'string');
+        validator.validateIfEmptyString(text, 'Comment');
+        this.content = text;
     }
 }
 
