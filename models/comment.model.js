@@ -39,4 +39,8 @@ class Comment {
     }
 }
 
-module.exports = Comment;
+const initComment = (model, user) => {
+    return new Comment(model, user);
+};
+
+module.exports = { Comment, initComment };
