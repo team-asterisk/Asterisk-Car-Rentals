@@ -18,26 +18,24 @@ describe('Base Data getAll()', () => {
     };
 
     describe('when there are items in db', () => {
-        describe('with default toViewModel', () => {
-            beforeEach(() => {
-                items = ['item one', 'item two', 'item three'];
-                sinon.stub(db, 'collection').callsFake(() => {
-                    return { find };
+        beforeEach(() => {
+            items = ['item one', 'item two', 'item three'];
+            sinon.stub(db, 'collection').callsFake(() => {
+                return { find };
+            });
+            ModelClass = class Test {};
+            data = new BaseData(db, ModelClass, validator);
+        });
+
+        afterEach(() => {
+            db.collection.restore();
+        });
+
+        it('expect to return items', () => {
+            return data.getAll()
+                .then((models) => {
+                    expect(models).to.deep.equal(items);
                 });
-                ModelClass = class Test {};
-                data = new BaseData(db, ModelClass, validator);
-            });
-
-            afterEach(() => {
-                db.collection.restore();
-            });
-
-            it('expect to return items', () => {
-                return data.getAll()
-                    .then((models) => {
-                        expect(models).to.deep.equal(items);
-                    });
-            });
         });
     });
 });
