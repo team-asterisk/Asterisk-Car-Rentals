@@ -33,7 +33,7 @@ function validateEmail(email) {
 
 function validateImageExtension(image) {
     if (!image || image.length === 0) {
-        throw new Error('Invalid image: Only JPG and PNG is allowed');
+        throw new Error('Invalid image: Only JPG, PNG, Gif and BMP is allowed');
     }
 
     const pattern = /\.(jpe?g|png|gif|bmp)$/;
@@ -64,7 +64,7 @@ function validatePhone(phone) {
         throw new Error('Invalid phone');
     }
 
-    const pattern = /([0-9-\.\+\(\)\s])+/;
+    const pattern = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
 
     if (!pattern.test(phone)) {
         throw new Error('Invalid phone');
@@ -74,11 +74,11 @@ function validatePhone(phone) {
 }
 
 function validatePassword(password) {
-    if (typeof password !== 'string' || password.length === 0) {
-        const message = 'Invalid password: Password cannot be empty!';
+    if (typeof password === 'undefined' || password.length <= 3 ) {
+        const message = 'Invalid password: Password cannot be shorter than 3 symbols!';
         throw new Error(message);
     }
-
+    
     return true;
 }
 
