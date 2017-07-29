@@ -23,25 +23,42 @@ describe('-- Other routes tests --', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) {
-                        return done(err);
+                        done(err);
                     }
 
-                    return done();
+                    done();
                 });
         });
     });
 
+    // describe('POST /auth/login', () => {
+    //     it('expect to return 200', (done) => {
+    //         request(app)
+    //             .post('/auth/login')
+    //             .expect('Content-type', /html/)
+    //             .send({ username: 'cecee', password: 'cecee05' })
+    //             .expect(200)
+    //             .end((err, res) => {
+    //                 if (err) {
+    //                     done(err);
+    //                 }
+
+    //                 done();
+    //             });
+    //     });
+    // });
+
     describe('GET /MissingRoute', () => {
-        it('should return 404', function(done) {
+        it('should return 404', (done) => {
             request(app)
                 .get('/random')
                 .expect(404)
                 .end((err, res) => {
                     if (err) {
-                        return done(err);
+                        done(err);
                     }
 
-                    return done();
+                    done();
                 });
         });
     });
