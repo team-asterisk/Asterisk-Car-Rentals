@@ -1,5 +1,8 @@
 extends ../_shared/_master
 
+block title
+    | Car Rentals - Deals
+
 block main
     #main
         .container
@@ -38,3 +41,6 @@ block main
                                                     = 'Get this deal - Save ' + saving + '%'
                                             span.car-image
                                                 img(src=car.carphotolink)
+                else
+                    .row
+                        .col-xs-12 There are no deals at this moment.

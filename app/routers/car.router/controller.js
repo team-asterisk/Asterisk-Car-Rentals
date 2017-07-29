@@ -10,6 +10,13 @@ class CarController {
     getEditCarById(req, res) {
         Promise.resolve(this.data.cars.findById(req.params.id))
             .then((car) => {
+                if (!car) {
+                    return res.status(404).send({
+                        status: 404,
+                        msg: 'car not found',
+                    });
+                }
+
                 return res.render('auth/admin/editcar', {
                     car,
                     req: req,
@@ -32,7 +39,7 @@ class CarController {
             .then((cars) => {
                 return res.render('./public/category', {
                     context: cars,
-                    category: req.params.id,
+                    category: req.params.category,
                     req: req,
                 });
             });
@@ -51,6 +58,12 @@ class CarController {
     getSingleCar(req, res) {
         Promise.resolve(this.data.cars.findById(req.params.id))
             .then((car) => {
+                if (!car) {
+                    return res.status(404).send({
+                        status: 404,
+                        msg: 'car not found',
+                    });
+                }
                 return res.render('./public/car-details', {
                         car,
                     req: req,

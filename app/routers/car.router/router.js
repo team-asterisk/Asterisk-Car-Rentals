@@ -28,9 +28,6 @@ const attachTo = (app, data) => {
         .get('/cars/:category', (req, res) => {
             return controller.getCarsFromCategory(req, res);
         })
-        // .get('/searchcars', (req, res) => {
-        //     return res.render('./public/search-cars');
-        // })
         .get('/deals', (req, res) => {
             return controller.getAllDeals(req, res);
         });
