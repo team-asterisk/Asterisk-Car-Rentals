@@ -6,23 +6,25 @@ const generateHash = require('../../../data/models.data/users.hash.generator');
 
 describe('when correct user provided', () => {
     describe('users.hash.generator(user)', () => {
-        const user = {
-            'password': '1234',
-            'repeat-password': '1234',
-        };
+        let user = {};
 
-        const expected = {
-            'passHash': '$2a$10$c3mgVbBZmwcDBtgmGLTB.uTNCUo3rQBftsuDaQMdXbCgC2jsPzzGy',
-        };
-
-        // it('expect to return correct user with calculated hash', () => {
-        //     return generateHash(user).should.eventually.equal(expected);
-        // });
+        beforeEach(() => {
+            user = {
+                'password': '1234',
+                'repeat-password': '1234',
+            };
+        });
 
         it('expect to return correct user with calculated hash', () => {
             return generateHash(user)
                 .then((newUser) => {
                     expect(newUser).have.property('passHash');
+                });
+        });
+
+        it('expect to return correct hash length', () => {
+            return generateHash(user)
+                .then((newUser) => {
                     expect(newUser.passHash).to.have.length(60);
                 });
         });
