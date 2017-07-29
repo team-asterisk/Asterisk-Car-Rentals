@@ -15,17 +15,10 @@ describe('when there are items in db', () => {
     // tested methods parameters
     const id = '597acb4930c4971364beae60';
     let model = {};
-    const filterProps = {};
 
     // chain methods definition
     const toArray = () => {
         return Promise.resolve(items);
-    };
-    const findOne = () => {
-        return Promise.resolve(items);
-    };
-    const updateOne = () => {
-        return Promise.resolve(model);
     };
 
     describe('Base Data getAll()', () => {
@@ -54,6 +47,8 @@ describe('when there are items in db', () => {
     });
 
     describe('Base Data filterBy(props)', () => {
+        const filterProps = {};
+
         beforeEach(() => {
             const find = () => {
                 return { toArray };
@@ -79,6 +74,10 @@ describe('when there are items in db', () => {
     });
 
     describe('Base Data filterBy(props)', () => {
+        const findOne = () => {
+            return Promise.resolve(items);
+        };
+
         beforeEach(() => {
             items = ['item one', 'item two', 'item three'];
             sinon.stub(db, 'collection').callsFake(() => {
@@ -101,6 +100,10 @@ describe('when there are items in db', () => {
     });
 
     describe('Base Data updateById(model)', () => {
+        const updateOne = () => {
+            return Promise.resolve(model);
+        };
+
         beforeEach(() => {
             model = { _id: id, one: 1, two: 2, three: 3 };
             sinon.stub(db, 'collection').callsFake(() => {
@@ -116,6 +119,32 @@ describe('when there are items in db', () => {
 
         it('expect to return model', () => {
             return data.updateById(model)
+                .then((models) => {
+                    expect(models).to.deep.equal(model);
+                });
+        });
+    });
+
+    describe('Base Data create(model)', () => {
+        const insert = () => {
+            return Promise.resolve(model);
+        };
+
+        beforeEach(() => {
+            model = { _id: id, one: 1, two: 2, three: 3 };
+            sinon.stub(db, 'collection').callsFake(() => {
+                return { insert };
+            });
+            ModelClass = class Test {};
+            data = new BaseData(db, ModelClass);
+        });
+
+        afterEach(() => {
+            db.collection.restore();
+        });
+
+        it('expect to return model', () => {
+            return data.create(model)
                 .then((models) => {
                     expect(models).to.deep.equal(model);
                 });
