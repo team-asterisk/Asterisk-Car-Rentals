@@ -4,7 +4,7 @@ class AdminController {
     }
 
     getViewBookings(req, res) {
-        Promise.resolve(this.data.users.getAll())
+        return Promise.resolve(this.data.users.getAll())
             .then((users) => {
                 return res.render('auth/admin/viewbookings', {
                     context: users,
@@ -15,7 +15,7 @@ class AdminController {
     }
 
     getViewCars(req, res) {
-        Promise.resolve(this.data.cars.getAll())
+        return Promise.resolve(this.data.cars.getAll())
             .then((cars) => {
                 return res.render('auth/admin/viewcars', {
                     context: cars,
@@ -25,7 +25,7 @@ class AdminController {
     }
 
     getViewUsers(req, res) {
-        Promise.resolve(this.data.users.getAll())
+        return Promise.resolve(this.data.users.getAll())
             .then((user) => {
                 return res.render('auth/admin/viewusers', {
                     context: user,
@@ -35,7 +35,7 @@ class AdminController {
     }
 
     getViewDeals(req, res) {
-        Promise.resolve(this.data.cars.filterBy({ 'specialpriceactivated': '1' }))
+        return Promise.resolve(this.data.cars.filterBy({ 'specialpriceactivated': '1' }))
             .then((deals) => {
                 return res.render('auth/admin/viewdeals', {
                     context: deals,
@@ -45,7 +45,7 @@ class AdminController {
     }
 
     getEditUserByIdForm(req, res) {
-        Promise.resolve(this.data.users.findById(req.params.id))
+        return Promise.resolve(this.data.users.findById(req.params.id))
             .then((user) => {
                 return res.render('auth/admin/edituser', {
                     user,

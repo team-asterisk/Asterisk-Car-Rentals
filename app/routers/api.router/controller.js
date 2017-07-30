@@ -8,7 +8,7 @@ class ApiController {
     }
 
     getWelcomeMessage(req, res) {
-        Promise.resolve(this.data.cars.findById(req.params.id))
+        return Promise.resolve(this.data.cars.findById(req.params.id))
             .then((car) => {
                 return res.status(200).send({
                     message: 'Welcome to the Asterisk - Car Rentals API!',
@@ -17,7 +17,7 @@ class ApiController {
     }
 
     getCarDetails(req, res) {
-        Promise.resolve(this.data.cars.findById(req.params.id))
+        return Promise.resolve(this.data.cars.findById(req.params.id))
             .then((car) => {
                 return res.status(200).send({
                     car,
@@ -29,7 +29,7 @@ class ApiController {
         const start = new Date(req.params.pickupdate);
         const end = new Date(req.params.dropoffdate);
 
-        Promise.resolve(this.data.cars.getAll())
+        return Promise.resolve(this.data.cars.getAll())
             .then((cars) => {
                 return cars.filter((car) => {
                     return this.carHelper.checkIfCarIsBooked(car, start, end);
@@ -43,7 +43,7 @@ class ApiController {
     }
 
     getDeals(req, res) {
-        Promise.resolve(this.data.cars.filterBy({ 'specialpriceactivated': '1' }))
+        return Promise.resolve(this.data.cars.filterBy({ 'specialpriceactivated': '1' }))
             .then((deals) => {
                 return res.status(200).send({
                     deals,
@@ -52,7 +52,7 @@ class ApiController {
     }
 
     getCars(req, res) {
-        Promise.resolve(this.data.cars.getAll())
+        return Promise.resolve(this.data.cars.getAll())
             .then((cars) => {
                 return res.status(200).send({
                     cars,
@@ -62,7 +62,7 @@ class ApiController {
 
     getCarCategory(req, res) {
         const category = req.params.category;
-        Promise.resolve(this.data.cars.filterBy({ 'category': category }))
+        return Promise.resolve(this.data.cars.filterBy({ 'category': category }))
             .then((cars) => {
                 return res.status(200).send({
                     cars,
@@ -71,7 +71,7 @@ class ApiController {
     }
 
     viewAllBookings(req, res) {
-        Promise.resolve(this.data.users.getAll())
+        return Promise.resolve(this.data.users.getAll())
             .then((users) => {
                 const allBookings = [];
                 users.forEach((user) => {
@@ -93,9 +93,8 @@ class ApiController {
         const password = req.params.password;
         let token = '';
 
-        this.data.users.findByUsername(username)
+        return this.data.users.findByUsername(username)
             .then((user) => {
-                console.log(user);
                 if (!user) {
                     return res.json({ success: false, message: 'Authentication failed. User not found.' });
                 }
