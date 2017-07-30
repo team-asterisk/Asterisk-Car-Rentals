@@ -19,13 +19,70 @@ const gulpConfig = {
     }
 };
 
-const server = require('./server');
+const { Server } = require('./server');
+const server = new Server();
 
 gulp.task('start-server:default', () => {
-    server.run(
+    return server.run(
         {
             connectionString: gulpConfig.connectionString.default,
             port: gulpConfig.port.default
+        });
+
+});
+
+gulp.task('stop-server:default', () => {
+    return server.stop({
+        config: {
+            port: gulpConfig.port.default
+        }
+    });
+});
+
+
+gulp.task('start-server:browser-tests', () => {
+    return server.run(
+        {
+            connectionString: gulpConfig.connectionString.browserTests,
+            port: gulpConfig.port.browserTests
+        });
+
+});
+
+gulp.task('stop-server:browser-tests', () => {
+    return server.stop({
+        config: {
+            connectionString: gulpConfig.connectionString.browserTests,
+            port: gulpConfig.port.default
+        }
+    });
+});
+
+
+gulp.task('tests:functional', () => {
+
+    return server.run(
+        {
+            connectionString: gulpConfig.connectionString.browserTests,
+            port: gulpConfig.port.browserTests
+        })
+        .then(() => {
+            console.log('--------------');
+            console.log('FUNCTIONAL TESTS');
+            console.log('--------------');
+            
+            
+        })
+        .then(() => {
+            return server.stop({
+                config: {
+                    connectionString: gulpConfig.connectionString.browserTests,
+                    port: gulpConfig.port.browserTests
+                }
+            });
+        })
+        .catch((err) => {
+            console.log(err);
         });
 });
 

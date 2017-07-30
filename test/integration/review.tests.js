@@ -1,15 +1,16 @@
 const request = require('supertest');
 const expect = require('chai').expect;
 
+const config = require('./config');
+const { Server } = require('./../../server');
+
 describe('-- Review tests --', () => {
     const connectionString = 'mongodb://localhost/car-rentals-db-tests';
     let app = null;
 
     beforeEach(() => {
-        return Promise.resolve()
-            .then(() => require('../../db').init(connectionString))
-            .then((db) => require('../../data').init(db))
-            .then((data) => require('../../app').init(data))
+        const server = new Server();
+        return server.getApp(config)
             .then((_app) => {
                 app = _app;
             });

@@ -1,3 +1,7 @@
 const config = require('./config');
 
-require('./server').run(config);
+const { Server } = require('./server');
+
+const server = new Server();
+
+server.run(config);
