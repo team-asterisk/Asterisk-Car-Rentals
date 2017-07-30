@@ -1,18 +1,20 @@
 const { expect } = require('chai');
-const sinon = require('sinon');
 const { init } = require('../../../../app/routers/review.router/controller');
 
 describe('routers/review.router/controller', () => {
-    const reviews = null;
     let data = null;
     let controller = null;
     const items = [1, 2, 3, 4];
-    const create = () => {
-        return Promise.resolve(items);
-    };
 
     let req = null;
     let res = null;
+
+    const options = {
+        toastr: {
+            success: () => 'success',
+            error: () => 'error',
+        },
+    };
 
     beforeEach(() => {
         data = {
@@ -24,13 +26,6 @@ describe('routers/review.router/controller', () => {
         };
 
         controller = init(data);
-        const options = {
-            toastr: {
-                success: () => 'success',
-                error: () => 'error',
-            },
-        };
-
         req = require('../../_mocks/req-res-doncho').getRequestMock(options);
         res = require('../../_mocks/req-res-doncho').getResponseMock();
     });
@@ -61,13 +56,6 @@ describe('routers/review.router/controller', () => {
             };
 
             controller = init(data);
-            const options = {
-                toastr: {
-                    success: () => 'success',
-                    error: () => 'error',
-                },
-            };
-
             req = require('../../_mocks/req-res-doncho').getRequestMock(options);
             res = require('../../_mocks/req-res-doncho').getResponseMock();
         });
