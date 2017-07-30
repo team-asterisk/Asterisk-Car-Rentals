@@ -15,7 +15,11 @@ const gulpConfig = {
     },
     port: {
         default: defaultConfig.port,
-        browserTests: 3002
+        browserTests: 3003
+    },
+    url: {
+        local: 'http://localhost',
+        amazon: 'http://35.158.166.9/'
     }
 };
 
@@ -34,26 +38,26 @@ gulp.task('start-server:default', () => {
 
 gulp.task('tests:functional', () => {
     server = new Server();
-    
+
     return server.run(
         {
             connectionString: gulpConfig.connectionString.browserTests,
             port: gulpConfig.port.browserTests
         })
         .then(() => {
-            console.log('--------------');
-            console.log('FUNCTIONAL TESTS');
-            console.log('--------------');
-
-
-        })
-        .then(() => {
-            return server.stop({
-                config: {
-                    connectionString: gulpConfig.connectionString.browserTests,
-                    port: gulpConfig.port.browserTests
-                }
-            });
+            gulp.src('./test/browser/**/*.js')
+                .pipe(mocha({
+                    reporter: 'nyan',
+                    timeout: 10000
+                }))
+                .on('end', () => {
+                    return server.stop({
+                        config: {
+                            connectionString: gulpConfig.connectionString.browserTests,
+                            port: gulpConfig.port.browserTests
+                        }
+                    });
+                });
         })
         .catch((err) => {
             console.log(err);
@@ -108,3 +112,7 @@ gulp.task('tests:unit', ['pre-test'], () => {
             dir: './coverage/unit-tests'
         }));
 });
+
+module.exports = {
+    gulpConfig
+};
