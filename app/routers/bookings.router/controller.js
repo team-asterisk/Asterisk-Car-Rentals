@@ -7,54 +7,63 @@ class BookingsController {
         this.data = data;
     }
 
-    async getAddBookingMenu(req, res) {
+    getAddBookingMenu(req, res) {
         const carId = req.params.id;
-        const carInfo = await this._generateCarData(this.data, carId);
+        Promise.resolve(this._generateCarData(this.data, carId))
+            .then((carInfo) => {
+                return res.render('auth/bookings/add', {
+                    context: carInfo,
+                    req: req,
+                });
+            });
 
-        return res.render('auth/bookings/add', {
-            context: carInfo,
-            req: req,
-        });
+
     }
 
-    async searchCars(req, res) {
+    searchCars(req, res) {
         const now = new Date();
         const start = new Date(req.query.pickup_date);
         const end = new Date(req.query.dropoff_date);
         const category = !req.query.category ? 'All' : req.query.category;
 
-        let cars;
+        //can return empty promise
+        this._searchCarsByQuery(category, now, start, end)
+            .then((cars) => {
+                if (!cars) {
+                    return Promise.reject('No cars found');
+                }
+                req.toastr.success('Results will appear in a second!', 'Searching...');
+                return res.render('./public/search-cars', {
+                    context: { cars, start, end },
+                    req: req,
+                    moment: require('moment'),
+                });
+            })
+            .catch((err) => {
+                req.toastr.error('Search was not successfull, please try again' + err, 'Sorry!');
+                return res.status(401).redirect('/');
+            });
 
-        try {
-            cars = await this._searchCarsByQuery(category, now, start, end);
-        } catch (err) {
-            req.toastr.error('Search was not successfull, please try again' + err, 'Sorry!');
-            res.status(401).redirect('/');
-        }
-
-        req.toastr.success('Results will appear in a second!', 'Searching...');
-        res.render('./public/search-cars', {
-            context: { cars, start, end },
-            req: req,
-            moment: require('moment'),
-        });
     }
 
-    async getEditBookingMenu(req, res) {
+    getEditBookingMenu(req, res) {
         const bookingId = req.params.id;
         const currentBooking = req.user.bookings
             .find((x) => x._id == bookingId);
         const carId = currentBooking.car._id;
-        const carInfo = await this._generateCarData(this.data, carId);
 
-        return res.render('auth/bookings/edit', {
-            context: {
-                currentBooking,
-                carInfo,
-            },
-            req: req,
-            moment: require('moment'),
-        });
+        Promise.resolve(this._generateCarData(this.data, carId))
+            .then((carInfo) => {
+                return res.render('auth/bookings/edit', {
+                    context: {
+                        currentBooking,
+                        carInfo,
+                    },
+                    req: req,
+                    moment: require('moment'),
+                });
+            });
+
     }
 
     addBooking(req, res, message) {
@@ -66,10 +75,10 @@ class BookingsController {
         this.data.cars.findById(carId)
             .then((car) => {
                 if (carHelper.checkIfCarIsBooked(
-                        car,
-                        newBooking.startdate,
-                        newBooking.enddate
-                    )) {
+                    car,
+                    newBooking.startdate,
+                    newBooking.enddate
+                )) {
                     carHelper.addBookedDatesToCar(
                         car,
                         newBooking.startdate,
@@ -116,12 +125,12 @@ class BookingsController {
             .then((car) => {
                 carHelper.removeBookedDatesFromCar(car, bookingId);
                 if (carHelper.checkOtherDates(
-                        car,
-                        newBooking.startdate,
-                        newBooking.enddate,
-                        current.startdate,
-                        current.enddate
-                    )) {
+                    car,
+                    newBooking.startdate,
+                    newBooking.enddate,
+                    current.startdate,
+                    current.enddate
+                )) {
                     carHelper.addBookedDatesToCar(
                         car,
                         newBooking.startdate,
@@ -159,55 +168,70 @@ class BookingsController {
     }
 
     // private methods
-    async _searchCarsByQuery(category, nowDate, startDate, endDate) {
+    _searchCarsByQuery(category, nowDate, startDate, endDate) {
         const now = nowDate.valueOf() - 24 * 60 * 60 * 1000;
         const start = startDate.valueOf();
         const end = endDate.valueOf();
-        let cars;
+        // let cars;
         let filteredCars;
 
         if (isNaN(start) || isNaN(end)) {
-            throw new Error('Please provide correct dates.');
+            return Promise.reject('Please provide correct dates.');
         }
         if (start < now) {
-            throw new Error('Please choose today or a future date.');
+            return Promise.reject('Please choose today or a future date.');
         }
         if (end < now) {
-            throw new Error('Please choose a future date.');
+            return Promise.reject('Please choose a future date.');
         }
         if (start > end) {
-            throw new Error('Dropoff date must follow pickup date.');
+            return Promise.reject('Dropoff date must follow pickup date.');
         }
 
         if (category === 'All') {
-            cars = await this.data.cars.getAll();
-        } else {
-            cars = await this.data.cars.filterBy({ 'category': category });
+            return Promise.resolve(this.data.cars.getAll())
+                .then((cars) => {
+                    if (cars) {
+                        filteredCars = cars.filter((car) => {
+                            return carHelper.checkIfCarIsBooked(car, startDate, endDate);
+                        });
+                        return Promise.resolve(filteredCars);
+                    }
+                    return Promise.resolve();
+                });
         }
 
-        if (cars) {
-            filteredCars = await cars.filter((car) => {
-                return carHelper.checkIfCarIsBooked(car, startDate, endDate);
+        return Promise.resolve(this.data.cars.filterBy({ 'category': category }))
+            .then((cars) => {
+                if (cars) {
+                    filteredCars = cars.filter((car) => {
+                        return carHelper.checkIfCarIsBooked(car, startDate, endDate);
+                    });
+                    return Promise.resolve(filteredCars);
+
+                }
+                return Promise.resolve();
             });
-        }
 
-        return filteredCars;
+
     }
 
-    async _generateCarData(data, carId) {
-        const car = await data.cars.findById(carId);
+    _generateCarData(data, carId) {
 
-        const viewModel = {
-            car: {
-                id: carId,
-                makemodel: car.makemodel,
-                baseprice: car.baseprice,
-                specialprice: car.specialprice,
-                specialpriceactivated: car.specialpriceactivated,
-            },
-        };
+        return Promise.resolve(data.cars.findById(carId))
+            .then((car) => {
+                const viewModel = {
+                    car: {
+                        id: carId,
+                        makemodel: car.makemodel,
+                        baseprice: car.baseprice,
+                        specialprice: car.specialprice,
+                        specialpriceactivated: car.specialpriceactivated,
+                    },
+                };
+                return viewModel;
 
-        return viewModel;
+            });
     }
 }
 

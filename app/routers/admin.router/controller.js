@@ -40,7 +40,7 @@ class AdminController {
                 return res.render('auth/admin/viewdeals', {
                     context: deals,
                     req: req,
-                }, );
+                });
             });
     }
 
