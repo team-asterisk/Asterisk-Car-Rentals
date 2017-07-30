@@ -31,6 +31,6 @@ block main
                         br
                         input#user-email.form-control(type='email', name='email')
                         br
-                        button.btn.btn-primary(type='submit') Register
+                        button#register-submit.btn.btn-primary(type='submit') Register
                     .toastr
                         #{req.toastr.render()}

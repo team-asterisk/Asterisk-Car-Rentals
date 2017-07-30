@@ -35,15 +35,15 @@ body
                             span.caret
                         ul.dropdown-menu
                             if user.role == "admin"
-                                li
+                                li#dashboard
                                     a(href='/auth/viewusers') Dashboard
-                            li
+                            li#profile
                                 a(href='/auth/profile') Profile
-                            li
+                            li#mybookings
                                 a(href='/auth/bookings') My Bookings
-                            li
+                            li#leavereview
                                 a(href='/auth/review') Leave Review
-                            li
+                            li#logout
                                 a(href='/auth/logout') Logout
                 else
                     li.register
