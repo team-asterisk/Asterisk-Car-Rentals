@@ -6,6 +6,9 @@ const attachTo = (app, data) => {
     const authController = require('../auth.router/controller').init(data);
 
     router
+        .get('/', (req, res) => {
+            return controller.getWelcomeMessage(req, res);
+        })
         .get('/car/:id', (req, res) => {
             return controller.getCarDetails(req, res);
         })
@@ -21,8 +24,11 @@ const attachTo = (app, data) => {
         .get('/cars/:category', (req, res) => {
             return controller.getCarCategory(req, res);
         })
-        .get('/auth/bookings', authController.verifyIsAdmin, (req, res) => {
+        .get('/auth/bookings', controller.verifyToken, (req, res) => {
             return controller.viewAllBookings(req, res);
+        })
+        .post('/authenticate/:user/:password', (req, res, next) => {
+            return controller.provideToken(req, res, next);
         });
 
     app.use('/api', router);
