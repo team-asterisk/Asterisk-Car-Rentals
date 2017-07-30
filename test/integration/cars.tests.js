@@ -23,10 +23,10 @@ describe('-- Cars tests --', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) {
-                        done(err);
+                        return done(err);
                     }
 
-                    done();
+                    return done();
                 });
         });
     });
@@ -39,10 +39,10 @@ describe('-- Cars tests --', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) {
-                        done(err);
+                        return done(err);
                     }
 
-                    done();
+                    return done();
                 });
         });
     });
@@ -55,10 +55,10 @@ describe('-- Cars tests --', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) {
-                        done(err);
+                        return done(err);
                     }
 
-                    done();
+                    return done();
                 });
         });
     });
@@ -71,10 +71,10 @@ describe('-- Cars tests --', () => {
                 .expect(404)
                 .end((err, res) => {
                     if (err) {
-                        done(err);
+                        return done(err);
                     }
 
-                    done();
+                    return done();
                 });
         });
     });
@@ -87,10 +87,10 @@ describe('-- Cars tests --', () => {
                 .expect('Location', '/401')
                 .end((err, res) => {
                     if (err) {
-                        done(err);
+                        return done(err);
                     }
 
-                    done();
+                    return done();
                 });
         });
     });
@@ -102,10 +102,10 @@ describe('-- Cars tests --', () => {
                 .expect(403)
                 .end((err, res) => {
                     if (err) {
-                        done(err);
+                        return done(err);
                     }
 
-                    done();
+                    return done();
                 });
         });
     });
@@ -118,10 +118,10 @@ describe('-- Cars tests --', () => {
                 .expect('Location', '/401')
                 .end((err, res) => {
                     if (err) {
-                        done(err);
+                        return done(err);
                     }
 
-                    done();
+                    return done();
                 });
         });
     });
@@ -133,10 +133,10 @@ describe('-- Cars tests --', () => {
                 .expect(403)
                 .end((err, res) => {
                     if (err) {
-                        done(err);
+                        return done(err);
                     }
 
-                    done();
+                    return done();
                 });
         });
     });
