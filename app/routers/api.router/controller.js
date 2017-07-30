@@ -12,7 +12,7 @@ class ApiController {
             .then((car) => {
                 return res.status(200).send({
                     message: 'Welcome to the Asterisk - Car Rentals API!',
-                }, );
+                });
             });
     }
 

@@ -1,7 +1,7 @@
 const request = require('supertest');
 const expect = require('chai').expect;
 
-describe('-- API tests --', () => {
+describe('-- Bookings tests --', () => {
     const connectionString = 'mongodb://localhost/car-rentals-db-tests';
     let app = null;
 
@@ -15,12 +15,12 @@ describe('-- API tests --', () => {
             });
     });
 
-    describe('GET /api/cars', () => {
-        it('expect to return 200', (done) => {
+    describe('GET /searchcars', () => {
+        it('expect to return 302', (done) => {
             request(app)
-                .get('/api/cars')
-                .expect('Content-type', /json/)
-                .expect(200)
+                .get('/searchcars')
+                .expect(302)
+                .expect('Location', '/')
                 .end((err, res) => {
                     if (err) {
                         return done(err);
@@ -31,12 +31,12 @@ describe('-- API tests --', () => {
         });
     });
 
-    describe('GET /api/deals', () => {
-        it('expect to return 200', (done) => {
+    describe('GET /auth/bookings/add/:id', () => {
+        it('expect to return 302', (done) => {
             request(app)
-                .get('/api/deals')
-                .expect('Content-type', /json/)
-                .expect(200)
+                .get('/auth/bookings/add/424242424242')
+                .expect(302)
+                .expect('Location', '/auth/login')
                 .end((err, res) => {
                     if (err) {
                         return done(err);
@@ -47,12 +47,12 @@ describe('-- API tests --', () => {
         });
     });
 
-    describe('GET /api/cars/:category', () => {
-        it('expect to return 200', (done) => {
+    describe('POST /auth/bookings/add/:id', () => {
+        it('expect to return 302', (done) => {
             request(app)
-                .get('/api/cars/Economys')
-                .expect('Content-type', /json/)
-                .expect(200)
+                .post('/auth/bookings/add/424242424242')
+                .expect('Content-type', /html/)
+                .expect(403)
                 .end((err, res) => {
                     if (err) {
                         return done(err);
@@ -63,12 +63,12 @@ describe('-- API tests --', () => {
         });
     });
 
-    describe('GET /api/car/:id', () => {
-        it('expect to return 200', (done) => {
+    describe('GET /auth/bookings/:id', () => {
+        it('expect to return 302', (done) => {
             request(app)
-                .get('/api/car/597b3fde41263123e8aa0d66')
-                .expect('Content-type', /json/)
-                .expect(200)
+                .get('/auth/bookings/424242424242')
+                .expect(302)
+                .expect('Location', '/auth/login')
                 .end((err, res) => {
                     if (err) {
                         return done(err);
@@ -79,12 +79,28 @@ describe('-- API tests --', () => {
         });
     });
 
-    describe('GET /api/searchcars/:pickupdate/:dropoffdate', () => {
-        it('expect to return 200', (done) => {
+    describe('POST /auth/bookings/:id', () => {
+        it('expect to return 302', (done) => {
             request(app)
-                .get('/api/searchcars/10-08-2017/12-08-2017')
-                .expect('Content-type', /json/)
-                .expect(200)
+                .post('/auth/bookings/424242424242')
+                .expect('Content-type', /html/)
+                .expect(403)
+                .end((err, res) => {
+                    if (err) {
+                        return done(err);
+                    }
+
+                    return done();
+                });
+        });
+    });
+
+    describe('POST /auth/edituser/:id', () => {
+        it('expect to return 403', (done) => {
+            request(app)
+                .post('/auth/edituser/424242424242')
+                .expect('Content-type', /html/)
+                .expect(403)
                 .end((err, res) => {
                     if (err) {
                         return done(err);

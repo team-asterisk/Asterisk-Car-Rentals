@@ -2,10 +2,32 @@
 
 const nodemon = require('gulp-nodemon');
 
-// const port = process.env.PORT || 3001;
 const gulp = require('gulp');
 const istanbul = require('gulp-istanbul');
 const mocha = require('gulp-mocha');
+
+const defaultConfig = require('./config');
+
+const gulpConfig = {
+    connectionString: {
+        default: defaultConfig.connectionString,
+        browserTests: 'mongodb://localhost/car-rentals-db-browser-tests'
+    },
+    port: {
+        default: defaultConfig.port,
+        browserTests: 3002
+    }
+};
+
+const server = require('./server');
+
+gulp.task('start-server:default', () => {
+    server.run(
+        {
+            connectionString: gulpConfig.connectionString.default,
+            port: gulpConfig.port.default
+        });
+});
 
 gulp.task('pre-test', () => {
     return gulp.src([
@@ -14,7 +36,7 @@ gulp.task('pre-test', () => {
         './config/**/*.js',
         './db/**/*.js',
         './models/**/*.js',
-        './utils/**/*.js',        
+        './utils/**/*.js',
         './server.js',
     ])
         .pipe(istanbul({
@@ -23,14 +45,12 @@ gulp.task('pre-test', () => {
         .pipe(istanbul.hookRequire());
 });
 
-gulp.task('server', () => {
-    require('./server');
-});
+
 
 gulp.task('dev', () => {
     return nodemon({
         ext: 'js pug html css',
-        script: './server.js',
+        script: './launch.js',
     });
 });
 

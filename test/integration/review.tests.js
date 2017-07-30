@@ -1,7 +1,7 @@
 const request = require('supertest');
 const expect = require('chai').expect;
 
-describe('-- Other routes tests --', () => {
+describe('-- Review tests --', () => {
     const connectionString = 'mongodb://localhost/car-rentals-db-tests';
     let app = null;
 
@@ -15,12 +15,12 @@ describe('-- Other routes tests --', () => {
             });
     });
 
-    describe('GET /', () => {
-        it('expect to return 200', (done) => {
+    describe('GET /auth/review', () => {
+        it('expect to return 302', (done) => {
             request(app)
-                .get('/')
-                .expect('Content-type', /html/)
-                .expect(200)
+                .get('/auth/review')
+                .expect(302)
+                .expect('Location', '/auth/login')
                 .end((err, res) => {
                     if (err) {
                         return done(err);
@@ -31,28 +31,11 @@ describe('-- Other routes tests --', () => {
         });
     });
 
-    // describe('POST /auth/login', () => {
-    //     it('expect to return 200', (done) => {
-    //         request(app)
-    //             .post('/auth/login')
-    //             .expect('Content-type', /html/)
-    //             .send({ username: 'cecee', password: 'cecee05' })
-    //             .expect(200)
-    //             .end((err, res) => {
-    //                 if (err) {
-    //                     done(err);
-    //                 }
-
-    //                 done();
-    //             });
-    //     });
-    // });
-
-    describe('GET /MissingRoute', () => {
-        it('should return 404', (done) => {
+    describe('POST /auth/review', () => {
+        it('expect to return 403', (done) => {
             request(app)
-                .get('/random')
-                .expect(404)
+                .post('/auth/review')
+                .expect(403)
                 .end((err, res) => {
                     if (err) {
                         return done(err);

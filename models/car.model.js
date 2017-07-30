@@ -31,7 +31,7 @@ class Car {
 
     set _makemodel(value) {
         const nameVal = convert(value);
-        validator.validateIfUndefinedOrNull(nameVal, 'Model');
+        validator.validateIfUndefinedOrNull(nameVal, 'Pesho');
         validator.validateTypeOf(nameVal, 'Model', 'string');
         validator.validateIfEmptyString(nameVal, 'Model');
         this.makemodel = nameVal;

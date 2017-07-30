@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const multer = require('../utils/fileupload');
+// const multer = require('../utils/fileupload');
 
 const attachTo = (app, data) => {
     const router = new Router();
@@ -13,10 +13,10 @@ const attachTo = (app, data) => {
         .get('/auth/editcar/:id', authController.verifyIsAdmin, (req, res) => {
             return controller.getEditCarById(req, res);
         })
-        .post('/auth/addcar', authController.verifyIsAdmin, multer.uploadSingle, (req, res) => {
+        .post('/auth/addcar', authController.verifyIsAdmin, (req, res) => {
             return controller.addCar(req, res);
         })
-        .post('/auth/editcar/:id', authController.verifyIsAdmin, multer.uploadSingle, (req, res) => {
+        .post('/auth/editcar/:id', authController.verifyIsAdmin, (req, res) => {
             return controller.updateCar(req, res);
         })
         .get('/cars', (req, res) => {
