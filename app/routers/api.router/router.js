@@ -4,6 +4,7 @@ const attachTo = (app, data) => {
     const router = new Router();
     const controller = require('./controller').init(data);
     const authController = require('../auth.router/controller').init(data);
+    const verifyToken = require('../utils/apiTokenVerify.js');
 
     router
         .get('/', (req, res) => {
@@ -24,15 +25,16 @@ const attachTo = (app, data) => {
         .get('/cars/:category', (req, res) => {
             return controller.getCarCategory(req, res);
         })
-        .get('/auth/bookings', controller.verifyToken, (req, res) => {
+        .get('/auth/bookings', verifyToken, (req, res) => {
             return controller.viewAllBookings(req, res);
         })
-        .get('/authenticate', (req, res) => {
-            return controller.getWelcomeMessage(req, res);
-        })
-        .post('/authenticate', (req, res, next) => {
-            return controller.provideToken(req, res, next);
+        .get('/authenticate/:username/:password', (req, res) => {
+            return controller.provideToken(req, res);
         });
+    // to use form authentication intead of get
+    // .post('/authenticate', (req, res, next) => {
+    //     return controller.provideToken(req, res, next);
+    // });
 
     app.use('/api', router);
 };
