@@ -43,10 +43,10 @@ gulp.task('tests:functional', ['pre-functional-test'], () => {
         .pipe(mocha({
             reporter: 'nyan',
             timeout: 10000
+        }))
+        .pipe(istanbul.writeReports({
+            dir: './coverage/functional-tests'
         }));
-        // .pipe(istanbul.writeReports({
-        //     dir: './coverage/functional-tests'
-        // }));
 });
 
 
