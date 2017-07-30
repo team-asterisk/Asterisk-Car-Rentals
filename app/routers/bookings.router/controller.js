@@ -68,7 +68,7 @@ class BookingsController {
         newBooking._id = new ObjectID();
         const user = req.user;
 
-        this.data.cars.findById(carId)
+        return this.data.cars.findById(carId)
             .then((car) => {
                 if (carHelper.checkIfCarIsBooked(
                         car,
@@ -83,11 +83,12 @@ class BookingsController {
                     );
 
                     return this.data.cars.updateById(car)
-                        .then(() => {
-                            return car;
+                        .then((updated) => {
+                            return Promise.resolve(updated);
                         });
                 }
-                throw new Error('Cannot book the car for these dates!');
+
+                return Promise.reject('Cannot book the car for these dates!');
             })
             .then((car) => {
                 return userHelper.addBookingToUser(car, user, newBooking);
