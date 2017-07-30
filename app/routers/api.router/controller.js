@@ -91,32 +91,30 @@ class ApiController {
     provideToken(req, res, next) {
         const username = req.body.user;
         const password = req.body.password;
-        const token = '';
+        let token = '';
 
         console.log(username);
         console.log(password);
 
-        this.data.users.findOne({ username: username })
+        this.data.users.findByUsername(username)
             .then((user) => {
                 if (!user) {
                     return res.json({ success: false, message: 'Authentication failed. User not found.' });
                 }
 
-                if (user.password !== password) {
-                    return res.json({ success: false, message: 'Authentication failed. Wrong password.' });
-                }
-
                 if (bcrypt.compareSync(password, user.passHash)) {
                     token = jwt.sign(user, 'superSecret', {
-                        expiresInMinutes: 1440,
+                        expiresIn: 60,
+                    });
+
+                    return res.json({
+                        success: true,
+                        message: 'Enjoy your token!',
+                        token: token,
                     });
                 }
 
-                return res.json({
-                    success: true,
-                    message: 'Enjoy your token!',
-                    token: token,
-                });
+                return res.json({ success: false, message: 'Authentication failed. Wrong password.' });
             });
     }
 

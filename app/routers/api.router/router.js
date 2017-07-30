@@ -27,7 +27,10 @@ const attachTo = (app, data) => {
         .get('/auth/bookings', controller.verifyToken, (req, res) => {
             return controller.viewAllBookings(req, res);
         })
-        .post('/authenticate/:user/:password', (req, res, next) => {
+        .get('/authenticate', (req, res) => {
+            return controller.getWelcomeMessage(req, res);
+        })
+        .post('/authenticate', (req, res, next) => {
             return controller.provideToken(req, res, next);
         });
 
