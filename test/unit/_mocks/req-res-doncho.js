@@ -25,6 +25,10 @@ const getResponseMock = () => {
             this.body = body;
             return this;
         },
+        json(body) {
+            this.body = body;
+            return this;
+        },
         redirect(status, url) {
             if (!url) {
                 this.redirectUrl = status;
