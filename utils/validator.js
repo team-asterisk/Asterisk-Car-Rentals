@@ -48,9 +48,9 @@ const validator = {
         }
     },
     validatePhone: (phone) => {
-        const regex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+        const regex = /^\(?([+0-9]{0,5}[-. ]*)\)?([0-9]+)[-. ]?([0-9]+)$/;
         if (!regex.test(phone)) {
-            throw new Error('Invalid Phone');
+            throw new Error('Invalid Phone, e.g. formats +359-888-121212 or 0888 121212');
         }
     },
     validatePassword: (password) => {
