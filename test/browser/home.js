@@ -2,7 +2,11 @@
 const { expect } = require('chai');
 const { setupDriver } = require('./utils/setup-driver');
 const webdriver = require('selenium-webdriver');
-const { appUrl } = require('./config');
+const { appUrl, connectionString, port } = require('./config');
+
+let server = null;
+const { Server } = require('./../../server');
+
 
 describe('Home routes', () => {
     let driver = null;
@@ -10,6 +14,26 @@ describe('Home routes', () => {
     // let driver =
     //     new webdriver.Builder()
     //         .build();
+
+    before(() => {
+        server = new Server();
+
+        return server.run(
+            {
+                connectionString: connectionString,
+                port: port
+            })
+            .then(() => {
+                Promise.resolve();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    });
+
+    after(() => {
+        return server.stop('drop database');
+    });
 
     beforeEach(() => {
         driver = setupDriver('chrome');

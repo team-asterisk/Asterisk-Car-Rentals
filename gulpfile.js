@@ -36,33 +36,19 @@ gulp.task('start-server:default', () => {
 
 });
 
-gulp.task('tests:functional', () => {
-    server = new Server();
-
-    return server.run(
-        {
-            connectionString: gulpConfig.connectionString.browserTests,
-            port: gulpConfig.port.browserTests
-        })
-        .then(() => {
-            gulp.src('./test/browser/**/*.js')
-                .pipe(mocha({
-                    reporter: 'nyan',
-                    timeout: 10000
-                }))
-                .on('end', () => {
-                    return server.stop({
-                        config: {
-                            connectionString: gulpConfig.connectionString.browserTests,
-                            port: gulpConfig.port.browserTests
-                        }
-                    });
-                });
-        })
-        .catch((err) => {
-            console.log(err);
-        });
+gulp.task('tests:functional', ['pre-functional-test'], () => {
+    return gulp.src([
+        './test/browser/**/*.js'
+    ])
+        .pipe(mocha({
+            reporter: 'nyan',
+            timeout: 10000
+        }));
+        // .pipe(istanbul.writeReports({
+        //     dir: './coverage/functional-tests'
+        // }));
 });
+
 
 gulp.task('pre-test', () => {
     return gulp.src([
@@ -72,7 +58,17 @@ gulp.task('pre-test', () => {
         './db/**/*.js',
         './models/**/*.js',
         './utils/**/*.js',
-        './server.js',
+        './server/**/*.js',
+    ])
+        .pipe(istanbul({
+            includeUntested: true,
+        }))
+        .pipe(istanbul.hookRequire());
+});
+
+gulp.task('pre-functional-test', () => {
+    return gulp.src([
+        './app/routers/**/*.js'
     ])
         .pipe(istanbul({
             includeUntested: true,

@@ -5,10 +5,6 @@ const async = () => {
 
 class Server {
 
-    constructor() {
-        this.servers = [];
-    }
-
     getApp(config) {
         return async()
             .then(() => require('./../db').init(config.connectionString))
@@ -27,44 +23,39 @@ class Server {
         return this.getApp(config)
             .then((app) => {
                 //neded for WebSockets
-                const httpServer = app.listen(config.port, () =>
+                this.instance = app.listen(config.port, () =>
                     console.log(`Car Rentals is now live at http://localhost:${config.port}`));
-                this.servers.push({
-                    config,
-                    httpServer
-                });
-                return Promise.resolve(httpServer);
+                this.port = config.port;
+                this.connectionString = config.connectionString;
+                return Promise.resolve(this.instance);
             })
             .catch((err) => {
                 console.log(err);
             });
     }
 
-    stop(options) {
+    stop(dropDatabase) {
         return async()
             .then(() => {
-                const server = this.servers.find((s) =>
-                    s.config.connectionString === options.config.connectionString &&
-                    s.config.port === options.config.port).httpServer;
-                if (!server) {
-                    return Promise.reject('Server not iniated');
+                if (!this.instance) {
+                    return Promise.reject('No parameter for server');
                 }
-                return Promise.resolve(server);
+                return Promise.resolve(this.instance);
             })
             .then((server) => {
                 return server.close(() => {
-                    console.log(`Server at: ${options.config.port} now closed `);
+                    console.log(`Server at: ${this.port} now closed `);
                 });
             })
             .then(() => {
-                if (options.config.connectionString) {
+                if (dropDatabase) {
                     const { MongoClient } = require('mongodb');
-                    return MongoClient.connect(options.config.connectionString)
+                    return MongoClient.connect(this.connectionString)
                         .then((db) => {
                             return db.dropDatabase();
                         })
                         .then(() => {
-                            console.log(`Database: ${options.config.connectionString} sucessfully dropped`);
+                            console.log(`Database: ${this.connectionString} sucessfully dropped`);
                         })
                         .catch((err) => {
                             console.log(err);
