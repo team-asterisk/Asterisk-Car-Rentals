@@ -20,9 +20,10 @@ const gulpConfig = {
 };
 
 const { Server } = require('./server');
-const server = new Server();
+let server = null;
 
 gulp.task('start-server:default', () => {
+    server = new Server();
     return server.run(
         {
             connectionString: gulpConfig.connectionString.default,
@@ -31,36 +32,9 @@ gulp.task('start-server:default', () => {
 
 });
 
-gulp.task('stop-server:default', () => {
-    return server.stop({
-        config: {
-            port: gulpConfig.port.default
-        }
-    });
-});
-
-
-gulp.task('start-server:browser-tests', () => {
-    return server.run(
-        {
-            connectionString: gulpConfig.connectionString.browserTests,
-            port: gulpConfig.port.browserTests
-        });
-
-});
-
-gulp.task('stop-server:browser-tests', () => {
-    return server.stop({
-        config: {
-            connectionString: gulpConfig.connectionString.browserTests,
-            port: gulpConfig.port.default
-        }
-    });
-});
-
-
 gulp.task('tests:functional', () => {
-
+    server = new Server();
+    
     return server.run(
         {
             connectionString: gulpConfig.connectionString.browserTests,
@@ -70,8 +44,8 @@ gulp.task('tests:functional', () => {
             console.log('--------------');
             console.log('FUNCTIONAL TESTS');
             console.log('--------------');
-            
-            
+
+
         })
         .then(() => {
             return server.stop({
