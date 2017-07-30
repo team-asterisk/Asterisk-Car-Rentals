@@ -4,7 +4,7 @@ const { setupDriver } = require('./utils/setup-driver');
 const webdriver = require('selenium-webdriver');
 const { appUrl } = require('./config');
 
-describe('Items routes', () => {
+describe('Home routes', () => {
     let driver = null;
 
     // let driver =
