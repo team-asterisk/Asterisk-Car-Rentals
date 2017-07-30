@@ -21,7 +21,7 @@ const gulpConfig = {
 
 const server = require('./server');
 
-gulp.task('server', () => {
+gulp.task('start-server:default', () => {
     server.run(
         {
             connectionString: gulpConfig.connectionString.default,
