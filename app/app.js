@@ -2,11 +2,25 @@ const express = require('express');
 const flash = require('connect-flash');
 const toastr = require('express-toastr');
 const toastrOptions = require('../utils/constants').toastrOptions;
+const multer = require('multer');
 
 const init = (data) => {
     const app = express();
 
     require('./config').applyTo(app);
+
+    //CSRF fix
+    const uploadDir = 'static/images/cars/';
+    const storage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, uploadDir);
+        },
+        filename: (req, file, cb) => {
+            cb(null, file.originalname);
+        },
+    });
+    app.use(multer({ storage: storage }).single('carphoto'));
+    //multer config before csrf 
     require('./auth').applyTo(app, data);
 
     app.use(flash());
