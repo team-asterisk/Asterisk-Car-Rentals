@@ -87,7 +87,6 @@ class BookingsController {
                             return Promise.resolve(updated);
                         });
                 }
-
                 return Promise.reject('Cannot book the car for these dates!');
             })
             .then((car) => {
@@ -102,10 +101,8 @@ class BookingsController {
             })
             .catch((err) => {
                 req.toastr.error(err.message);
-                setTimeout(() => {
-                    return res.status(400)
-                        .redirect('/auth/bookings/add/' + carId);
-                }, 1000);
+                return res.status(400)
+                    .redirect('/auth/bookings/add/' + carId);
             });
     }
 
@@ -118,7 +115,7 @@ class BookingsController {
         const current = req.user.bookings
             .find((x) => x._id == bookingId);
 
-        this.data.cars.findById(current.car._id)
+        return this.data.cars.findById(current.car._id)
             .then((car) => {
                 carHelper.removeBookedDatesFromCar(car, bookingId);
                 if (carHelper.checkOtherDates(
@@ -157,10 +154,8 @@ class BookingsController {
             })
             .catch((err) => {
                 req.toastr.error(err.message);
-                setTimeout(() => {
-                    return res.status(400)
-                        .redirect('/auth/bookings/' + bookingId);
-                }, 1000);
+                return res.status(400)
+                    .redirect('/auth/bookings/' + bookingId);
             });
     }
 
@@ -175,7 +170,7 @@ class BookingsController {
         if (isNaN(start) || isNaN(end)) {
             return Promise.reject('Please provide correct dates.');
         }
-        if (start < now) {
+        if (end > now && now > start) {
             return Promise.reject('Please choose today or a future date.');
         }
         if (end < now) {
