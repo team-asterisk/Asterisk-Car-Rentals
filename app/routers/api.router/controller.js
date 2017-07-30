@@ -93,13 +93,15 @@ class ApiController {
         const password = req.params.password;
         let token = '';
 
-        console.log(username);
-        console.log(password);
-
         this.data.users.findByUsername(username)
             .then((user) => {
+                console.log(user);
                 if (!user) {
                     return res.json({ success: false, message: 'Authentication failed. User not found.' });
+                }
+
+                if (user.role !== 'admin') {
+                    return res.json({ success: false, message: 'Authentication failed. User must be admin. Did you buy me a beer!?' });
                 }
 
                 if (bcrypt.compareSync(password, user.passHash)) {
