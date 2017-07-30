@@ -9,15 +9,13 @@ class BookingsController {
 
     getAddBookingMenu(req, res) {
         const carId = req.params.id;
-        Promise.resolve(this._generateCarData(this.data, carId))
+        return Promise.resolve(this._generateCarData(this.data, carId))
             .then((carInfo) => {
                 return res.render('auth/bookings/add', {
                     context: carInfo,
                     req: req,
                 });
             });
-
-
     }
 
     searchCars(req, res) {
@@ -26,8 +24,8 @@ class BookingsController {
         const end = new Date(req.query.dropoff_date);
         const category = !req.query.category ? 'All' : req.query.category;
 
-        //can return empty promise
-        this._searchCarsByQuery(category, now, start, end)
+        // can return empty promise
+        return this._searchCarsByQuery(category, now, start, end)
             .then((cars) => {
                 if (!cars) {
                     return Promise.reject('No cars found');
@@ -43,7 +41,6 @@ class BookingsController {
                 req.toastr.error('Search was not successfull, please try again' + err, 'Sorry!');
                 return res.status(401).redirect('/');
             });
-
     }
 
     getEditBookingMenu(req, res) {
@@ -52,7 +49,7 @@ class BookingsController {
             .find((x) => x._id == bookingId);
         const carId = currentBooking.car._id;
 
-        Promise.resolve(this._generateCarData(this.data, carId))
+        return Promise.resolve(this._generateCarData(this.data, carId))
             .then((carInfo) => {
                 return res.render('auth/bookings/edit', {
                     context: {
@@ -63,7 +60,6 @@ class BookingsController {
                     moment: require('moment'),
                 });
             });
-
     }
 
     addBooking(req, res, message) {
@@ -75,10 +71,10 @@ class BookingsController {
         this.data.cars.findById(carId)
             .then((car) => {
                 if (carHelper.checkIfCarIsBooked(
-                    car,
-                    newBooking.startdate,
-                    newBooking.enddate
-                )) {
+                        car,
+                        newBooking.startdate,
+                        newBooking.enddate
+                    )) {
                     carHelper.addBookedDatesToCar(
                         car,
                         newBooking.startdate,
@@ -125,12 +121,12 @@ class BookingsController {
             .then((car) => {
                 carHelper.removeBookedDatesFromCar(car, bookingId);
                 if (carHelper.checkOtherDates(
-                    car,
-                    newBooking.startdate,
-                    newBooking.enddate,
-                    current.startdate,
-                    current.enddate
-                )) {
+                        car,
+                        newBooking.startdate,
+                        newBooking.enddate,
+                        current.startdate,
+                        current.enddate
+                    )) {
                     carHelper.addBookedDatesToCar(
                         car,
                         newBooking.startdate,
@@ -208,16 +204,12 @@ class BookingsController {
                         return carHelper.checkIfCarIsBooked(car, startDate, endDate);
                     });
                     return Promise.resolve(filteredCars);
-
                 }
                 return Promise.resolve();
             });
-
-
     }
 
     _generateCarData(data, carId) {
-
         return Promise.resolve(data.cars.findById(carId))
             .then((car) => {
                 const viewModel = {
@@ -230,7 +222,6 @@ class BookingsController {
                     },
                 };
                 return viewModel;
-
             });
     }
 }
