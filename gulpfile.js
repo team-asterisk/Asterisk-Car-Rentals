@@ -15,14 +15,19 @@ const gulpConfig = {
     },
     port: {
         default: defaultConfig.port,
-        browserTests: 3002
+        browserTests: 3003
+    },
+    url: {
+        local: 'http://localhost',
+        amazon: 'http://35.158.166.9/'
     }
 };
 
 const { Server } = require('./server');
-const server = new Server();
+let server = null;
 
 gulp.task('start-server:default', () => {
+    server = new Server();
     return server.run(
         {
             connectionString: gulpConfig.connectionString.default,
@@ -31,35 +36,8 @@ gulp.task('start-server:default', () => {
 
 });
 
-gulp.task('stop-server:default', () => {
-    return server.stop({
-        config: {
-            port: gulpConfig.port.default
-        }
-    });
-});
-
-
-gulp.task('start-server:browser-tests', () => {
-    return server.run(
-        {
-            connectionString: gulpConfig.connectionString.browserTests,
-            port: gulpConfig.port.browserTests
-        });
-
-});
-
-gulp.task('stop-server:browser-tests', () => {
-    return server.stop({
-        config: {
-            connectionString: gulpConfig.connectionString.browserTests,
-            port: gulpConfig.port.default
-        }
-    });
-});
-
-
 gulp.task('tests:functional', () => {
+    server = new Server();
 
     return server.run(
         {
@@ -67,19 +45,19 @@ gulp.task('tests:functional', () => {
             port: gulpConfig.port.browserTests
         })
         .then(() => {
-            console.log('--------------');
-            console.log('FUNCTIONAL TESTS');
-            console.log('--------------');
-            
-            
-        })
-        .then(() => {
-            return server.stop({
-                config: {
-                    connectionString: gulpConfig.connectionString.browserTests,
-                    port: gulpConfig.port.browserTests
-                }
-            });
+            gulp.src('./test/browser/**/*.js')
+                .pipe(mocha({
+                    reporter: 'nyan',
+                    timeout: 10000
+                }))
+                .on('end', () => {
+                    return server.stop({
+                        config: {
+                            connectionString: gulpConfig.connectionString.browserTests,
+                            port: gulpConfig.port.browserTests
+                        }
+                    });
+                });
         })
         .catch((err) => {
             console.log(err);
@@ -134,3 +112,7 @@ gulp.task('tests:unit', ['pre-test'], () => {
             dir: './coverage/unit-tests'
         }));
 });
+
+module.exports = {
+    gulpConfig
+};

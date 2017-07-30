@@ -2,7 +2,9 @@ let driver = null;
 
 const ui = require('./ui');
 
-const async = require('../../../utils/async');
+const async = () => {
+    return Promise.resolve();
+};
 
 const createItem = (text) => {
     return async()
