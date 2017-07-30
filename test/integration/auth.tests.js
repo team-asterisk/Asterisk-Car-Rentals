@@ -1,7 +1,7 @@
 const request = require('supertest');
 const expect = require('chai').expect;
 
-describe('-- Admin tests --', () => {
+describe('-- Auth tests --', () => {
     const connectionString = 'mongodb://localhost/car-rentals-db-tests';
     let app = null;
 
@@ -15,12 +15,12 @@ describe('-- Admin tests --', () => {
             });
     });
 
-    describe('GET /auth/viewbookings', () => {
-        it('expect to return 302', (done) => {
+    describe('GET /auth/register', () => {
+        it('expect to return 200', (done) => {
             request(app)
-                .get('/auth/viewbookings')
-                .expect(302)
-                .expect('Location', '/401')
+                .get('/auth/register')
+                .expect('Content-type', /html/)
+                .expect(200)
                 .end((err, res) => {
                     if (err) {
                         return done(err);
@@ -31,76 +31,108 @@ describe('-- Admin tests --', () => {
         });
     });
 
-    describe('GET /auth/viewcars', () => {
-        it('expect to return 302', (done) => {
-            request(app)
-                .get('/auth/viewcars')
-                .expect(302)
-                .expect('Location', '/401')
-                .end((err, res) => {
-                    if (err) {
-                        return done(err);
-                    }
-
-                    return done();
-                });
-        });
-    });
-
-    describe('GET /auth/viewusers', () => {
-        it('expect to return 302', (done) => {
-            request(app)
-                .get('/auth/viewusers')
-                .expect(302)
-                .expect('Location', '/401')
-                .end((err, res) => {
-                    if (err) {
-                        return done(err);
-                    }
-
-                    return done();
-                });
-        });
-    });
-
-    describe('GET /auth/viewdeals', () => {
-        it('expect to return 302', (done) => {
-            request(app)
-                .get('/auth/viewdeals')
-                .expect(302)
-                .expect('Location', '/401')
-                .end((err, res) => {
-                    if (err) {
-                        return done(err);
-                    }
-
-                    return done();
-                });
-        });
-    });
-
-    describe('GET /auth/edituser/:id', () => {
-        it('expect to return 302', (done) => {
-            request(app)
-                .get('/auth/edituser/424242424242')
-                .expect(302)
-                .expect('Location', '/401')
-                .end((err, res) => {
-                    if (err) {
-                        return done(err);
-                    }
-
-                    return done();
-                });
-        });
-    });
-
-    describe('POST /auth/edituser/:id', () => {
+    describe('POST /auth/register', () => {
         it('expect to return 403', (done) => {
             request(app)
-                .post('/auth/edituser/424242424242')
+                .post('/auth/register')
                 .expect('Content-type', /html/)
                 .expect(403)
+                .end((err, res) => {
+                    if (err) {
+                        return done(err);
+                    }
+
+                    return done();
+                });
+        });
+    });
+
+    describe('GET /auth/login', () => {
+        it('expect to return 200', (done) => {
+            request(app)
+                .get('/auth/login')
+                .expect('Content-type', /html/)
+                .expect(200)
+                .end((err, res) => {
+                    if (err) {
+                        return done(err);
+                    }
+
+                    return done();
+                });
+        });
+    });
+
+    describe('POST /auth/login', () => {
+        it('expect to return 403', (done) => {
+            request(app)
+                .post('/auth/login')
+                .expect('Content-type', /html/)
+                .expect(403)
+                .end((err, res) => {
+                    if (err) {
+                        return done(err);
+                    }
+
+                    return done();
+                });
+        });
+    });
+
+    describe('GET /auth/profile', () => {
+        it('expect to return 302', (done) => {
+            request(app)
+                .get('/auth/profile')
+                .expect(302)
+                .expect('Location', '/auth/login')
+                .end((err, res) => {
+                    if (err) {
+                        return done(err);
+                    }
+
+                    return done();
+                });
+        });
+    });
+
+    describe('POST /auth/profile', () => {
+        it('expect to return 403', (done) => {
+            request(app)
+                .post('/auth/profile')
+                .expect('Content-type', /html/)
+                .expect(403)
+                .end((err, res) => {
+                    if (err) {
+                        return done(err);
+                    }
+
+                    return done();
+                });
+        });
+    });
+
+    describe('GET /auth/bookings', () => {
+        it('expect to return 302', (done) => {
+            request(app)
+                .get('/auth/bookings')
+                .expect(302)
+                .expect('Location', '/auth/login')
+                .end((err, res) => {
+                    if (err) {
+                        return done(err);
+                    }
+
+                    return done();
+                });
+        });
+    });
+
+    describe('GET /auth/logout', () => {
+        it('expect to return 302', (done) => {
+            request(app)
+                .get('/auth/logout')
+                .expect(302)
+                .expect('Location', '/')
                 .end((err, res) => {
                     if (err) {
                         return done(err);
