@@ -9,11 +9,22 @@ class Server {
         this.servers = [];
     }
 
-    run(config) {
+    getApp(config) {
         return async()
             .then(() => require('./../db').init(config.connectionString))
             .then((db) => require('./../data').init(db))
             .then((data) => require('./../app').init(data))
+            .then((app) => {
+                return Promise.resolve(app);
+            })
+            .catch((err) => {
+                console.log(err);
+                return Promise.reject(err);
+            });
+    }
+
+    run(config) {
+        return this.getApp(config)
             .then((app) => {
                 //neded for WebSockets
                 const httpServer = app.listen(config.port, () =>
@@ -22,6 +33,7 @@ class Server {
                     config,
                     httpServer
                 });
+                return Promise.resolve(httpServer);
             })
             .catch((err) => {
                 console.log(err);
