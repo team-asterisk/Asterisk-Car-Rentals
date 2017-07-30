@@ -89,8 +89,8 @@ class ApiController {
     }
 
     provideToken(req, res, next) {
-        const username = req.body.user;
-        const password = req.body.password;
+        const username = req.params.username;
+        const password = req.params.password;
         let token = '';
 
         console.log(username);
@@ -104,6 +104,7 @@ class ApiController {
 
                 if (bcrypt.compareSync(password, user.passHash)) {
                     token = jwt.sign(user, 'superSecret', {
+                        algorithm: 'HS256',
                         expiresIn: 60,
                     });
 
@@ -116,25 +117,6 @@ class ApiController {
 
                 return res.json({ success: false, message: 'Authentication failed. Wrong password.' });
             });
-    }
-
-    verifyToken(req, res, next) {
-        const token = req.body.token || req.query.token || req.headers['x-access-token'];
-
-        if (token) {
-            jwt.verify(token, 'superSecret', (err, decoded) => {
-                if (err) {
-                    return res.json({ success: false, message: 'Failed to authenticate token.' });
-                }
-                req.decoded = decoded;
-                return next();
-            });
-        }
-
-        return res.status(403).send({
-            success: false,
-            message: 'No token provided.',
-        });
     }
 }
 
