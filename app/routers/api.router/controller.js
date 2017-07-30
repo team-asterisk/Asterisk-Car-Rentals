@@ -1,7 +1,19 @@
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+
 class ApiController {
     constructor(data) {
         this.data = data;
         this.carHelper = require('../utils/carHelpers').init();
+    }
+
+    getWelcomeMessage(req, res) {
+        Promise.resolve(this.data.cars.findById(req.params.id))
+            .then((car) => {
+                return res.status(200).send({
+                    message: 'Welcome to the Asterisk - Car Rentals API!',
+                }, );
+            });
     }
 
     getCarDetails(req, res) {
@@ -74,6 +86,55 @@ class ApiController {
                     bookings,
                 });
             });
+    }
+
+    provideToken(req, res, next) {
+        const username = req.body.user;
+        const password = req.body.password;
+        let token = '';
+
+        console.log(username);
+        console.log(password);
+
+        this.data.users.findByUsername(username)
+            .then((user) => {
+                if (!user) {
+                    return res.json({ success: false, message: 'Authentication failed. User not found.' });
+                }
+
+                if (bcrypt.compareSync(password, user.passHash)) {
+                    token = jwt.sign(user, 'superSecret', {
+                        expiresIn: 60,
+                    });
+
+                    return res.json({
+                        success: true,
+                        message: 'Enjoy your token!',
+                        token: token,
+                    });
+                }
+
+                return res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+            });
+    }
+
+    verifyToken(req, res, next) {
+        const token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+        if (token) {
+            jwt.verify(token, 'superSecret', (err, decoded) => {
+                if (err) {
+                    return res.json({ success: false, message: 'Failed to authenticate token.' });
+                }
+                req.decoded = decoded;
+                return next();
+            });
+        }
+
+        return res.status(403).send({
+            success: false,
+            message: 'No token provided.',
+        });
     }
 }
 
