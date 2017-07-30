@@ -10,7 +10,7 @@ class ReviewController {
     addReview(req, res) {
         const review = req.body;
         const user = req.user;
-        this.data.reviews.create(review, user)
+        return this.data.reviews.create(review, user)
             .then(() => {
                 req.toastr.success('Thank you for your review!!', 'Success!');
                 return res.status(200).redirect('/');
