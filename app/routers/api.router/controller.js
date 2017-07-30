@@ -9,7 +9,7 @@ class ApiController {
             .then((car) => {
                 return res.status(200).send({
                     car,
-                }, );
+                });
             });
     }
 
@@ -26,7 +26,7 @@ class ApiController {
             .then((filteredCars) => {
                 return res.status(200).send({
                     filteredCars,
-                }, );
+                });
             });
     }
 
@@ -35,7 +35,7 @@ class ApiController {
             .then((deals) => {
                 return res.status(200).send({
                     deals,
-                }, );
+                });
             });
     }
 
@@ -44,7 +44,7 @@ class ApiController {
             .then((cars) => {
                 return res.status(200).send({
                     cars,
-                }, );
+                });
             });
     }
 
@@ -54,7 +54,7 @@ class ApiController {
             .then((cars) => {
                 return res.status(200).send({
                     cars,
-                }, );
+                });
             });
     }
 
@@ -72,7 +72,7 @@ class ApiController {
             .then((bookings) => {
                 return res.status(200).send({
                     bookings,
-                }, );
+                });
             });
     }
 }
