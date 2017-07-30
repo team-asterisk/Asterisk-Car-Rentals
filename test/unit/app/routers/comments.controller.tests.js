@@ -1,15 +1,21 @@
 const { expect } = require('chai');
-const { init } = require('../../../../app/routers/review.router/controller');
+const { init } = require('../../../../app/routers/comments.router/controller');
 
-describe('routers/review.router/controller', () => {
+describe('routers/comments.router/controller', () => {
     let data = null;
     let controller = null;
     const items = [1, 2, 3, 4];
+    const carId = '123456789';
 
     let req = null;
     let res = null;
 
     const options = {
+        body: 'text',
+        user: 'gosho',
+        params: {
+            id: carId,
+        },
         toastr: {
             success: () => 'success',
             error: () => 'error',
@@ -18,8 +24,8 @@ describe('routers/review.router/controller', () => {
 
     beforeEach(() => {
         data = {
-            reviews: {
-                create() {
+            cars: {
+                createComment() {
                     return Promise.resolve(items);
                 },
             },
@@ -30,26 +36,19 @@ describe('routers/review.router/controller', () => {
         res = require('../../_mocks/req-res-doncho').getResponseMock();
     });
 
-
-    it('expect getReviewForm to call res.render(auth/review)', () => {
-        return controller.addReview(req, res)
+    it('expect addComment to return status code 200', () => {
+        return controller.addComment(req, res)
             .then(() => {
-                expect(res.redirectUrl).to.be.equal('/');
-            });
-    });
-
-    it('expect addReview to redirect to "/" when successfull', () => {
-        return controller.addReview(req, res)
-            .then(() => {
-                expect(res.redirectUrl).to.be.equal('/');
+                expect(res.statusCode).to.equal(200);
+                expect(res.redirectUrl).to.be.equal('/car/' + carId);
             });
     });
 
     describe('when create returns error', () => {
         beforeEach(() => {
             data = {
-                reviews: {
-                    create() {
+                cars: {
+                    createComment() {
                         return Promise.reject('error');
                     },
                 },
@@ -60,10 +59,11 @@ describe('routers/review.router/controller', () => {
             res = require('../../_mocks/req-res-doncho').getResponseMock();
         });
 
-        it('expect addReview to redirect to "/auth/review"', () => {
-            return controller.addReview(req, res)
+        it('expect addComment to return status code 400', () => {
+            return controller.addComment(req, res)
                 .then(() => {
-                    expect(res.redirectUrl).to.be.equal('/auth/review');
+                    expect(res.statusCode).to.equal(400);
+                    expect(res.redirectUrl).to.be.equal('/car/' + carId);
                 });
         });
     });

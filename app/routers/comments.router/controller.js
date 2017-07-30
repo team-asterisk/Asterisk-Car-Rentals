@@ -7,7 +7,7 @@ class CommentController {
         const comment = req.body;
         const carId = req.params.id;
         const user = req.user;
-        this.data.cars.createComment(comment, user, carId)
+        return this.data.cars.createComment(comment, user, carId)
             .then(() => {
                 req.toastr.success('Thank you for your comment!', 'Success!');
                 return res.status(200).redirect('/car/' + carId);
