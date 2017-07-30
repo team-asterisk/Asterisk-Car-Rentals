@@ -68,7 +68,7 @@ gulp.task('pre-test', () => {
 
 gulp.task('pre-functional-test', () => {
     return gulp.src([
-        './app/routers/**/*.js'
+        './app/routers/**/router.js'
     ])
         .pipe(istanbul({
             includeUntested: true,
