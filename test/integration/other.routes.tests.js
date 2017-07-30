@@ -23,10 +23,10 @@ describe('-- Other routes tests --', () => {
                 .expect(200)
                 .end((err, res) => {
                     if (err) {
-                        done(err);
+                        return done(err);
                     }
 
-                    done();
+                    return done();
                 });
         });
     });
@@ -55,10 +55,10 @@ describe('-- Other routes tests --', () => {
                 .expect(404)
                 .end((err, res) => {
                     if (err) {
-                        done(err);
+                        return done(err);
                     }
 
-                    done();
+                    return done();
                 });
         });
     });
