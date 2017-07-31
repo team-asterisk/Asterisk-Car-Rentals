@@ -11,40 +11,40 @@ block main
                 .row
                     .col-xs-12.col-md-4.border-right-1px
                         .car-model
-                            = car.makemodel
+                            != car.makemodel
                         .car-price
                             if car.specialpriceactivated
-                                = 'From $' + car.specialprice + ' per Day'
+                                != 'From $' + car.specialprice + ' per Day'
                             else
-                                = 'From $' + car.baseprice + ' per Day'
+                                != 'From $' + car.baseprice + ' per Day'
                         span.car-image
                             img(width=250, src= '../' + car.carphotolink)
                     .col-xs-12.col-md-8
                         .car-info
                             .car-capacity
                                 span.car-passengers 
-                                    = car.adultscount + ' Adults'
+                                    != car.adultscount + ' Adults'
                                 span.car-bags 
-                                    = car.bagscount + ' Bags'
+                                    != car.bagscount + ' Bags'
                                 span.car-doors
-                                    = car.doorscount + ' Doors'
+                                    != car.doorscount + ' Doors'
                             .car-class
-                                = car.category
+                                != car.category
                             .row
                                 .col-xs-12.col-md-5
                                     ul.car-features
                                         li 
-                                            = 'Fuel type: ' + car.fueltype
+                                            != 'Fuel type: ' + car.fueltype
                                         li
-                                            = 'Mileage: ' + car.mileage + ' Mpg'
+                                            != 'Mileage: ' + car.mileage + ' Mpg'
                                         li
-                                            = 'Transmission: ' + car.transmission
+                                            != 'Transmission: ' + car.transmission
                                 .col-xs-12.col-md-5
                                     ul.car-features
                                         if car.airconditioner
                                             li Air Conditioning
                                         li
-                                            = 'Model ' + car.yearofmanufacture
+                                            != 'Model ' + car.yearofmanufacture
                                         li * Unlimited mileage included
                         a.book-now(id='book-now' href="/auth/bookings/add/" + car._id) Book Now
             #comments
@@ -54,9 +54,9 @@ block main
                         .single-comment
                             .comment-author
                                 strong
-                                    = 'Author: ' + comment.author
+                                    != 'Author: ' + comment.author
                             .comment-text 
-                                = comment.content
+                                != comment.content
                 else
                     if user
                         | No comments added. Be the first to comment this car!

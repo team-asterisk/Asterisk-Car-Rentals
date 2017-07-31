@@ -19,12 +19,12 @@ block adminpage
                     .col-xs-12
                         article.cars
                             .car-model
-                                = deal.makemodel
+                                != deal.makemodel
                             .car-category
-                                = deal.category
+                                != deal.category
                             .car-fuel-type
-                                = deal.fueltype
+                                != deal.fueltype
                             .car-price
-                                = '$' + deal.baseprice
+                                != '$' + deal.baseprice
                             .car-special-price
-                                = '$' + deal.specialprice
+                                != '$' + deal.specialprice

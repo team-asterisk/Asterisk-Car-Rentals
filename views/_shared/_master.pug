@@ -31,7 +31,7 @@ body
                             #my-account-logo
                                 img(src='/images/my-account.png', alt='my-account')
                             #my-account-link 
-                                =user.username
+                                !=user.username
                             span.caret
                         ul.dropdown-menu
                             if user.role == "admin"
