@@ -23,7 +23,13 @@ class Server {
         return this.getApp(config)
             .then((app) => {
                 //neded for WebSockets
-                this.instance = app.listen(config.port, () =>
+                const server = require('http').createServer(app);
+                this.instance = server;
+                return Promise.resolve(server);
+            })
+            .then((server) => require('./../sockets').init(server))
+            .then((io) => {
+                this.instance.listen(config.port, () =>
                     console.log(`Car Rentals is now live at ${config.url}:${config.port}`));
                 this.port = config.port;
                 this.connectionString = config.connectionString;
