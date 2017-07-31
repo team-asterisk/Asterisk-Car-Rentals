@@ -13,9 +13,9 @@ mixin comment
                             input(type='hidden', name='_csrf', value=csrfTokenFunc())
                             label(for='comment-form') Type your comment here
                             br
-                            textarea#review-text.form-control(rows='8', cols='30', name='comment')
+                            textarea#commenttext.form-control(rows='8', cols='30', name='comment')
                             br
-                            button.btn.btn-primary(type='submit') Send
+                            button#commentsend.btn.btn-primary(type='submit') Send
                 .modal-footer
                     .toastr
                         #{req.toastr.render()}

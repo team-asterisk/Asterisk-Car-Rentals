@@ -10,15 +10,15 @@ block main
                             strong Dashboard:
                     .col-xs-12.col-md-10.dashboard-pages
                         span
-                            a(href='/auth/addcar') Add New Car
+                            a(id='add-car-link' href='/auth/addcar') Add New Car
                         span
-                            a(href='/auth/viewusers') View Users
+                            a(id='view-users-link' href='/auth/viewusers') View Users
                         span
-                            a(href='/auth/viewcars') View Cars
+                            a(id='view-cars-link' href='/auth/viewcars') View Cars
                         span
-                            a(href='/auth/viewbookings') View Bookings
+                            a(id='view-bookings-link' href='/auth/viewbookings') View Bookings
                         span
-                            a(href='/auth/viewdeals') View Deals
+                            a(id='view-deals-link' href='/auth/viewdeals') View Deals
             .toastr
                 #{req.toastr.render()}
             block adminpage

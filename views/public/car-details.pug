@@ -46,7 +46,7 @@ block main
                                         li
                                             = 'Model ' + car.yearofmanufacture
                                         li * Unlimited mileage included
-                        a.book-now(href="/auth/bookings/add/" + car._id) Book Now
+                        a.book-now(id='book-now' href="/auth/bookings/add/" + car._id) Book Now
             #comments
                 h2#comments-title Comments
                 if car.comments.length   
