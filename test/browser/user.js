@@ -1,21 +1,39 @@
 /* eslint-disable no-unused-expressions */
 const { expect } = require('chai');
 const { setupDriver } = require('./utils/setup-driver');
+const { setupDb } = require('./utils/setup-db');
 const webdriver = require('selenium-webdriver');
 const { appUrl, connectionString, port } = require('./config');
 
 let server = null;
 const { Server } = require('./../../server');
 
-
-describe('Public - for unregistered visitors', () => {
+describe('Users - for registered visitors', () => {
     let driver = null;
 
-    // let driver =
-    //     new webdriver.Builder()
-    //         .build();
+    const waitSeconds = (seconds) => {
+        return new Promise((resolve) => {
+            setTimeout(resolve, seconds * 1000);
+        });
+    };
+
+    const waitFor = (selector) => {
+        try {
+            return driver.findElement(
+                webdriver.By.css(selector)
+            )
+                .catch((err) => {
+                    return waitFor(selector);
+                });
+        } catch (err) {
+            return waitSeconds(1)
+                .then(() => waitFor(selector));
+        }
+    };
 
     before(() => {
+        setupDb();
+
         server = new Server();
         driver = setupDriver('chrome');
 
@@ -126,10 +144,10 @@ describe('Public - for unregistered visitors', () => {
                 return el.click();
             })
             .then(() => {
-                return driver.getCurrentUrl();
+                return driver.getTitle();
             })
-            .then((url) => {
-                expect(url).to.contain(appUrl);
+            .then((title) => {
+                expect(title).to.contain('Home');
                 done();
             });
         });
@@ -179,10 +197,10 @@ describe('Public - for unregistered visitors', () => {
                 return el.click();
             })
             .then(() => {
-                return driver.getCurrentUrl();
+                return driver.getTitle();
             })
-            .then((url) => {
-                expect(url).to.contain(appUrl);
+            .then((title) => {
+                expect(title).to.contain('Home');
                 done();
             });
         });
@@ -513,12 +531,105 @@ describe('Public - for unregistered visitors', () => {
                 return el.click();
             })
             .then(() => {
-                return driver.getCurrentUrl();
+                return driver.getTitle();
             })
-            .then((url) => {
-                expect(url).to.contain(appUrl);
+            .then((title) => {
+                expect(title).to.contain('Home');
                 done();
             });
         });
     });
+
+    describe('Book a Car', () => {
+        it('expect user to book car successfully', (done) => {
+            driver.get(appUrl)
+            .then(() => {
+                return driver.findElement(
+                    webdriver.By.id('select_economy')
+                );
+            })
+            .then((el) => {
+                return el.click();
+            })
+            .then(() => {
+                return driver.findElement(
+                    webdriver.By.css('button[class="view-deal-button"]')
+                );
+            })
+            .then((el) => {
+                return el.click();
+            })
+            .then(() => {
+                return driver.findElement(
+                    webdriver.By.id('book-now')
+                );
+            })
+            .then((el) => {
+                return el.click();
+            })
+            .then(() => {
+                return driver.getCurrentUrl();
+            })
+            .then((url) => {
+                expect(url).to.contain(appUrl + '/auth/bookings/add');
+                done();
+            });
+        });
+    });
+
+    // describe('Add comment', () => {
+    //     it('expect user to add comment for a car successfully', (done) => {
+    //         driver.get(appUrl)
+    //         .then(() => {
+    //             return driver.findElement(
+    //                 webdriver.By.id('select_economy')
+    //             );
+    //         })
+    //         .then((el) => {
+    //             return el.click();
+    //         })
+    //         .then(() => {
+    //             return driver.findElement(
+    //                 webdriver.By.css('button[class="view-deal-button"]')
+    //             );
+    //         })
+    //         .then((el) => {
+    //             return el.click();
+    //         })
+    //         .then(() => {
+    //             return driver.findElement(
+    //                 webdriver.By.id('add-new-comment-btn')
+    //             );
+    //         })
+    //         .then((el) => {
+    //             return el.click();
+    //         })
+    //         .then(() => {
+    //             return waitFor('#commenttext');
+    //         })
+    //         .then((el) => {
+    //             return el.sendKeys('Very good car');
+    //         })
+    //         .then(() => {
+    //             return driver.findElement(
+    //                 webdriver.By.id('commentsend')
+    //             );
+    //         })
+    //         .then((el) => {
+    //             return el.click();
+    //         })
+    //         .then(() => {
+    //             return driver.findElement(
+    //                 webdriver.By.css('div.comment-text')
+    //             );
+    //         })
+    //         .then((el) => {
+    //             return el.getText();
+    //         })
+    //         .then((text) => {
+    //             expect(text).to.contain('Very good car');
+    //             done();
+    //         });
+    //     });
+    // });
 });

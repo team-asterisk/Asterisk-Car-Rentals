@@ -26,12 +26,12 @@ block adminpage
                     .col-xs-12
                         article.cars
                             .car-model
-                                = car.makemodel
+                                != car.makemodel
                             .car-category
-                                = car.category
+                                != car.category
                             .car-fuel-type
-                                = car.fueltype
+                                != car.fueltype
                             .car-price
-                                = '$' + car.baseprice
+                                != '$' + car.baseprice
                             .car-edit
-                                a(href='/auth/editcar/' + car._id) Edit
+                                a(class='edit-car-link' href='/auth/editcar/' + car._id) Edit

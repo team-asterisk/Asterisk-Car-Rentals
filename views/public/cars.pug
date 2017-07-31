@@ -24,23 +24,23 @@ block main
                                             .price-container
                                                 if car.specialpriceactivated
                                                     span.original-price
-                                                        = '$' + car.baseprice + ' / Day'
+                                                        != '$' + car.baseprice + ' / Day'
                                                 span.total-price
-                                                    = '$' + car.specialprice + ' / Day'
+                                                    != '$' + car.specialprice + ' / Day'
                                                 span.total Total
                                                 button.view-deal-button View Deal
                                             .car-info
                                                 .car-class
-                                                    = car.category
+                                                    != car.category
                                                 .car-model
-                                                    = car. makemodel
+                                                    != car. makemodel
                                                 .car-capacity
                                                     span.car-passengers 
-                                                        = car.adultscount + ' Adults'
+                                                        != car.adultscount + ' Adults'
                                                     span.car-bags 
-                                                        = car.bagscount + ' Bags'
+                                                        != car.bagscount + ' Bags'
                                                     span.car-doors
-                                                        = car.doorscount + ' Doors'
+                                                        != car.doorscount + ' Doors'
                                                 .offer-details * Unlimited mileage included
                                             span.car-image
                                                 img(src=car.carphotolink)
