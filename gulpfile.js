@@ -40,7 +40,7 @@ gulp.task('deploy', () => {
         });
 });
 
-gulp.task('start-server:default', () => {
+gulp.task('start-server:local', () => {
     server = new Server();
     return server.run(
         {
