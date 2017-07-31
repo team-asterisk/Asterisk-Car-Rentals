@@ -5,6 +5,7 @@
     "main": "server.js",
     "scripts": {
         "start": "gulp start-server:local",
+        "dev": "gulp start-server:develop",
         "deploy": "gulp deploy",
         "nodemon": "gulp nodemon",
         "test": "./node_modules/.bin/mocha test/integration/**/*.js",
