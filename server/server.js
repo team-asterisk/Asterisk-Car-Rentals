@@ -24,7 +24,7 @@ class Server {
             .then((app) => {
                 //neded for WebSockets
                 this.instance = app.listen(config.port, () =>
-                    console.log(`Car Rentals is now live at http://localhost:${config.port}`));
+                    console.log(`Car Rentals is now live at ${config.url}:${config.port}`));
                 this.port = config.port;
                 this.connectionString = config.connectionString;
                 return Promise.resolve(this.instance);

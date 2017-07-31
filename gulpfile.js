@@ -6,16 +6,14 @@ const gulp = require('gulp');
 const istanbul = require('gulp-istanbul');
 const mocha = require('gulp-mocha');
 
-const defaultConfig = require('./config');
-
 const gulpConfig = {
     connectionString: {
-        default: defaultConfig.connectionString,
+        default: 'mongodb://localhost/car-rentals-db',
         browserTests: 'mongodb://localhost/car-rentals-db-browser-tests',
         deploy: 'mongodb://asterisk:hardtoguess@35.157.1.2:27017/test-cr-connection?authSource=admin'
     },
     port: {
-        default: defaultConfig.port,
+        default: 3001,
         browserTests: 3003,
         deploy: 80
     },
@@ -24,7 +22,7 @@ const gulpConfig = {
     },
     url: {
         local: 'http://localhost',
-        amazon: 'http://35.158.166.9/'
+        deploy: 'http://35.158.166.9/'
     }
 };
 
@@ -37,7 +35,8 @@ gulp.task('deploy', () => {
         {
             connectionString: gulpConfig.connectionString.deploy,
             port: gulpConfig.port.deploy,
-            sessionSecret: gulpConfig.sessionSecret.default
+            sessionSecret: gulpConfig.sessionSecret.default,
+            url: gulpConfig.url.deploy
         });
 });
 
@@ -45,8 +44,10 @@ gulp.task('start-server:default', () => {
     server = new Server();
     return server.run(
         {
-            connectionString: gulpConfig.connectionString.default,
-            port: gulpConfig.port.default
+            connectionString: gulpConfig.connectionString.deploy,
+            port: gulpConfig.port.default,
+            sessionSecret: gulpConfig.sessionSecret.default,
+            url: gulpConfig.url.local
         });
 
 });

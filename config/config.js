@@ -1,7 +1,7 @@
-const port = 3001;
-const connectionString = 'mongodb://localhost/car-rentals-db';
-// const connectionString = 'mongodb://asterisk:hardtoguess@35.157.1.2:27017/test-cr-connection?authSource=admin';
+const { gulpConfig } = require('./../gulpfile');
 
-const sessionSecret = 'Purple Unicorn';
-
-module.exports = { port, connectionString, sessionSecret };
+const port = gulpConfig.port.default;
+const connectionString = gulpConfig.connectionString.default;
+const sessionSecret = gulpConfig.sessionSecret.default;
+const url = gulpConfig.url.local;
+module.exports = { port, connectionString, sessionSecret, url };
