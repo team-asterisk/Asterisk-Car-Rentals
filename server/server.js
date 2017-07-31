@@ -4,7 +4,6 @@ const async = () => {
 };
 
 class Server {
-
     getApp(config) {
         return async()
             .then(() => require('./../db').init(config.connectionString))
@@ -24,6 +23,7 @@ class Server {
             .then(({ http }) => {
                 this.instance = http;
                 this.instance.listen(config.port, () =>
+                    // eslint-disable-next-line max-len
                     console.log(`Car Rentals is now live at ${config.url}:${config.port}`));
                 this.port = config.port;
                 this.connectionString = config.connectionString;
@@ -55,12 +55,12 @@ class Server {
                             return db.dropDatabase();
                         })
                         .then(() => {
+                            // eslint-disable-next-line max-len
                             console.log(`Database: ${this.connectionString} sucessfully dropped`);
                         })
                         .catch((err) => {
                             console.log(err);
                         });
-
                 }
                 return Promise.resolve();
             })

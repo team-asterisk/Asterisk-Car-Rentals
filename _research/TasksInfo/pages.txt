@@ -1,0 +1,16 @@
+--== dynamic pages ==--
+
+public pages
+- home - nav + logo in header, banner, some car categories, some info, some reviews (from registered users), footer
+- login/register
+- cars - all cars (eventually sorting by: price, category (small to large; large to small))
+- search cars - shows only cars that are available for the requested period
+- car details - for a single car, comments (only auth users can post comment)
+- special offers - only cars that have discounted price, ordered by category (compact, economy, premium etc.)
+
+pages for auth users
+- user profile - name, telephone, email etc. (he can update all personal info and password)
+	- if the user is admin - he also have administration page and there he can change info about cars and also select wich cars to have special offer and by how much (type % and it calculate the special price and also show's original price with style: line-trough)
+- my bookings/reservations - history of all previous bookings
+- booking/reservation of a car - choosing dates from calendar, extras (gps), additional insurance etc.
+- leave a review (about this rent-a-car service)
