@@ -11,11 +11,13 @@ const defaultConfig = require('./config');
 const gulpConfig = {
     connectionString: {
         default: defaultConfig.connectionString,
-        browserTests: 'mongodb://localhost/car-rentals-db-browser-tests'
+        browserTests: 'mongodb://localhost/car-rentals-db-browser-tests',
+        deploy: 'mongodb://asterisk:hardtoguess@35.157.1.2:27017/test-cr-connection?authSource=admin'
     },
     port: {
         default: defaultConfig.port,
-        browserTests: 3003
+        browserTests: 3003,
+        deploy: 80
     },
     url: {
         local: 'http://localhost',
@@ -25,6 +27,15 @@ const gulpConfig = {
 
 const { Server } = require('./server');
 let server = null;
+
+gulp.task('deploy', () => {
+    server = new Server();
+    return server.run(
+        {
+            connectionString: gulpConfig.connectionString.deploy,
+            port: gulpConfig.port.deploy
+        });
+});
 
 gulp.task('start-server:default', () => {
     server = new Server();

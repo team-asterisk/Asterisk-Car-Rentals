@@ -8,7 +8,8 @@
         "nodemon": "gulp nodemon",
         "test": "./node_modules/.bin/mocha test/integration/**/*.js",
         "unit": "./node_modules/.bin/mocha test/unit/app/**/*.js",
-        "cover": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha ./test/unit/**/*.js"
+        "cover": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha ./test/unit/**/*.js",
+        "deploy": "gulp deploy"
     },
     "repository": {
         "type": "git",
