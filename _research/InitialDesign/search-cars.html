@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rentals</title>
+    <link rel="icon" href="./images/favicon.ico">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+<header id="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-2 pull-left top-height">
+                <div id="logo">
+                    <a href="/home"><img src="./images/logo.png" alt="Car Rentals logo"></a>
+                </div>
+            </div>
+            <div class="col-xs-5 col-md-4 pull-left top-height">
+                <div id="nav">
+                    <div><a href="#">Cars</a></div>
+                    <div><a href="#">Deals</a></div>
+                </div>
+            </div>
+            <div class="col-xs-7 col-md-6 pull-right">
+                <div id="top-right-panel">
+                    <div id="login-register">
+                        <a href="/sign-in-up">
+                            <div id="my-account-logo">
+                                <img src="./images/my-account.png" alt="my-account">
+                            </div>
+                            <div id="my-account-link">My Account</div>
+                        </a>
+                        <a id="logout-link" class="hidden" href="#/logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!--<div class="search-form-container">
+    <div class="search-form">
+        <input type="text" class="search-form-input" placeholder="From Where" maxlength="90">
+        
+        <input type="text" class="search-form-input" placeholder="Pickup Date">
+
+        <select id="pickup_hour" name="pickup_hour" title="Noon">
+        <option value="1" title="8:00 am">8:00 am</option>
+        <option value="2" title="9:00 am">9:00 am</option>
+        <option value="3" title="10:00 am">10:00 am</option>
+        <option value="4" title="11:00 am">11:00 am</option>
+        <option value="5" title="12:00 am" selected="selected">12:00 am</option>
+        <option value="6" title="1:00 pm">1:00 pm</option>
+        <option value="7" title="2:00 pm">2:00 pm</option>
+        <option value="8" title="3:00 pm">3:00 pm</option>
+        <option value="9" title="4:00 pm">4:00 pm</option>
+        <option value="10" title="5:00 pm">5:00 pm</option>
+        <option value="11" title="6:00 pm">6:00 pm</option>
+        </select>
+
+        <input type="text" class="search-form-input" placeholder="Dropoff Date">
+    
+        <select id="dropoff_hour" name="dropoff_hour" title="Noon">
+        <option value="1" title="8:00 am">8:00 am</option>
+        <option value="2" title="9:00 am">9:00 am</option>
+        <option value="3" title="10:00 am">10:00 am</option>
+        <option value="4" title="11:00 am">11:00 am</option>
+        <option value="5" title="12:00 am" selected="selected">12:00 am</option>
+        <option value="6" title="1:00 pm">1:00 pm</option>
+        <option value="7" title="2:00 pm">2:00 pm</option>
+        <option value="8" title="3:00 pm">3:00 pm</option>
+        <option value="9" title="4:00 pm">4:00 pm</option>
+        <option value="10" title="5:00 pm">5:00 pm</option>
+        <option value="11" title="6:00 pm">6:00 pm</option>
+        </select>
+        
+        <button class="search-form-btn" type="submit">
+            <span>Search</span>
+        </button>
+    </div>
+</div>-->
+
+<div id="main">
+    
+    <div class="container">
+        <div id="car-rentals">
+            <div class="cars-title">Showing cars available for your chosen dates:
+                <span class="chosen-dates">22.07 - 24.07</span>
+            </div>
+            <div class="sort-cars-by">
+                <span class="sort-by-text">Sort by:</span>
+                <span>Price</span>
+                <select name="sort_by_category" id="sort_by_category">
+                    <option value="" disabled selected>Category</option>
+                    <option value="small_to_large" title="small to large">small to large</option>
+                    <option value="large_to_small" title="large to small">large to small</option>
+                </select>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <article class="car-single-search">
+                        <a href="#">
+                            <div class="car-category">
+                                <div class="price-container">
+                                    <span class="total-price">$50 / day</span>
+                                    <span class="total">Total</span>
+                                    <button class="view-deal-button">View Deal</button>
+                                </div>
+                                <div class="car-info">
+                                    <div class="car-class">Economy</div>
+                                    <div class="car-model">Toyota Corolla or similar</div>
+                                    <div class="car-capacity">
+                                        <span class="car-passengers">5 Adults</span>
+                                        <span class="car-bags">2 Bags</span>
+                                        <span class="car-doors">2-4 Doors</span>
+                                    </div>
+                                    <div class="offer-details">* Unlimited mileage included</div>
+                                </div>
+                                <span class="car-image"><img src="./images/4door-sedan.png" alt="Economy car"></span>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+                <div class="col-xs-12">
+                    <article class="car-single-search">
+                        <a href="#">
+                            <div class="car-category">
+                                <div class="price-container">
+                                    <span class="total-price">$50 / day</span>
+                                    <span class="total">Total</span>
+                                    <button class="view-deal-button">View Deal</button>
+                                </div>
+                                <div class="car-info">
+                                    <div class="car-class">Economy</div>
+                                    <div class="car-model">Toyota Corolla or similar</div>
+                                    <div class="car-capacity">
+                                        <span class="car-passengers">5 Adults</span>
+                                        <span class="car-bags">2 Bags</span>
+                                        <span class="car-doors">2-4 Doors</span>
+                                    </div>
+                                    <div class="offer-details">* Unlimited mileage included</div>
+                                </div>
+                                <span class="car-image"><img src="./images/4door-sedan.png" alt="Economy car"></span>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+                <div class="col-xs-12">
+                    <article class="car-single-search">
+                        <a href="#">
+                            <div class="car-category">
+                                <div class="price-container">
+                                    <span class="total-price">$50 / day</span>
+                                    <span class="total">Total</span>
+                                    <button class="view-deal-button">View Deal</button>
+                                </div>
+                                <div class="car-info">
+                                    <div class="car-class">Economy</div>
+                                    <div class="car-model">Toyota Corolla or similar</div>
+                                    <div class="car-capacity">
+                                        <span class="car-passengers">5 Adults</span>
+                                        <span class="car-bags">2 Bags</span>
+                                        <span class="car-doors">2-4 Doors</span>
+                                    </div>
+                                    <div class="offer-details">* Unlimited mileage included</div>
+                                </div>
+                                <span class="car-image"><img src="./images/4door-sedan.png" alt="Economy car"></span>
+                            </div>
+                        </a>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer class="text-center footer">
+    <div class="row">
+        <div>
+            <small><strong>Author:</strong> <a href="https://github.com/???" target="_blank">Team Asterisk</a></small>
+            <br>
+            <small><strong>&copy; 2017</strong></small>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

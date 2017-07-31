@@ -47,7 +47,7 @@ body
                                 a(href='/auth/logout') Logout
                 else
                     li.register
-                        a(href='/auth/register') Regiser
+                        a(href='/auth/register') Register
                     li.login
                         a(href='/auth/login') Login
 
@@ -67,7 +67,10 @@ body
             small
                 strong 
                     | © 2017
-    script(src='/libs/bootstrap/dist/js/bootstrap.min.js')
-    script(src='/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')
-    script(src='/libs/toastr/build/toastr.min.js')
-    script(src='/js/main.js')
+    block body-end-scripts
+        script(src='/libs/bootstrap/dist/js/bootstrap.min.js')
+        script(src='/libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')
+        script(src='/libs/toastr/build/toastr.min.js')
+        script(src='/js/main.js')
+        script(src="/socket.io/socket.io.js")
+        script(src='/js/sockets.js')         
