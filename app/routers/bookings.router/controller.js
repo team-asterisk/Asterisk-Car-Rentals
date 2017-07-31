@@ -3,8 +3,9 @@ const carHelper = require('../utils/carHelpers').init();
 const userHelper = require('../utils/userHelpers').init();
 
 class BookingsController {
-    constructor(data) {
+    constructor(data, io) {
         this.data = data;
+        this.io = io;
     }
 
     getAddBookingMenu(req, res) {
@@ -71,10 +72,10 @@ class BookingsController {
         return this.data.cars.findById(carId)
             .then((car) => {
                 if (carHelper.checkIfCarIsBooked(
-                        car,
-                        newBooking.startdate,
-                        newBooking.enddate
-                    )) {
+                    car,
+                    newBooking.startdate,
+                    newBooking.enddate
+                )) {
                     carHelper.addBookedDatesToCar(
                         car,
                         newBooking.startdate,
@@ -98,11 +99,12 @@ class BookingsController {
                 return userHelper.addBookingToUser(car, user, newBooking);
             })
             .then((updatedUser) => {
-                return this.data.users.updateById(updatedUser);
+                return Promise.all([this.data.users.updateById(updatedUser), Promise.resolve(updatedUser)]);
             })
-            .then(() => {
+            .then((values) => {
+                const user = values[1];
+                this.io.emit('user booking', { username: user.username });
                 req.toastr.success('Thank you for booking this car!', 'Thank you!');
-                // BOOKINGSOCKET
                 return res.status(200).redirect('/auth/bookings');
             })
             .catch((err) => {
@@ -125,12 +127,12 @@ class BookingsController {
             .then((car) => {
                 carHelper.removeBookedDatesFromCar(car, bookingId);
                 if (carHelper.checkOtherDates(
-                        car,
-                        newBooking.startdate,
-                        newBooking.enddate,
-                        current.startdate,
-                        current.enddate
-                    )) {
+                    car,
+                    newBooking.startdate,
+                    newBooking.enddate,
+                    current.startdate,
+                    current.enddate
+                )) {
                     carHelper.addBookedDatesToCar(
                         car,
                         newBooking.startdate,
@@ -228,8 +230,8 @@ class BookingsController {
     }
 }
 
-const init = (data) => {
-    return new BookingsController(data);
+const init = (data, io) => {
+    return new BookingsController(data, io);
 };
 
 module.exports = { init };

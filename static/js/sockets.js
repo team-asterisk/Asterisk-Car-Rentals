@@ -1,20 +1,17 @@
-//PORTA E MNOGO VAJEN
 var socket = io.connect('http://localhost:3001');
 
-socket.on('user logged out', (data) => {
-    // toastr.error('To all clients', 'Attention!');
-    toastr.info('User has book', 'Booking added',
+// io.emits server
+
+socket.on('user booking', (data) => {
+    toastr.success('New Booking', `${data.username} has just made a booking!!!`,
         {
-            animate: 'flyRight',
-            toastLife: 5000,
-            'progressBar': false,
-            'positionClass': 'toast-top-center',
+            'closeButton': true,
+            'toastLife': 5000,
             'preventDuplicates': false,
-            'showDuration': '1000',
-            'hideDuration': '1000',
-            'timeOut': '1200',
-            'extendedTimeOut': '1000',
-            onclick: function () { window.location.assign("http://localhost:3001/auth/viewbookings"); }
+            'positionClass': 'toast-top-left',
+            'timeOut': '0',
+            'extendedTimeOut': '0',
+            'onclick': function () { window.location.assign("http://localhost:3001/auth/viewbookings"); }
         })
 
 });

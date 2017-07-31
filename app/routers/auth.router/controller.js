@@ -29,7 +29,6 @@ class AuthController {
 
     logOut(req, res) {
         req.logout();
-        this.io.emit('user logged out', { text: 'user logged out' });
         return res.status(200).redirect('/');
     }
 
