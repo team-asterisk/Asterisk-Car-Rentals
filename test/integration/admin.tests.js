@@ -6,14 +6,14 @@ const { Server } = require('./../../server');
 
 
 describe('-- Admin tests --', () => {
-    
+
     let app = null;
 
     beforeEach(() => {
         const server = new Server();
         return server.getApp(config)
-            .then((_app) => {
-                app = _app;
+            .then((obj) => {
+                app = obj.app;
             });
     });
 

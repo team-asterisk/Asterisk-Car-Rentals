@@ -10,8 +10,8 @@ describe('-- Bookings tests --', () => {
     beforeEach(() => {
         const server = new Server();
         return server.getApp(config)
-            .then((_app) => {
-                app = _app;
+            .then((obj) => {
+                app = obj.app;
             });
     });
 

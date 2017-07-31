@@ -5,14 +5,14 @@ const config = require('./config');
 const { Server } = require('./../../server');
 
 describe('-- Other routes tests --', () => {
-    const connectionString = 'mongodb://localhost/car-rentals-db-tests';
+    const connectionString = config.connectionString;
     let app = null;
 
     beforeEach(() => {
         const server = new Server();
         return server.getApp(config)
-            .then((_app) => {
-                app = _app;
+            .then((obj) => {
+                app = obj.app;
             });
     });
 
