@@ -62,7 +62,7 @@ class BookingsController {
             });
     }
 
-    addBooking(req, res, message) {
+    addBooking(req, res) {
         const carId = req.params.id;
         const newBooking = req.body;
         newBooking._id = new ObjectID();
@@ -81,13 +81,18 @@ class BookingsController {
                         newBooking.enddate,
                         newBooking._id
                     );
-
-                    return this.data.cars.updateById(car)
-                        .then((updated) => {
-                            return Promise.resolve(updated);
-                        });
+                    return Promise.resolve(car);
                 }
-                return Promise.reject('Cannot book the car for these dates!');
+                throw new Error('Cannot book the car for these dates!');
+            })
+            .then((car) => {
+                return this.data.cars.updateById(car)
+                    .then(() => {
+                        return Promise.resolve(car);
+                    })
+                    .catch((err) => {
+                        return Promise.reject(err);
+                    });
             })
             .then((car) => {
                 return userHelper.addBookingToUser(car, user, newBooking);
@@ -96,7 +101,7 @@ class BookingsController {
                 return this.data.users.updateById(updatedUser);
             })
             .then(() => {
-                req.toastr.success(message, 'Thank you!');
+                req.toastr.success('Thank you for booking this car!', 'Thank you!');
                 return res.status(200).redirect('/auth/bookings');
             })
             .catch((err) => {
@@ -106,7 +111,7 @@ class BookingsController {
             });
     }
 
-    editBooking(req, res, message) {
+    editBooking(req, res) {
         const bookingId = req.params.id;
         const newBooking = req.body;
         newBooking._id = new ObjectID();
@@ -149,7 +154,7 @@ class BookingsController {
                 return this.data.users.updateById(updatedUser);
             })
             .then(() => {
-                req.toastr.success(message, 'Thank you!');
+                req.toastr.success('Successfully edited booking dates!', 'Thank you!');
                 return res.status(200).redirect('/auth/bookings');
             })
             .catch((err) => {

@@ -27,6 +27,15 @@ class CarHelper {
     // s1, e1 - (start, end of first period)
     // s2, e2 - (start, end of second period)
     checkIfPeriodsCollide(s1, e1, s2, e2) {
+        const now = new Date().valueOf();
+        if (s2 < now || e2 < now || isNaN(s2) || isNaN(e2)) {
+            throw new Error('New dates are not correct! Choose future dates!');
+        }
+
+        if (s1 < now || e1 < now) {
+            throw new Error('Cannot change expired or in progress reservations!');
+        }
+
         return (s1 >= s2 && s1 <= e2) || (s1 <= s2 && e1 >= s2);
     }
 
