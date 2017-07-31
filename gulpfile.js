@@ -19,6 +19,9 @@ const gulpConfig = {
         browserTests: 3003,
         deploy: 80
     },
+    sessionSecret: {
+        default: 'Purple Unicorn'
+    },
     url: {
         local: 'http://localhost',
         amazon: 'http://35.158.166.9/'
@@ -33,7 +36,8 @@ gulp.task('deploy', () => {
     return server.run(
         {
             connectionString: gulpConfig.connectionString.deploy,
-            port: gulpConfig.port.deploy
+            port: gulpConfig.port.deploy,
+            sessionSecret: gulpConfig.sessionSecret.default
         });
 });
 

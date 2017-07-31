@@ -5,10 +5,10 @@ const MongoStore = require('connect-mongo')(session);
 const bcrypt = require('bcrypt');
 const csrf = require('csurf');
 
-const config = require('../../config');
 const csrfProtection = csrf();
 
-const applyTo = (app, data) => {
+const applyTo = (app, data, config) => {
+
     passport.use(new Strategy((username, password, done) => {
         data.users.findByUsername(username)
             .then((user) => {
