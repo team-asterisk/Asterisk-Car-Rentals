@@ -27,15 +27,15 @@ block main
                         br
                         label(for='startdate') Pick-up date
                         br
-                        input.search-form-input.datepicker-from(name='startdate' type='text', placeholder='Pickup Date')
+                        input.search-form-input.datepicker-from(id='pickup_date' name='startdate' type='text', placeholder='Pickup Date')
                         br
                         label(for='enddate') Drop-off date
                         br
-                        input.search-form-input.datepicker-to(name='enddate' type='text', placeholder='Dropoff Date')
+                        input.search-form-input.datepicker-to(id='dropoff_date' name='enddate' type='text', placeholder='Dropoff Date')
                         br
                         h3
                             | Total price: 
                             span.automatic-price(base=context.car.baseprice, special=context.car.specialprice, activated=context.car.specialpriceactivated)
                             span $
-                        button.add-booking-button.btn.btn-primary(type='submit') Add booking
+                        button.add-booking-button.btn.btn-primary(id='add_booking' type='submit') Add booking
     != messages()

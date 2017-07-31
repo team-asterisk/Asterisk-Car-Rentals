@@ -11,26 +11,6 @@ const { Server } = require('./../../server');
 describe('Users - for registered visitors', () => {
     let driver = null;
 
-    const waitSeconds = (seconds) => {
-        return new Promise((resolve) => {
-            setTimeout(resolve, seconds * 1000);
-        });
-    };
-
-    const waitFor = (selector) => {
-        try {
-            return driver.findElement(
-                webdriver.By.css(selector)
-            )
-                .catch((err) => {
-                    return waitFor(selector);
-                });
-        } catch (err) {
-            return waitSeconds(1)
-                .then(() => waitFor(selector));
-        }
-    };
-
     before(() => {
         setupDb();
 
@@ -540,8 +520,8 @@ describe('Users - for registered visitors', () => {
         });
     });
 
-    describe('Book a Car', () => {
-        it('expect user to book car successfully', (done) => {
+    describe('Load Book a Car page', () => {
+        it('expect user to load book car page successfully', (done) => {
             driver.get(appUrl)
             .then(() => {
                 return driver.findElement(
@@ -576,60 +556,4 @@ describe('Users - for registered visitors', () => {
             });
         });
     });
-
-    // describe('Add comment', () => {
-    //     it('expect user to add comment for a car successfully', (done) => {
-    //         driver.get(appUrl)
-    //         .then(() => {
-    //             return driver.findElement(
-    //                 webdriver.By.id('select_economy')
-    //             );
-    //         })
-    //         .then((el) => {
-    //             return el.click();
-    //         })
-    //         .then(() => {
-    //             return driver.findElement(
-    //                 webdriver.By.css('button[class="view-deal-button"]')
-    //             );
-    //         })
-    //         .then((el) => {
-    //             return el.click();
-    //         })
-    //         .then(() => {
-    //             return driver.findElement(
-    //                 webdriver.By.id('add-new-comment-btn')
-    //             );
-    //         })
-    //         .then((el) => {
-    //             return el.click();
-    //         })
-    //         .then(() => {
-    //             return waitFor('#commenttext');
-    //         })
-    //         .then((el) => {
-    //             return el.sendKeys('Very good car');
-    //         })
-    //         .then(() => {
-    //             return driver.findElement(
-    //                 webdriver.By.id('commentsend')
-    //             );
-    //         })
-    //         .then((el) => {
-    //             return el.click();
-    //         })
-    //         .then(() => {
-    //             return driver.findElement(
-    //                 webdriver.By.css('div.comment-text')
-    //             );
-    //         })
-    //         .then((el) => {
-    //             return el.getText();
-    //         })
-    //         .then((text) => {
-    //             expect(text).to.contain('Very good car');
-    //             done();
-    //         });
-    //     });
-    // });
 });
