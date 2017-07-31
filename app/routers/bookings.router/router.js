@@ -1,8 +1,4 @@
 const { Router } = require('express');
-const messages = {
-    add: 'Thank you for booking this car!',
-    edit: 'Successfully edited booking dates!',
-};
 
 const attachTo = (app, data) => {
     const router = new Router();
@@ -20,10 +16,10 @@ const attachTo = (app, data) => {
             return controller.getEditBookingMenu(req, res);
         })
         .post('/auth/bookings/add/:id', authController.verifyIsUser, (req, res) => {
-            return controller.addBooking(req, res, messages.add);
+            return controller.addBooking(req, res);
         })
         .post('/auth/bookings/:id', authController.verifyIsUser, (req, res) => {
-            return controller.editBooking(req, res, messages.edit);
+            return controller.editBooking(req, res);
         });
 
     app.use(router);

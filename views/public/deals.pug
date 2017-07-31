@@ -18,27 +18,27 @@ block main
                                         .car-category
                                             .price-container
                                                 span.original-price
-                                                    = '$' + car.baseprice + ' / Day'
+                                                    != '$' + car.baseprice + ' / Day'
                                                 span.total-price
-                                                    = '$' + car.specialprice + ' / Day'
+                                                    != '$' + car.specialprice + ' / Day'
                                                 span.total Total
                                                 button.view-deal-button View Deal
                                             .car-info
                                                 .car-class
-                                                    = car.category
+                                                    != car.category
                                                 .car-model
-                                                    = car. makemodel
+                                                    != car. makemodel
                                                 .car-capacity
                                                     span.car-passengers 
-                                                        = car.adultscount + ' Adults'
+                                                        != car.adultscount + ' Adults'
                                                     span.car-bags 
-                                                        = car.bagscount + ' Bags'
+                                                        != car.bagscount + ' Bags'
                                                     span.car-doors
-                                                        = car.doorscount + ' Doors'
+                                                        != car.doorscount + ' Doors'
                                                 .offer-details * Unlimited mileage included
                                                 - saving = ((1 - car.specialprice/car.baseprice)*100).toFixed(2)
                                                 .save-percent
-                                                    = 'Get this deal - Save ' + saving + '%'
+                                                    != 'Get this deal - Save ' + saving + '%'
                                             span.car-image
                                                 img(src=car.carphotolink)
                 else

@@ -1,21 +1,19 @@
 /* eslint-disable no-unused-expressions */
 const { expect } = require('chai');
 const { setupDriver } = require('./utils/setup-driver');
+const { setupDb } = require('./utils/setup-db');
 const webdriver = require('selenium-webdriver');
 const { appUrl, connectionString, port } = require('./config');
 
 let server = null;
 const { Server } = require('./../../server');
 
-
-describe('Public - for unregistered visitors', () => {
+describe('Users - for registered visitors', () => {
     let driver = null;
 
-    // let driver =
-    //     new webdriver.Builder()
-    //         .build();
-
     before(() => {
+        setupDb();
+
         server = new Server();
         driver = setupDriver('chrome');
 
@@ -126,10 +124,10 @@ describe('Public - for unregistered visitors', () => {
                 return el.click();
             })
             .then(() => {
-                return driver.getCurrentUrl();
+                return driver.getTitle();
             })
-            .then((url) => {
-                expect(url).to.contain(appUrl);
+            .then((title) => {
+                expect(title).to.contain('Home');
                 done();
             });
         });
@@ -179,10 +177,10 @@ describe('Public - for unregistered visitors', () => {
                 return el.click();
             })
             .then(() => {
-                return driver.getCurrentUrl();
+                return driver.getTitle();
             })
-            .then((url) => {
-                expect(url).to.contain(appUrl);
+            .then((title) => {
+                expect(title).to.contain('Home');
                 done();
             });
         });
@@ -513,10 +511,47 @@ describe('Public - for unregistered visitors', () => {
                 return el.click();
             })
             .then(() => {
+                return driver.getTitle();
+            })
+            .then((title) => {
+                expect(title).to.contain('Home');
+                done();
+            });
+        });
+    });
+
+    describe('Load Book a Car page', () => {
+        it('expect user to load book car page successfully', (done) => {
+            driver.get(appUrl)
+            .then(() => {
+                return driver.findElement(
+                    webdriver.By.id('select_economy')
+                );
+            })
+            .then((el) => {
+                return el.click();
+            })
+            .then(() => {
+                return driver.findElement(
+                    webdriver.By.css('button[class="view-deal-button"]')
+                );
+            })
+            .then((el) => {
+                return el.click();
+            })
+            .then(() => {
+                return driver.findElement(
+                    webdriver.By.id('book-now')
+                );
+            })
+            .then((el) => {
+                return el.click();
+            })
+            .then(() => {
                 return driver.getCurrentUrl();
             })
             .then((url) => {
-                expect(url).to.contain(appUrl);
+                expect(url).to.contain(appUrl + '/auth/bookings/add');
                 done();
             });
         });

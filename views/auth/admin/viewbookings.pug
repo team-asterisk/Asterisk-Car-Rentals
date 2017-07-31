@@ -21,9 +21,9 @@ block adminpage
                         .col-xs-12
                             article.booking
                                 .booking-user
-                                    =user.username
+                                    !=user.username
                                 .booking-car-model
-                                    =b.car.makemodel
+                                    !=b.car.makemodel
                                 .booking-pickup
                                     =moment(b.startdate).format('YYYY-MM-DD')
                                 .booking-dropoff

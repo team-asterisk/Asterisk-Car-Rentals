@@ -17,11 +17,11 @@ block topContainer
                     option(value='Premium', title='Premium') Premium
                     option(value='SUV', title='SUV') SUV
                     option(value='Van', title='Van') Van
-                input.search-form-input.datepicker-from(name='pickup_date' type='text', placeholder='Pickup Date')
+                input.search-form-input.datepicker-from(id='pickup_date' name='pickup_date' type='text', placeholder='Pickup Date')
                 
-                input.search-form-input.datepicker-to(name='dropoff_date' type='text', placeholder='Dropoff Date')
+                input.search-form-input.datepicker-to(id='dropoff_date' name='dropoff_date' type='text', placeholder='Dropoff Date')
                 
-                button.search-form-btn(type='submit')
+                button.search-form-btn(id='search_submit' type='submit')
                     span Search
 
 
@@ -40,7 +40,7 @@ block main
                                     span.passengers-bags 2 Adults, 2 Bags 
                                     span.car-image
                                         img(src='./images/car-economy.png', alt='Economy car')
-                                    button.car-select-button Select
+                                    button.car-select-button(id='select_economy') Select
                     .col-xs-12.col-sm-6.col-md-4.eq-height
                         article.car-single-compact
                             a(href='/cars/Compact')
@@ -50,7 +50,7 @@ block main
                                     span.passengers-bags 4 Adults, 2 Bags 
                                     span.car-image
                                         img(src='./images/car-compact.png', alt='Compact car')
-                                    button.car-select-button Select
+                                    button.car-select-button(id='select_compact') Select
                     .col-xs-12.col-sm-6.col-md-4.eq-height
                         article.car-single-compact
                             a(href='/cars/FullSize')
@@ -60,7 +60,7 @@ block main
                                     span.passengers-bags 5 Adults, 2 Bags 
                                     span.car-image
                                         img(src='./images/car-full-size.png', alt='Full-Size car')
-                                    button.car-select-button Select
+                                    button.car-select-button(id='select_fullsize') Select
                 .row.eq-height
                     .col-xs-12.col-sm-6.col-md-4.eq-height
                         article.car-single-compact
@@ -71,7 +71,7 @@ block main
                                     span.passengers-bags 5 Adults, 5 Bags 
                                     span.car-image
                                         img(src='./images/car-premium.png', alt='Premium car')
-                                    button.car-select-button Select
+                                    button.car-select-button(id='select_premium') Select
                     .col-xs-12.col-sm-6.col-md-4.eq-height
                         article.car-single-compact
                             a(href='/cars/SUV')
@@ -81,7 +81,7 @@ block main
                                     span.passengers-bags 5 Adults, 5 Bags 
                                     span.car-image
                                         img(src='./images/car-suv.png', alt='SUV')
-                                    button.car-select-button Select
+                                    button.car-select-button(id='select_suv') Select
                     .col-xs-12.col-sm-6.col-md-4.eq-height
                         article.car-single-compact
                             a(href='/cars/Van')
@@ -91,7 +91,7 @@ block main
                                     span.passengers-bags 5 Adults, 7 Bags 
                                     span.car-image
                                         img(src='./images/car-van.png', alt='Van')
-                                    button.car-select-button Select
+                                    button.car-select-button(id='select_van') Select
             #customer-reviews
                 if context.length   
                     .row.eq-height
