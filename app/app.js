@@ -7,6 +7,10 @@ const multer = require('multer');
 const init = (data, config) => {
     const app = express();
 
+    const http = require('http').createServer(app);
+
+    const io = require('./../sockets').applyTo(http);
+
     require('./config').applyTo(app);
 
     //CSRF fix
@@ -32,9 +36,9 @@ const init = (data, config) => {
     });
 
     require('./routers')
-        .attachTo(app, data);
+        .attachTo(app, data, io);
 
-    return Promise.resolve(app);
+    return Promise.resolve({ app, http });
 };
 
 module.exports = { init };

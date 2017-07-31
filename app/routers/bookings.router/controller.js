@@ -102,6 +102,7 @@ class BookingsController {
             })
             .then(() => {
                 req.toastr.success('Thank you for booking this car!', 'Thank you!');
+                // BOOKINGSOCKET
                 return res.status(200).redirect('/auth/bookings');
             })
             .catch((err) => {

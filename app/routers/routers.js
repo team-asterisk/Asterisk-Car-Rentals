@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const attachTo = (app, data) => {
+const attachTo = (app, data, io) => {
     app.get('/', (req, res) => {
         Promise.resolve(data.reviews.getAll())
             .then((items) => {
@@ -25,7 +25,7 @@ const attachTo = (app, data) => {
         .filter((file) => file.includes('.router'))
         .forEach((file) => {
             const modulePath = path.join(__dirname, file);
-            require(modulePath).attachTo(app, data);
+            require(modulePath).attachTo(app, data, io);
         });
 
     app.get('*', (req, res) => {

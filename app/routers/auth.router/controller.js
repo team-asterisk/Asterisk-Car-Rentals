@@ -1,6 +1,7 @@
 class AuthController {
-    constructor(data) {
+    constructor(data, io) {
         this.data = data;
+        this.io = io;
     }
 
     getRegisterForm(req, res) {
@@ -28,6 +29,7 @@ class AuthController {
 
     logOut(req, res) {
         req.logout();
+        this.io.emit('user logged out', { text: 'user logged out' });
         return res.status(200).redirect('/');
     }
 
@@ -112,6 +114,8 @@ class AuthController {
             req.toastr.error('You need to be logged in to access this page.');
             res.status(401).redirect('/auth/login');
         }
+        // console.log(req.user);
+
         return next();
     }
 
@@ -120,12 +124,13 @@ class AuthController {
             req.toastr.error('You need to be an Admin to access this page.');
             res.status(401).redirect('/401');
         }
+        // console.log(req.user);
         return next();
     }
 }
 
-const init = (data) => {
-    return new AuthController(data);
+const init = (data, io) => {
+    return new AuthController(data, io);
 };
 
 module.exports = { init };

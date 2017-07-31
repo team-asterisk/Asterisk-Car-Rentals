@@ -10,8 +10,8 @@ class Server {
             .then(() => require('./../db').init(config.connectionString))
             .then((db) => require('./../data').init(db))
             .then((data) => require('./../app').init(data, config))
-            .then((app) => {
-                return Promise.resolve(app);
+            .then(({ app, http }) => {
+                return Promise.resolve({ app, http });
             })
             .catch((err) => {
                 console.log(err);
@@ -21,14 +21,8 @@ class Server {
 
     run(config) {
         return this.getApp(config)
-            .then((app) => {
-                //neded for WebSockets
-                const server = require('http').createServer(app);
-                this.instance = server;
-                return Promise.resolve(server);
-            })
-            .then((server) => require('./../sockets').init(server))
-            .then((io) => {
+            .then(({ http }) => {
+                this.instance = http;
                 this.instance.listen(config.port, () =>
                     console.log(`Car Rentals is now live at ${config.url}:${config.port}`));
                 this.port = config.port;
