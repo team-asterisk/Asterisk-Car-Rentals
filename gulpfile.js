@@ -94,7 +94,7 @@ gulp.task('pre-functional-test', () => {
 
 
 
-gulp.task('dev', () => {
+gulp.task('nodemon', () => {
     return nodemon({
         ext: 'js pug html css',
         script: './launch.js',
