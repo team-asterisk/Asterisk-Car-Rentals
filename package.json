@@ -4,7 +4,8 @@
     "description": "A simple car rental application with Node.js",
     "main": "server.js",
     "scripts": {
-        "start": "node launch.js",
+        "start": "gulp start-server:local",
+        "deploy": "gulp deploy",
         "nodemon": "gulp nodemon",
         "test": "./node_modules/.bin/mocha test/integration/**/*.js",
         "unit": "./node_modules/.bin/mocha test/unit/app/**/*.js",

@@ -4,7 +4,7 @@ const toastr = require('express-toastr');
 const toastrOptions = require('../utils/constants').toastrOptions;
 const multer = require('multer');
 
-const init = (data) => {
+const init = (data, config) => {
     const app = express();
 
     require('./config').applyTo(app);
@@ -21,7 +21,7 @@ const init = (data) => {
     });
     app.use(multer({ storage: storage }).single('carphoto'));
     //multer config before csrf 
-    require('./auth').applyTo(app, data);
+    require('./auth').applyTo(app, data, config);
 
     app.use(flash());
     app.use(toastr(toastrOptions));

@@ -9,7 +9,7 @@ class Server {
         return async()
             .then(() => require('./../db').init(config.connectionString))
             .then((db) => require('./../data').init(db))
-            .then((data) => require('./../app').init(data))
+            .then((data) => require('./../app').init(data, config))
             .then((app) => {
                 return Promise.resolve(app);
             })
@@ -24,7 +24,7 @@ class Server {
             .then((app) => {
                 //neded for WebSockets
                 this.instance = app.listen(config.port, () =>
-                    console.log(`Car Rentals is now live at http://localhost:${config.port}`));
+                    console.log(`Car Rentals is now live at ${config.url}:${config.port}`));
                 this.port = config.port;
                 this.connectionString = config.connectionString;
                 return Promise.resolve(this.instance);
