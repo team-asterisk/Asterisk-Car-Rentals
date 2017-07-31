@@ -32,10 +32,6 @@ class CarHelper {
             throw new Error('New dates are not correct! Choose future dates!');
         }
 
-        if (s1 < now || e1 < now) {
-            throw new Error('Cannot change expired or in progress reservations!');
-        }
-
         return (s1 >= s2 && s1 <= e2) || (s1 <= s2 && e1 >= s2);
     }
 
