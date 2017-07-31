@@ -233,6 +233,19 @@ describe('Public - for unregistered visitors', () => {
         });
     });
 
+    describe('View Private Page', () => {
+        it('expect visitor to be redirected to 401', (done) => {
+            driver.get(appUrl + '/auth/viewcars')
+            .then(() => {
+                return driver.getTitle();
+            })
+            .then((title) => {
+                expect(title).to.contain('Unauthorized Area');
+                done();
+            });
+        });
+    });
+
     describe('Deals page', () => {
         it('expect title with text "Deals"', (done) => {
             driver.get(appUrl + '/deals')
