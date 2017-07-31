@@ -1,8 +1,0 @@
-1. user
-2. admin - inherit user
-3. support user
-4. car category - collection of many cars
-5. deals - collection of many cars
-6. car
-7. review
-8. comment

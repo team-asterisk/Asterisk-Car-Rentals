@@ -7,13 +7,19 @@ const verifyToken = (req, res, next) => {
     if (token) {
         jwt.verify(token, 'superSecret', (err, decoded) => {
             if (err) {
-                return res.json({ success: false, message: 'Failed to authenticate token.' });
+                return res.json({
+                    success: false,
+                    message: 'Failed to authenticate token.',
+                });
             }
             req.decoded = decoded;
             return next();
         });
     } else {
-        res.status(403).send({ success: false, message: 'Failed to authenticate token.' });
+        res.status(403).send({
+            success: false,
+            message: 'Failed to authenticate token.',
+        });
     }
 };
 

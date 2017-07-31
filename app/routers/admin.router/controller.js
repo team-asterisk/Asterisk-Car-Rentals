@@ -35,7 +35,8 @@ class AdminController {
     }
 
     getViewDeals(req, res) {
-        return Promise.resolve(this.data.cars.filterBy({ 'specialpriceactivated': '1' }))
+        return Promise.resolve(this.data.cars
+                .filterBy({ 'specialpriceactivated': '1' }))
             .then((deals) => {
                 return res.render('auth/admin/viewdeals', {
                     context: deals,

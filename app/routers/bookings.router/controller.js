@@ -30,7 +30,8 @@ class BookingsController {
                 if (!cars) {
                     return Promise.reject('No cars found');
                 }
-                req.toastr.success('Results will appear in a second!', 'Searching...');
+                req.toastr
+                    .success('The list of available cars is here!', 'Success!');
                 return res.render('./public/search-cars', {
                     context: { cars, start, end },
                     req: req,
@@ -38,7 +39,9 @@ class BookingsController {
                 });
             })
             .catch((err) => {
-                req.toastr.error('Search was not successfull, please try again' + err, 'Sorry!');
+                req.toastr
+                    .error('Search was not successfull, please try again' +
+                        err, 'Sorry!');
                 return res.status(401).redirect('/');
             });
     }
@@ -101,7 +104,8 @@ class BookingsController {
                 return this.data.users.updateById(updatedUser);
             })
             .then(() => {
-                req.toastr.success('Thank you for booking this car!', 'Thank you!');
+                req.toastr
+                    .success('Thank you for booking this car!', 'Thank you!');
                 return res.status(200).redirect('/auth/bookings');
             })
             .catch((err) => {
@@ -148,13 +152,16 @@ class BookingsController {
                 return userHelper.addBookingToUser(car, user, newBooking);
             })
             .then((sameUser) => {
-                return userHelper.removeBookingFromUser(sameUser, bookingId);
+                return userHelper
+                    .removeBookingFromUser(sameUser, bookingId);
             })
             .then((updatedUser) => {
                 return this.data.users.updateById(updatedUser);
             })
             .then(() => {
-                req.toastr.success('Successfully edited booking dates!', 'Thank you!');
+                req.toastr
+                    .success('Successfully edited booking dates!',
+                        'Thank you!');
                 return res.status(200).redirect('/auth/bookings');
             })
             .catch((err) => {
@@ -190,7 +197,8 @@ class BookingsController {
                 .then((cars) => {
                     if (cars) {
                         filteredCars = cars.filter((car) => {
-                            return carHelper.checkIfCarIsBooked(car, startDate, endDate);
+                            return carHelper
+                                .checkIfCarIsBooked(car, startDate, endDate);
                         });
                         return Promise.resolve(filteredCars);
                     }
@@ -198,11 +206,13 @@ class BookingsController {
                 });
         }
 
-        return Promise.resolve(this.data.cars.filterBy({ 'category': category }))
+        return Promise.resolve(this.data.cars
+                .filterBy({ 'category': category }))
             .then((cars) => {
                 if (cars) {
                     filteredCars = cars.filter((car) => {
-                        return carHelper.checkIfCarIsBooked(car, startDate, endDate);
+                        return carHelper
+                            .checkIfCarIsBooked(car, startDate, endDate);
                     });
                     return Promise.resolve(filteredCars);
                 }

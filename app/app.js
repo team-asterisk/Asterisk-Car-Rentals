@@ -9,7 +9,7 @@ const init = (data, config) => {
 
     require('./config').applyTo(app);
 
-    //CSRF fix
+    // CSRF fix
     const uploadDir = 'static/images/cars/';
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
@@ -20,7 +20,7 @@ const init = (data, config) => {
         },
     });
     app.use(multer({ storage: storage }).single('carphoto'));
-    //multer config before csrf 
+    // multer config before csrf 
     require('./auth').applyTo(app, data, config);
 
     app.use(flash());

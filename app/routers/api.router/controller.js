@@ -1,5 +1,11 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const messages = {
+    // eslint-disable-next-line max-len
+    failedNotAdmin: 'Authentication failed. User must be admin. Did you buy me a beer!?',
+    failedPassword: 'Authentication failed. Wrong password.',
+    failedNotFound: 'Authentication failed. User not found.',
+};
 
 class ApiController {
     constructor(data) {
@@ -43,7 +49,8 @@ class ApiController {
     }
 
     getDeals(req, res) {
-        return Promise.resolve(this.data.cars.filterBy({ 'specialpriceactivated': '1' }))
+        return Promise.resolve(this.data.cars
+                .filterBy({ 'specialpriceactivated': '1' }))
             .then((deals) => {
                 return res.status(200).send({
                     deals,
@@ -62,7 +69,8 @@ class ApiController {
 
     getCarCategory(req, res) {
         const category = req.params.category;
-        return Promise.resolve(this.data.cars.filterBy({ 'category': category }))
+        return Promise.resolve(this.data.cars
+                .filterBy({ 'category': category }))
             .then((cars) => {
                 return res.status(200).send({
                     cars,
@@ -96,11 +104,17 @@ class ApiController {
         return this.data.users.findByUsername(username)
             .then((user) => {
                 if (!user) {
-                    return res.json({ success: false, message: 'Authentication failed. User not found.' });
+                    return res.json({
+                        success: false,
+                        message: messages.failedNotFound,
+                    });
                 }
 
                 if (user.role !== 'admin') {
-                    return res.json({ success: false, message: 'Authentication failed. User must be admin. Did you buy me a beer!?' });
+                    return res.json({
+                        success: false,
+                        message: messages.failedNotAdmin,
+                    });
                 }
 
                 if (bcrypt.compareSync(password, user.passHash)) {
@@ -116,7 +130,10 @@ class ApiController {
                     });
                 }
 
-                return res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+                return res.json({
+                    success: false,
+                    message: messages.failedPassword,
+                });
             });
     }
 }

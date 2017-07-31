@@ -22,6 +22,7 @@ const validator = {
         const pattern = /\.(jpe?g|png|gif|bmp)$/;
 
         if (!pattern.test(image)) {
+            // eslint-disable-next-line max-len
             throw new Error('Invalid extension: Please upload image with correct extension: Only JPG, PNG, Gif and BMP is allowed');
         }
     },
@@ -30,6 +31,7 @@ const validator = {
             throw new Error('Invalid url length');
         }
         // copied from http://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-an-url#answer-5717133
+        // eslint-disable-next-line max-len
         const pattern = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/;
 
         if (!pattern.test(url)) {
@@ -42,6 +44,7 @@ const validator = {
         }
     },
     validateEmail: (email) => {
+        // eslint-disable-next-line max-len
         const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         if (!regex.test(email)) {
             throw new Error('Invalid Email');
@@ -56,15 +59,17 @@ const validator = {
     validatePassword: (password) => {
         const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/;
         if (!regex.test(password)) {
+            // eslint-disable-next-line max-len
             throw new Error('Password has to be Minimum 4 characters at least 1 Alphabet and 1 Number');
         }
     },
     validateUsername: (username) => {
         const regex = /^[A-Za-z0-9_-]*[A-Za-z0-9][A-Za-z0-9_-]{3,}$/;
         if (!regex.test(username)) {
+            // eslint-disable-next-line max-len
             throw new Error('Username must be at least 4 symbols and all should be valid');
         }
-    }
+    },
 };
 
 module.exports = { validator };

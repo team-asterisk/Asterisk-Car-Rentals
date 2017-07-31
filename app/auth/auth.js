@@ -8,7 +8,6 @@ const csrf = require('csurf');
 const csrfProtection = csrf();
 
 const applyTo = (app, data, config) => {
-
     passport.use(new Strategy((username, password, done) => {
         data.users.findByUsername(username)
             .then((user) => {
@@ -75,8 +74,8 @@ const applyTo = (app, data, config) => {
         }
 
         // handle CSRF token errors here
-        res.status(403);
-        res.send('session has expired or form tampered with');
+        return res.status(403)
+            .send('session has expired or form tampered with');
     });
 };
 

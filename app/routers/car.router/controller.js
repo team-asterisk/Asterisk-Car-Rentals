@@ -35,7 +35,8 @@ class CarController {
     }
 
     getCarsFromCategory(req, res) {
-        Promise.resolve(this.data.cars.filterBy({ 'category': req.params.category }))
+        Promise.resolve(this.data.cars
+                .filterBy({ 'category': req.params.category }))
             .then((cars) => {
                 return res.render('./public/category', {
                     context: cars,
@@ -46,7 +47,8 @@ class CarController {
     }
 
     getAllDeals(req, res) {
-        Promise.resolve(this.data.cars.filterBy({ 'specialpriceactivated': '1' }))
+        Promise.resolve(this.data.cars
+                .filterBy({ 'specialpriceactivated': '1' }))
             .then((deals) => {
                 return res.render('./public/deals', {
                     context: deals,
@@ -56,7 +58,8 @@ class CarController {
     }
 
     getSingleCar(req, res) {
-        Promise.resolve(this.data.cars.findById(req.params.id))
+        Promise.resolve(this.data.cars
+                .findById(req.params.id))
             .then((car) => {
                 if (!car) {
                     return res.status(404).send({
@@ -65,7 +68,7 @@ class CarController {
                     });
                 }
                 return res.render('./public/car-details', {
-                        car,
+                    car,
                     req: req,
                 });
             });

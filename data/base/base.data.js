@@ -4,7 +4,6 @@ class BaseMongoDbData {
     constructor(db, ModelClass) {
         this.db = db;
         this.ModelClass = ModelClass;
-        // this.validator = validator;
         this.collectionName = this._getCollectionName();
         this.collection = this.db.collection(this.collectionName);
     }
@@ -20,9 +19,6 @@ class BaseMongoDbData {
     }
 
     create(model) {
-        // if (!this._isModelValid(model)) {
-        //     return Promise.reject('Validation failed!');
-        // }
         return this.collection.insert(model)
             .then(() => {
                 return model;
@@ -35,35 +31,11 @@ class BaseMongoDbData {
         });
     }
 
-    // findOrCreateBy(props) {
-    //     return this.filterBy(props)
-    //         .then(([model]) => {
-    //             if (!model) {
-    //                 model = {};
-    //                 return this.collection.insert(model)
-    //                     .then(() => {
-    //                         return model;
-    //                     });
-    //             }
-
-    //             return model;
-    //         });
-    // }
-
     updateById(model) {
         return this.collection.updateOne({
             _id: model._id,
         }, model);
     }
-
-    // _isModelValid(model) {
-    //     if ('undefined' === typeof this.validator ||
-    //         'function' !== typeof this.validator.isValid) {
-    //         return true;
-    //     }
-
-    //     return this.validator.isValid(model);
-    // }
 
     _getCollectionName() {
         return this.ModelClass.name.toLowerCase() + 's';
