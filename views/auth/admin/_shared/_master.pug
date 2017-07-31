@@ -22,3 +22,6 @@ block main
             .toastr
                 #{req.toastr.render()}
             block adminpage
+block append body-end-scripts
+        script(src='/socket.io/socket.io.js')
+        script(src='/js/sockets.js')   
