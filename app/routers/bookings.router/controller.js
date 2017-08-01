@@ -50,6 +50,7 @@ class BookingsController {
     getEditBookingMenu(req, res) {
         const bookingId = req.params.id;
         const currentBooking = req.user.bookings
+            // eslint-disable-next-line eqeqeq
             .find((x) => x._id == bookingId);
         const carId = currentBooking.car._id;
 
