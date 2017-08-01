@@ -10,36 +10,36 @@ block main
                 .cars-title
                     | Showing cars available for your chosen dates: 
                     span.chosen-dates #{moment(context.start).format('MM/DD')} - #{moment(context.end).format('MM/DD')}
-            if context.cars.length
-                .sort-cars-by
-                    span.sort-by-text Sort by:
-                    select#sort_by_category(name='sort_by_category')
-                        option(value='', disabled='', selected='') By Price
-                        option(value='ascending', title='ascending') ascending
-                        option(value='descending', title='descending') descending
-                .row
-                    each car in context.cars
-                        .col-xs-12
-                            article.car-single-search
-                                a(href='/car/' + car._id)
-                                    .car-category
-                                        .price-container
-                                            span.total-price #{car.baseprice} / day
-                                            span.total Total
-                                            button.view-deal-button View Deal
-                                        .car-info
-                                            .car-class #{car.category}
-                                            .car-model #{car.makemodel} or similar
-                                            .car-capacity
-                                                span.car-passengers #{car.adultscount} Adults
-                                                span.car-bags #{car.bagscount} Bags
-                                                span.car-doors #{car.doorscount} Doors
-                                            .offer-details * Unlimited mileage included
-                                        span.car-image
-                                            img(src=car.carphotolink, alt=car.category + 'car')
-            else
-                .col-xs-12
-                    h1
-                        | Sorry, no cars are available for this period.
-        .toastr
-            #{req.toastr.render()}
+                if context.cars.length
+                    .sort-cars-by
+                        span.sort-by-text Price:
+                        select#sort_by_price(name='sort_by_price')
+                            //- option(value='', disabled='', selected='') By Price
+                            option(value='ascending', title='ascending') ascending
+                            option(value='descending', title='descending') descending
+                    .row
+                        each car in context.cars
+                            .col-xs-12(price=car.baseprice)
+                                article.car-single-search
+                                    a(href='/car/' + car._id)
+                                        .car-category
+                                            .price-container
+                                                span.total-price #{car.baseprice} / day
+                                                span.total Total
+                                                button.view-deal-button View Deal
+                                            .car-info
+                                                .car-class #{car.category}
+                                                .car-model #{car.makemodel} or similar
+                                                .car-capacity
+                                                    span.car-passengers #{car.adultscount} Adults
+                                                    span.car-bags #{car.bagscount} Bags
+                                                    span.car-doors #{car.doorscount} Doors
+                                                .offer-details * Unlimited mileage included
+                                            span.car-image
+                                                img(src=car.carphotolink, alt=car.category + 'car')
+                else
+                    .col-xs-12
+                        h1
+                            | Sorry, no cars are available for this period.
+            .toastr
+                #{req.toastr.render()}

@@ -29,12 +29,28 @@ $(() => {
         orientation: "auto bottom",
     });
 
+    $('#sort_by_price')
+    .on('change', function(ev) {
+        var list = $('#car-rentals .col-xs-12');
+
+        list.sort(function(a, b) {
+            p1 = parseInt($(a).attr('price'), 10);
+            p2 = parseInt($(b).attr('price'), 10);
+            if(ev.target.value == 'ascending') {
+                return p1 - p2;
+            }
+                return p2 - p1;
+            }).each(function() {
+                    var elem = $(this);
+                    elem.remove();
+                    $(elem).appendTo('#car-rentals .row');
+                });
+            });
+
     $('.datepicker-from')
         .datepicker()
-        .on('changeDate', (ev) => {
+        .on('changeDate', function(ev) {
             if (ev.date.valueOf() < now.valueOf()) {
-                console.log(ev.date.valueOf());
-                console.log(now.valueOf());
                 toastr.error('Today or future date is required!', 'Attention!');
                 $(ev.target).val('');
             }
@@ -46,7 +62,7 @@ $(() => {
         });
     $('.datepicker-to')
         .datepicker()
-        .on('changeDate', (ev) => {
+        .on('changeDate', function(ev) {
             if (ev.date.valueOf() < now.valueOf()) {
                 toastr.error('Future date is required!', 'Error!');
                 $(ev.target).val('');
@@ -80,7 +96,7 @@ $(() => {
     //     });
 
     $('.add-booking-button')
-        .on('click', () => {
+        .on('click', function() {
             if (isNaN(+$('.automatic-price').html())) {
                 throw new Error('Empty date is not allowed!');
             }

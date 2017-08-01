@@ -9,15 +9,19 @@ block main
             #car-rentals
                 .cars-title Choose a car from our large collection
                 .sort-cars-by
-                    span.sort-by-text Sort by:
-                    select#sort_by_category(name='sort_by_category')
-                        option(value='', disabled='', selected='') By Price
+                    span.sort-by-text Price:
+                    select#sort_by_price(name='sort_by_price')
+                        //- option(value='', disabled='', selected='') By Price
                         option(value='ascending', title='ascending') ascending
                         option(value='descending', title='descending') descending
                 if context.length
                     .row
                         each car, i in context
-                            .col-xs-12
+                            if car.specialpriceactivated
+                                -var price = car.specialprice
+                            else
+                                -var price = car.baseprice
+                            .col-xs-12(price=price)
                                 article.car-single-search
                                     a(href='/car/' + car._id)
                                         .car-category
