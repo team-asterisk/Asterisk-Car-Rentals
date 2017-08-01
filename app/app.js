@@ -24,7 +24,7 @@ const init = (data, config) => {
         },
     });
     app.use(multer({ storage: storage }).single('carphoto'));
-    // multer config before csrf 
+    // multer config before csrf
     require('./auth').applyTo(app, data, config);
 
     app.use(flash());

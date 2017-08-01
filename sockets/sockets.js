@@ -1,7 +1,7 @@
 const applyTo = (http) => {
     const io = require('socket.io')(http);
 
-    //obache raboti samo za main
+    // obache raboti samo za main
     io.on('connection', (socket) => {
 
     });

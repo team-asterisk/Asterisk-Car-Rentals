@@ -1,3 +1,4 @@
+/* eslint-disable max-len, eqeqeq*/
 const { ObjectID } = require('mongodb');
 const carHelper = require('../utils/carHelpers').init();
 const userHelper = require('../utils/userHelpers').init();
@@ -106,8 +107,8 @@ class BookingsController {
                 return Promise.all([this.data.users.updateById(updatedUser), Promise.resolve(updatedUser)]);
             })
             .then((values) => {
-                const user = values[1];
-                this.io.emit('user booking', { username: user.username });
+                const userU = values[1];
+                this.io.emit('user booking', { username: userU.username });
                 req.toastr.success('Thank you for booking this car!', 'Thank you!');
                 return res.status(200).redirect('/auth/bookings');
             })

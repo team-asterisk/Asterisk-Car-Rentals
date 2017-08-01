@@ -43,7 +43,6 @@ class User {
         validator.validateUsername(usernameVal);
         validator.validateIfEmptyString(usernameVal, 'Username');
         this.username = usernameVal;
-        
     }
 
     get _password() {
@@ -98,7 +97,6 @@ class User {
     }
 
     set _bookings(val) {
-        // validate
         this.bookings = val;
     }
 }
