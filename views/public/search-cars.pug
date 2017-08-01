@@ -19,12 +19,20 @@ block main
                             option(value='descending', title='descending') descending
                     .row
                         each car in context.cars
-                            .col-xs-12(price=car.baseprice)
+                            if car.specialpriceactivated
+                                -var price = car.specialprice
+                            else
+                                -var price = car.baseprice
+                            .col-xs-12(price=price)
                                 article.car-single-search
                                     a(href='/car/' + car._id)
                                         .car-category
                                             .price-container
-                                                span.total-price #{car.baseprice} / day
+                                                if car.specialpriceactivated
+                                                    span.original-price
+                                                        != '$' + car.baseprice + ' / Day'
+                                                span.total-price
+                                                    != '$' + car.specialprice + ' / Day'
                                                 span.total Total
                                                 button.view-deal-button View Deal
                                             .car-info
