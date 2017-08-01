@@ -2,7 +2,8 @@ class UserHelper {
     removeBookingFromUser(user, bookingId) {
         const currentBookingIndex = user.bookings
             .indexOf(user.bookings
-                .find((x) => x._id === bookingId));
+                // eslint-disable-next-line eqeqeq
+                .find((x) => x._id == bookingId));
 
         if (currentBookingIndex >= 0) {
             user.bookings.splice(currentBookingIndex, 1);

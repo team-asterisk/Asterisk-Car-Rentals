@@ -42,7 +42,7 @@ class BookingsController {
             .catch((err) => {
                 req.toastr
                     .error('Search was not successfull, please try again' +
-                    err, 'Sorry!');
+                        err, 'Sorry!');
                 return res.status(401).redirect('/');
             });
     }
@@ -75,10 +75,10 @@ class BookingsController {
         return this.data.cars.findById(carId)
             .then((car) => {
                 if (carHelper.checkIfCarIsBooked(
-                    car,
-                    newBooking.startdate,
-                    newBooking.enddate
-                )) {
+                        car,
+                        newBooking.startdate,
+                        newBooking.enddate
+                    )) {
                     carHelper.addBookedDatesToCar(
                         car,
                         newBooking.startdate,
@@ -103,12 +103,16 @@ class BookingsController {
             })
             .then((updatedUser) => {
                 // return this.data.users.updateById(updatedUser);
-                return Promise.all([this.data.users.updateById(updatedUser), Promise.resolve(updatedUser)]);
+                return Promise.all([
+                    this.data.users.updateById(updatedUser),
+                    Promise.resolve(updatedUser),
+                ]);
             })
             .then((values) => {
-                const user = values[1];
-                this.io.emit('user booking', { username: user.username });
-                req.toastr.success('Thank you for booking this car!', 'Thank you!');
+                const uuser = values[1];
+                this.io.emit('user booking', { username: uuser.username });
+                req.toastr
+                    .success('Thank you for booking this car!', 'Thank you!');
                 return res.status(200).redirect('/auth/bookings');
             })
             .catch((err) => {
@@ -125,18 +129,19 @@ class BookingsController {
         const user = req.user;
 
         const current = req.user.bookings
+        // eslint-disable-next-line eqeqeq
             .find((x) => x._id == bookingId);
 
         return this.data.cars.findById(current.car._id)
             .then((car) => {
                 carHelper.removeBookedDatesFromCar(car, bookingId);
                 if (carHelper.checkOtherDates(
-                    car,
-                    newBooking.startdate,
-                    newBooking.enddate,
-                    current.startdate,
-                    current.enddate
-                )) {
+                        car,
+                        newBooking.startdate,
+                        newBooking.enddate,
+                        current.startdate,
+                        current.enddate
+                    )) {
                     carHelper.addBookedDatesToCar(
                         car,
                         newBooking.startdate,
@@ -164,7 +169,7 @@ class BookingsController {
             .then(() => {
                 req.toastr
                     .success('Successfully edited booking dates!',
-                    'Thank you!');
+                        'Thank you!');
                 return res.status(200).redirect('/auth/bookings');
             })
             .catch((err) => {
@@ -210,7 +215,7 @@ class BookingsController {
         }
 
         return Promise.resolve(this.data.cars
-            .filterBy({ 'category': category }))
+                .filterBy({ 'category': category }))
             .then((cars) => {
                 if (cars) {
                     filteredCars = cars.filter((car) => {

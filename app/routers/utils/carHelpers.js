@@ -16,7 +16,8 @@ class CarHelper {
     removeBookedDatesFromCar(car, bookingId) {
         const index = car.booked.indexOf(
             car.booked
-            .find((x) => x._id === bookingId));
+            // eslint-disable-next-line eqeqeq
+            .find((x) => x._id == bookingId));
 
         car.booked
             .splice(index, 1);
