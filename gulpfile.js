@@ -40,7 +40,7 @@ gulp.task('deploy', () => {
 gulp.task('start-server:local', () => {
     server = new Server();
     return server.run({
-        connectionString: gulpConfig.connectionString.deploy,
+        connectionString: gulpConfig.connectionString.default,
         port: gulpConfig.port.default,
         sessionSecret: gulpConfig.sessionSecret.default,
         url: gulpConfig.url.local,
