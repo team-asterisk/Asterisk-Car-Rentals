@@ -102,9 +102,9 @@ block main
                                         .review-rating
                                             = '★★★★★'.substr(0, review.rating)
                                         p.review-text
-                                            =review.content
+                                            !=review.content
                                         .review-author
-                                            =review.author
+                                            !=review.author
                     if i%3
                         .row.eq-height
                 else 
