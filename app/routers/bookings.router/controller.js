@@ -1,4 +1,3 @@
-/* eslint-disable max-len, eqeqeq*/
 const { ObjectID } = require('mongodb');
 const carHelper = require('../utils/carHelpers').init();
 const userHelper = require('../utils/userHelpers').init();
@@ -112,7 +111,8 @@ class BookingsController {
             .then((values) => {
                 const userU = values[1];
                 this.io.emit('user booking', { username: userU.username });
-                req.toastr.success('Thank you for booking this car!', 'Thank you!');
+                req.toastr
+                    .success('Thank you for booking this car!', 'Thank you!');
                 return res.status(200).redirect('/auth/bookings');
             })
             .catch((err) => {
@@ -129,7 +129,7 @@ class BookingsController {
         const user = req.user;
 
         const current = req.user.bookings
-        // eslint-disable-next-line eqeqeq
+            // eslint-disable-next-line eqeqeq
             .find((x) => x._id == bookingId);
 
         return this.data.cars.findById(current.car._id)
