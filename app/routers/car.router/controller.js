@@ -96,6 +96,12 @@ class CarController {
 
     updateCar(req, res) {
         const bodyCar = req.body;
+        if (bodyCar.specialpriceactivated === 'on') {
+            bodyCar.specialpriceactivated = 1;
+        }
+        if (bodyCar.airconditioner === 'on') {
+            bodyCar.airconditioner = 1;
+        }
         if (req.file) {
             const carPhotoFileName = req.file.originalname;
             const carPhotoLink = req.file.destination + carPhotoFileName;
