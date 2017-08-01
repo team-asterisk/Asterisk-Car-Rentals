@@ -20,7 +20,7 @@ const gulpConfig = {
     },
     url: {
         local: 'http://localhost',
-        deploy: 'http://35.158.166.9/',
+        deploy: 'http://35.158.166.9',
     },
 };
 
