@@ -55,8 +55,8 @@ $(() => {
             });
         });
 
-    var startDate = $('.datepicker-from').datepicker().date;
-    var endDate = $('.datepicker-to').datepicker().date;;
+    var startDate;
+    var endDate;
     var now = new Date() - 24 * 60 * 60 * 1000;
 
     $('.datepicker-from, .datepicker-to').datepicker({
