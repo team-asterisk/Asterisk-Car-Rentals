@@ -42,7 +42,7 @@ class BookingsController {
             .catch((err) => {
                 req.toastr
                     .error('Search was not successfull, please try again' +
-                        err, 'Sorry!');
+                    err, 'Sorry!');
                 return res.status(401).redirect('/');
             });
     }
@@ -102,6 +102,7 @@ class BookingsController {
                 return userHelper.addBookingToUser(car, user, newBooking);
             })
             .then((updatedUser) => {
+                // return this.data.users.updateById(updatedUser);
                 return Promise.all([this.data.users.updateById(updatedUser), Promise.resolve(updatedUser)]);
             })
             .then((values) => {
@@ -163,7 +164,7 @@ class BookingsController {
             .then(() => {
                 req.toastr
                     .success('Successfully edited booking dates!',
-                        'Thank you!');
+                    'Thank you!');
                 return res.status(200).redirect('/auth/bookings');
             })
             .catch((err) => {
@@ -209,7 +210,7 @@ class BookingsController {
         }
 
         return Promise.resolve(this.data.cars
-                .filterBy({ 'category': category }))
+            .filterBy({ 'category': category }))
             .then((cars) => {
                 if (cars) {
                     filteredCars = cars.filter((car) => {

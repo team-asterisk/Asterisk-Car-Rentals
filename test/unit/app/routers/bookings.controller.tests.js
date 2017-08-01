@@ -6,6 +6,7 @@ const { init } = require('../../../../app/routers/bookings.router/controller');
 
 describe('routers/bookings.router/controller', () => {
     let data = null;
+    let io = null;
     let controller = null;
     let carId = '';
     let cars = [];
@@ -83,7 +84,13 @@ describe('routers/bookings.router/controller', () => {
                 },
             };
 
-            controller = init(data);
+            io = {
+                emit: (message) => {
+                    return ('gosho');
+                }
+            }
+
+            controller = init(data, io);
             req = require('../../_mocks/req-res-doncho').getRequestMock(options);
             res = require('../../_mocks/req-res-doncho').getResponseMock();
         });
