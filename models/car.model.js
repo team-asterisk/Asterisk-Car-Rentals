@@ -1,3 +1,4 @@
+/* eslint-disable max-len*/
 const { validator } = require('../utils/validator');
 const convert = require('../utils/inputConverter').convert;
 

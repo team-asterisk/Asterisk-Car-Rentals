@@ -1,3 +1,4 @@
+/* eslint-disable max-len*/
 const validator = {
     validateTypeOf: (value, property, type) => {
         if (typeof value !== type) {

@@ -1,5 +1,3 @@
-/* global process */
-
 const nodemon = require('gulp-nodemon');
 
 const gulp = require('gulp');
@@ -91,7 +89,7 @@ gulp.task('pre-test', () => {
 
 gulp.task('pre-functional-test', () => {
     return gulp.src([
-        './app/routers/**/*.js'
+        './app/routers/**/*.js',
     ])
         .pipe(istanbul({
             includeUntested: true,

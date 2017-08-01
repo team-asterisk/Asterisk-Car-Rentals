@@ -1,3 +1,4 @@
+/* eslint-disable max-len, eqeqeq*/
 const { ObjectID } = require('mongodb');
 const carHelper = require('../utils/carHelpers').init();
 const userHelper = require('../utils/userHelpers').init();
@@ -109,10 +110,9 @@ class BookingsController {
                 ]);
             })
             .then((values) => {
-                const uuser = values[1];
-                this.io.emit('user booking', { username: uuser.username });
-                req.toastr
-                    .success('Thank you for booking this car!', 'Thank you!');
+                const userU = values[1];
+                this.io.emit('user booking', { username: userU.username });
+                req.toastr.success('Thank you for booking this car!', 'Thank you!');
                 return res.status(200).redirect('/auth/bookings');
             })
             .catch((err) => {
