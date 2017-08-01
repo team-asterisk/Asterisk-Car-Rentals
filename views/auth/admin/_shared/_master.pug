@@ -1,4 +1,5 @@
 extends ../../../_shared/_master
+include ./sockets.pug
 
 block main
     #main
@@ -23,5 +24,5 @@ block main
                 #{req.toastr.render()}
             block adminpage
 block append body-end-scripts
-        script(src='/socket.io/socket.io.js')
-        script(src='/js/sockets.js')   
+    script(src='/socket.io/socket.io.js')
+    +sockets(socketUrl)
