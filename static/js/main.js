@@ -19,8 +19,44 @@ $(() => {
         'hideMethod': 'slideUp'
     };
 
-    var startDate;
-    var endDate;
+    $('#sort_by_price')
+        .on('change', function(ev) {
+            var list = $('#car-rentals .col-xs-12');
+
+            list.sort(function(a, b) {
+                p1 = parseInt($(a).attr('price'), 10);
+                p2 = parseInt($(b).attr('price'), 10);
+                if (ev.target.value == 'ascending') {
+                    return p1 - p2;
+                }
+                return p2 - p1;
+            }).each(function() {
+                var elem = $(this);
+                elem.remove();
+                $(elem).appendTo('#car-rentals .row');
+            });
+        });
+
+    $('#sort_by_price_admin')
+        .on('change', function(ev) {
+            var list = $('#view-cars .cars-list-only');
+
+            list.sort(function(a, b) {
+                p1 = parseInt($(a).attr('price'), 10);
+                p2 = parseInt($(b).attr('price'), 10);
+                if (ev.target.value == 'ascending') {
+                    return p1 - p2;
+                }
+                return p2 - p1;
+            }).each(function() {
+                var elem = $(this);
+                elem.remove();
+                $(elem).appendTo('#view-cars .row');
+            });
+        });
+
+    var startDate = $('.datepicker-from').datepicker().date;
+    var endDate = $('.datepicker-to').datepicker().date;;
     var now = new Date() - 24 * 60 * 60 * 1000;
 
     $('.datepicker-from, .datepicker-to').datepicker({
@@ -28,24 +64,6 @@ $(() => {
         autoclose: true,
         orientation: "auto bottom",
     });
-
-    $('#sort_by_price')
-    .on('change', function(ev) {
-        var list = $('#car-rentals .col-xs-12');
-
-        list.sort(function(a, b) {
-            p1 = parseInt($(a).attr('price'), 10);
-            p2 = parseInt($(b).attr('price'), 10);
-            if(ev.target.value == 'ascending') {
-                return p1 - p2;
-            }
-                return p2 - p1;
-            }).each(function() {
-                    var elem = $(this);
-                    elem.remove();
-                    $(elem).appendTo('#car-rentals .row');
-                });
-            });
 
     $('.datepicker-from')
         .datepicker()

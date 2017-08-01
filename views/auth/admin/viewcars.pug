@@ -9,7 +9,7 @@ block adminpage
         .sort-by-wrapper
             .sort-cars-by
                 span.sort-by-text Sort by:
-                select#sort_by_category(name='sort_by_category')
+                select#sort_by_price_admin(name='sort_by_price_admin')
                     option(value='', disabled='', selected='') By Price
                     option(value='ascending', title='ascending') ascending
                     option(value='descending', title='descending') descending
@@ -23,7 +23,7 @@ block adminpage
                         .car-price Price per Day
                         .car-edit Operation
                 each car, i in context
-                    .col-xs-12
+                    .col-xs-12.cars-list-only(price=car.baseprice)
                         article.cars
                             .car-model
                                 != car.makemodel
