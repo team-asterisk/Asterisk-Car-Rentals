@@ -75,7 +75,7 @@
 }
 
 select#select-category,
-select#sort_by_category {
+select#sort_by_price {
     height: 36px;
     padding: 0 1.5rem 0 1rem;
     font-size: 1.6rem;
@@ -85,9 +85,10 @@ select#sort_by_category {
     padding: 0.7rem;
 }
 
-select#sort_by_category {
+select#sort_by_price {
     box-shadow: none;
     vertical-align: baseline;
+    min-width: 110px;
 }
 
 #top-container {
