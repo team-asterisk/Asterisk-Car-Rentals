@@ -32,6 +32,7 @@ const init = (data, config) => {
 
     app.use((req, res, next) => {
         res.locals.messages = require('express-messages')(req, res);
+        res.locals.socketUrl = config.url + ':' + config.port;
         next();
     });
 
