@@ -12,7 +12,7 @@ block main
                     span.chosen-dates #{moment(context.start).format('MM/DD')} - #{moment(context.end).format('MM/DD')}
                 if context.cars.length
                     .sort-cars-by
-                        span.sort-by-text Price:
+                        span.sort-by-text Sort by Price:
                         select#sort_by_price(name='sort_by_price')
                             //- option(value='', disabled='', selected='') By Price
                             option(value='ascending', title='ascending') ascending
