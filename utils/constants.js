@@ -10,17 +10,17 @@ const size = {
 };
 
 const toastrOptions = {
-    'closeButton': false,
+    'closeButton': true,
     'debug': false,
     'newestOnTop': false,
     'progressBar': false,
     'positionClass': 'toast-top-center',
     'preventDuplicates': true,
     'onclick': null,
-    'showDuration': '100',
+    'showDuration': '500',
     'hideDuration': '100',
-    'timeOut': '1200',
-    'extendedTimeOut': '1000',
+    'timeOut': '2200',
+    'extendedTimeOut': '2000',
     'showEasing': 'swing',
     'hideEasing': 'linear',
     'showMethod': 'slideDown',
